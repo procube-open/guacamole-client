@@ -205,7 +205,7 @@
 
         <!-- Java servlet API -->
         <dependency>
-            <groupId>javax.servlet</groupId>
+            <groupId>jakarta.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
@@ -213,8 +213,8 @@
 
         <!-- JSR 356 WebSocket API -->
         <dependency>
-            <groupId>javax.websocket</groupId>
-            <artifactId>javax.websocket-api</artifactId>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-api</artifactId>
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
@@ -236,7 +236,7 @@
                 <!-- Exclude optional dependency on JavaMail -->
                 <exclusion>
                     <groupId>com.sun.mail</groupId>
-                    <artifactId>javax.mail</artifactId>
+                    <artifactId>jakarta.mail</artifactId>
                 </exclusion>
 
             </exclusions>

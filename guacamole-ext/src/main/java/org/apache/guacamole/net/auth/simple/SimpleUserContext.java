@@ -28,6 +28,7 @@ import org.apache.guacamole.net.auth.AuthenticationProvider;
 import org.apache.guacamole.net.auth.Connection;
 import org.apache.guacamole.net.auth.Directory;
 import org.apache.guacamole.net.auth.User;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.apache.guacamole.protocol.GuacamoleConfiguration;
 
@@ -54,6 +55,12 @@ public class SimpleUserContext extends AbstractUserContext {
      * associated with this UserContext.
      */
     private final Directory<Connection> connectionDirectory;
+
+    /**
+     * The Directory with access to all connections within the root group
+     * associated with this UserContext.
+     */
+    private final Directory<Work> workDirectory;
 
     /**
      * Creates a new SimpleUserContext which provides access to only those
@@ -135,9 +142,24 @@ public class SimpleUserContext extends AbstractUserContext {
 
         }
 
+        Map<String, Work> works = new ConcurrentHashMap<String, Work>(0);
+        // for (Map.Entry<String, GuacamoleConfiguration> configEntry : configs.entrySet()) {
+        // 
+        //     // Get connection identifier and configuration
+        //     String identifier = configEntry.getKey();
+        //     GuacamoleConfiguration config = configEntry.getValue();
+        // 
+        //     // Add as simple connection
+        //     Connection work = new SimpleConnection(identifier, identifier, config, interpretTokens);
+        //     work.setParentIdentifier(DEFAULT_ROOT_CONNECTION_GROUP);
+        //     works.put(identifier, work);
+        // 
+        // }
+
         this.username = username;
         this.authProvider = authProvider;
         this.connectionDirectory = new SimpleDirectory<Connection>(connections);
+        this.workDirectory = new SimpleDirectory<Work>(works);
 
     }
 
@@ -174,4 +196,9 @@ public class SimpleUserContext extends AbstractUserContext {
         return connectionDirectory;
     }
 
+    @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return workDirectory;
+    }
 }

@@ -34,6 +34,7 @@ import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Connection;
 import org.apache.guacamole.net.auth.ConnectionGroup;
 import org.apache.guacamole.net.auth.SharingProfile;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.User;
 import org.apache.guacamole.net.auth.UserContext;
 import org.apache.guacamole.net.auth.UserGroup;
@@ -116,6 +117,13 @@ public class UserContextResource {
      */
     @Inject
     private DirectoryResourceFactory<UserGroup, APIUserGroup> userGroupDirectoryResourceFactory;
+
+    /**
+     * Factory for creating DirectoryResources which expose a given
+     * Work Directory.
+     */
+    @Inject
+    private DirectoryResourceFactory<Work, APIWoprk> workDirectoryResourceFactory;
 
     /**
      * Creates a new UserContextResource which exposes the data within the
@@ -289,6 +297,24 @@ public class UserContextResource {
     @Path("schema")
     public SchemaResource getSchemaResource() {
         return new SchemaResource(userContext);
+    }
+
+    /**
+     * Returns a new resource which represents the UserGroup Directory contained
+     * within the UserContext exposed by this UserContextResource.
+     *
+     * @return
+     *     A new resource which represents the UserGroup Directory contained
+     *     within the UserContext exposed by this UserContextResource.
+     *
+     * @throws GuacamoleException
+     *     If an error occurs while retrieving the UserGroup Directory.
+     */
+    @Path("works")
+    public DirectoryResource<UserGroup, APIUserGroup> getWorkDirectoryResource()
+            throws GuacamoleException {
+        return workDirectoryResourceFactory.create(authenticatedUser,
+                userContext, userContext.getWorkDirectory());
     }
 
 }

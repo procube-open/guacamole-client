@@ -109,7 +109,7 @@
 
         <!-- Java servlet API -->
         <dependency>
-            <groupId>javax.servlet</groupId>
+            <groupId>jakarta.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
 

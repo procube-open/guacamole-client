@@ -24,14 +24,14 @@
 # Use args for Tomcat image label to allow image builder to choose alternatives
 # such as `--build-arg TOMCAT_JRE=jre8-alpine`
 #
-ARG TOMCAT_VERSION=8.5
-ARG TOMCAT_JRE=jdk8
+ARG TOMCAT_VERSION=11.0
+ARG TOMCAT_JRE=jdk17
 
 # Use official maven image for the build
-FROM maven:3-jdk-8 AS builder
+FROM maven:latest AS builder
 
 # Install firefox browser for sake of JavaScript unit tests
-RUN apt-get update && apt-get install -y firefox-esr
+RUN apt-get update && apt-get install -y firefox
 
 # Arbitrary arguments that can be passed to the maven build. By default, an
 # argument will be provided to explicitly unskip any skipped tests. To, for

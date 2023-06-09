@@ -21,7 +21,7 @@ package org.apache.guacamole.tunnel.http;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.tunnel.TunnelRequestService;
 import org.apache.guacamole.net.GuacamoleTunnel;

@@ -20,7 +20,7 @@ package org.apache.guacamole.auth.saml.acs;
 
 import com.google.inject.Inject;
 import java.net.URI;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.Path;

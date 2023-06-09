@@ -106,6 +106,12 @@ public class DelegatingUserContext implements UserContext {
     }
 
     @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return userContext.getWorkDirectory();
+    }
+
+    @Override
     public ActivityRecordSet<ConnectionRecord> getConnectionHistory()
             throws GuacamoleException {
         return userContext.getConnectionHistory();

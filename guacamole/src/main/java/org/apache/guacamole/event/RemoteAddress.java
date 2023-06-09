@@ -20,7 +20,7 @@
 package org.apache.guacamole.event;
 
 import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.guacamole.net.auth.Credentials;
 
 /**
