@@ -195,10 +195,12 @@ public class SimpleUserContext extends AbstractUserContext {
             throws GuacamoleException {
         return connectionDirectory;
     }
-
+    
+    /*
     @Override
     public Directory<Work> getWorkDirectory()
             throws GuacamoleException {
         return workDirectory;
     }
+    */
 }

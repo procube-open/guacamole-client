@@ -24,7 +24,7 @@ import com.onelogin.saml2.exception.ValidationError;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import javax.xml.xpath.XPathExpressionException;
+import jakarta.xml.xpath.XPathExpressionException;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleSecurityException;
 

@@ -19,8 +19,8 @@
 
 package org.apache.guacamole.tunnel.websocket.tomcat;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.GuacamoleTunnel;
 import org.apache.guacamole.tunnel.TunnelRequestService;

@@ -22,7 +22,7 @@ package org.apache.guacamole.auth.cas.conf;
 import com.google.inject.Inject;
 import java.net.URI;
 import java.security.PrivateKey;
-import javax.naming.ldap.LdapName;
+import jakarta.naming.ldap.LdapName;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleServerException;
 import org.apache.guacamole.auth.cas.group.GroupFormat;

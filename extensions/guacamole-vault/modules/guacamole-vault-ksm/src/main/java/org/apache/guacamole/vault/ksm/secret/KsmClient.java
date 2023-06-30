@@ -44,7 +44,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.vault.ksm.conf.KsmConfigurationService;

@@ -28,7 +28,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletContextEvent;
 import org.apache.guacamole.environment.Environment;
 import org.apache.guacamole.environment.LocalEnvironment;

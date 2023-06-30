@@ -23,11 +23,11 @@ import org.apache.guacamole.rest.directory.DirectoryResource;
 import org.apache.guacamole.rest.directory.DirectoryResourceFactory;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.ActiveConnection;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
@@ -122,8 +122,8 @@ public class UserContextResource {
      * Factory for creating DirectoryResources which expose a given
      * Work Directory.
      */
-    @Inject
-    private DirectoryResourceFactory<Work, APIWoprk> workDirectoryResourceFactory;
+    // @Inject
+    // private DirectoryResourceFactory<Work, APIWoprk> workDirectoryResourceFactory;
 
     /**
      * Creates a new UserContextResource which exposes the data within the
@@ -310,11 +310,11 @@ public class UserContextResource {
      * @throws GuacamoleException
      *     If an error occurs while retrieving the UserGroup Directory.
      */
-    @Path("works")
-    public DirectoryResource<UserGroup, APIUserGroup> getWorkDirectoryResource()
-            throws GuacamoleException {
-        return workDirectoryResourceFactory.create(authenticatedUser,
-                userContext, userContext.getWorkDirectory());
-    }
+    // @Path("works")
+    // public DirectoryResource<UserGroup, APIUserGroup> getWorkDirectoryResource()
+    //         throws GuacamoleException {
+    //     return workDirectoryResourceFactory.create(authenticatedUser,
+    //             userContext, userContext.getWorkDirectory());
+    // }
 
 }

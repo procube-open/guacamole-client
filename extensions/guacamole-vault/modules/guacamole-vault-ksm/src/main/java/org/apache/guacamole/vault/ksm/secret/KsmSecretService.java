@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.Future;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.Attributes;

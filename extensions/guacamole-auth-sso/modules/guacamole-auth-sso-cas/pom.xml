@@ -84,12 +84,12 @@
         <!-- Java servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
 
         <!-- JAX-RS Annotations -->
         <dependency>
-            <groupId>javax.ws.rs</groupId>
+            <groupId>jakarta.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
         </dependency>
 
@@ -113,7 +113,7 @@
         <!-- Force use of version 2.3.1 (transitive dependencies of
             cas-client-core disagree on 2.3.0. vs. 2.3.1) -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
+            <groupId>jakarta.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
         </dependency>

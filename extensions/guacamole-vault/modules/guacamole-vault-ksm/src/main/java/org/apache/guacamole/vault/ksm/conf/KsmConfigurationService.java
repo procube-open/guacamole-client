@@ -22,7 +22,7 @@ package org.apache.guacamole.vault.ksm.conf;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleServerException;

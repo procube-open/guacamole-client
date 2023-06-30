@@ -19,8 +19,8 @@
 
 package org.apache.guacamole.auth.cas.conf;
 
-import javax.naming.InvalidNameException;
-import javax.naming.ldap.LdapName;
+import jakarta.naming.InvalidNameException;
+import jakarta.naming.ldap.LdapName;
 import org.apache.guacamole.properties.GuacamoleProperty;
 import org.apache.guacamole.GuacamoleServerException;
 

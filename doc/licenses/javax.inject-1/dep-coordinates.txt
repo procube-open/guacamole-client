@@ -1,1 +1,1 @@
-javax.inject:javax.inject:jar:1
+jakarta.inject:jakarta.inject:jar:1

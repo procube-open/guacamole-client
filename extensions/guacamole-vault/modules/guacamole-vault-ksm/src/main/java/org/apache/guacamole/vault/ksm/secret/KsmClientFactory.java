@@ -19,7 +19,7 @@
 
 package org.apache.guacamole.vault.ksm.secret;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import com.keepersecurity.secretsManager.core.SecretsManagerOptions;
 

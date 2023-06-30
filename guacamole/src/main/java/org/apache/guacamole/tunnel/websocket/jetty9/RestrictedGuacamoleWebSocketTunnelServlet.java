@@ -19,8 +19,8 @@
 
 package org.apache.guacamole.tunnel.websocket.jetty9;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 import org.apache.guacamole.tunnel.TunnelRequestService;

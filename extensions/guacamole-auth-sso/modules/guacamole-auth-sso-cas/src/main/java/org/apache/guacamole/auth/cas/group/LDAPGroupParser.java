@@ -19,9 +19,9 @@
 
 package org.apache.guacamole.auth.cas.group;
 
-import javax.naming.InvalidNameException;
-import javax.naming.ldap.LdapName;
-import javax.naming.ldap.Rdn;
+import jakarta.naming.InvalidNameException;
+import jakarta.naming.ldap.LdapName;
+import jakarta.naming.ldap.Rdn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

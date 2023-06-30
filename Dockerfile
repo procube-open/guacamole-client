@@ -24,13 +24,17 @@
 # Use args for Tomcat image label to allow image builder to choose alternatives
 # such as `--build-arg TOMCAT_JRE=jre8-alpine`
 #
-ARG TOMCAT_VERSION=11.0
+ARG TOMCAT_VERSION=10.1.9
 ARG TOMCAT_JRE=jdk17
 
 # Use official maven image for the build
-FROM maven:latest AS builder
+# FROM maven:3-jdk-8 AS builder
+FROM maven:3.8.7-ibm-semeru-17-focal AS builder
+
+USER root
 
 # Install firefox browser for sake of JavaScript unit tests
+# RUN apt-get update && apt-get install -y firefox-esr
 RUN apt-get update && apt-get install -y firefox
 
 # Arbitrary arguments that can be passed to the maven build. By default, an
@@ -44,10 +48,10 @@ ENV \
     BUILD_DIR=/tmp/guacamole-docker-BUILD
 
 # Add configuration scripts
-COPY guacamole-docker/bin/ /opt/guacamole/bin/
+COPY --chmod=755 guacamole-docker/bin/ /opt/guacamole/bin/
 
 # Copy source to container for sake of build
-COPY . "$BUILD_DIR"
+COPY --chmod=755 . "$BUILD_DIR"
 
 # Run the build itself
 RUN /opt/guacamole/bin/build-guacamole.sh "$BUILD_DIR" /opt/guacamole

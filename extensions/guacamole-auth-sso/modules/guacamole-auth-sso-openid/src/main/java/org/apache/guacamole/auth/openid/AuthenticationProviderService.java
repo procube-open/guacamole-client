@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import jakarta.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.UriBuilder;
+import jakarta.ws.rs.core.UriBuilder;
 import org.apache.guacamole.auth.openid.conf.ConfigurationService;
 import org.apache.guacamole.auth.openid.token.TokenValidationService;
 import org.apache.guacamole.GuacamoleException;

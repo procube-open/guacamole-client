@@ -23,8 +23,8 @@ import com.google.common.primitives.Longs;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
+import jakarta.crypto.Mac;
+import jakarta.crypto.spec.SecretKeySpec;
 import org.apache.guacamole.properties.EnumGuacamoleProperty.PropertyValue;
 
 /*

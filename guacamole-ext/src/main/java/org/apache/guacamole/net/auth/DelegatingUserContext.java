@@ -105,11 +105,13 @@ public class DelegatingUserContext implements UserContext {
         return userContext.getSharingProfileDirectory();
     }
 
+    /*
     @Override
     public Directory<Work> getWorkDirectory()
             throws GuacamoleException {
         return userContext.getWorkDirectory();
     }
+    */
 
     @Override
     public ActivityRecordSet<ConnectionRecord> getConnectionHistory()

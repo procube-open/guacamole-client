@@ -180,6 +180,19 @@ public interface UserContext {
             throws GuacamoleException;
 
     /**
+     * Retrieves a Directory which can be used to view and manipulate
+     * connections and their configurations, but only as allowed by the
+     * permissions given to the user.
+     *
+     * @return A Directory whose operations are bound by the permissions of 
+     *         the user.
+     *
+     * @throws GuacamoleException If an error occurs while creating the
+     *                            Directory.
+     */
+    // Directory<Work> getWorkDirectory() throws GuacamoleException;
+
+    /**
      * Retrieves all connection records visible to current user. Connection
      * history records describe the start and end times of connections, and
      * correspond to the times that users connect or disconnect to individual
@@ -324,19 +337,5 @@ public interface UserContext {
     default UserContext getPrivileged() {
         return this;
     }
-
-    /**
-     * Retrieves a Directory which can be used to view and manipulate
-     * connections and their configurations, but only as allowed by the
-     * permissions given to the user.
-     *
-     * @return A Directory whose operations are bound by the permissions of 
-     *         the user.
-     *
-     * @throws GuacamoleException If an error occurs while creating the
-     *                            Directory.
-     */
-    Directory<Work> getWorkDirectory()
-            throws GuacamoleException;
 
 }

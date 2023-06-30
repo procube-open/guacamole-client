@@ -19,8 +19,8 @@
 
 package org.apache.guacamole.auth.cas.group;
 
-import javax.naming.InvalidNameException;
-import javax.naming.ldap.LdapName;
+import jakarta.naming.InvalidNameException;
+import jakarta.naming.ldap.LdapName;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

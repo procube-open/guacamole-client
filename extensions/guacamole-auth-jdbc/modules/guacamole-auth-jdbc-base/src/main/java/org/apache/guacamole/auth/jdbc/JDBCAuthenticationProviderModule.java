@@ -20,7 +20,7 @@
 package org.apache.guacamole.auth.jdbc;
 
 import com.google.inject.Scopes;
-import javax.sql.DataSource;
+import jakarta.sql.DataSource;
 import org.apache.guacamole.auth.jdbc.user.ModeledUserContext;
 import org.apache.guacamole.auth.jdbc.connectiongroup.RootConnectionGroup;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ModeledConnectionGroup;

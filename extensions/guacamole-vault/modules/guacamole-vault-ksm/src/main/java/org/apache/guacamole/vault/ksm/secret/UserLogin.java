@@ -21,8 +21,8 @@ package org.apache.guacamole.vault.ksm.secret;
 
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 
 /**
  * A class intended for use as a key in KSM user record client cache. This
