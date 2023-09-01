@@ -16,11 +16,14 @@ jobs:
         run: |
           git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
           git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+      - name: Resolve commit sha
+        run: |
+          echo COMMIT_SHA=${{ github.sha }} >> $GITHUB_ENV
       - name: Create tag name
         run: |
-          echo TAG_NAME=develop-$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 8 | head -1) >> $GITHUB_ENV
+          echo TAG_NAME=develop-${ COMMIT_SHA:1:8 } >> $GITHUB_ENV
       - name: Create tag
         if: contains(toJSON(github.event.commits.*.message), '[[DEVELOP]]')
         run: |
-          git tag -a ${{env.TAG_NAME}} -m "create at $(date +'%Y%m%d%H%M%S')"
+          git tag -a ${TAG_NAME} -m "create at $(date +'%Y%m%d%H%M%S')"
           git push --tags
