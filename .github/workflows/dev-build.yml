@@ -1,0 +1,26 @@
+name: develop build
+on:
+  push:
+    tags-ignore: 
+      - '**'
+    branches-ignore:
+      - master
+
+jobs:
+  dev-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set git user
+        run: |
+          git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+      - name: Create tag name
+        run: |
+          echo TAG_NAME=develop-$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 8 | head -1) >> $GITHUB_ENV
+      - name: Create tag
+        if: contains(toJSON(github.event.commits.*.message), '[[DEVELOP]]')
+        run: |
+          git tag -a ${{env.TAG_NAME}} -m "create at $(date +'%Y%m%d%H%M%S')"
+          git push --tags

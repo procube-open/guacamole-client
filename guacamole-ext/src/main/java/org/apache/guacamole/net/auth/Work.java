@@ -20,4 +20,6 @@
 package org.apache.guacamole.net.auth;
 
 public interface Work extends Identifiable, Attributes, Nameable {
+
+    RelatedObjectSet getWork();
 }

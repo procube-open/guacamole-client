@@ -21,6 +21,7 @@ package org.apache.guacamole.rest.work;
 
 import java.util.Map;
 
+import org.apache.guacamole.net.auth.RelatedObjectSet;
 import org.apache.guacamole.net.auth.Work;
 
 public class APIWorkWrapper implements Work {
@@ -69,5 +70,10 @@ public class APIWorkWrapper implements Work {
     @Override
     public void setName(String name) {
         apiWork.setName(name);
+    }
+
+    @Override
+    public RelatedObjectSet getWork() {
+        throw new UnsupportedOperationException("Unimplemented method 'getWork'");
     }
 }

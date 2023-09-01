@@ -32,6 +32,7 @@ import org.apache.guacamole.auth.jdbc.base.ModeledChildDirectoryObject;
 import org.apache.guacamole.form.DateField;
 import org.apache.guacamole.form.Field;
 import org.apache.guacamole.form.Form;
+import org.apache.guacamole.net.auth.RelatedObjectSet;
 import org.apache.guacamole.net.auth.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -126,6 +127,11 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
         catch (ParseException e) {
             logger.warn("Ignoring invalid end date \"{}\" for work \"{}\".", attributes.get(END_DATE_NAME), getName());
         }
+    }
+
+    @Override
+    public RelatedObjectSet getWork() {
+        throw new UnsupportedOperationException("Unimplemented method 'getWork'");
     }
 
 }
