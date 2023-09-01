@@ -63,7 +63,7 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
     ));
 
     /**
-     * All possible attributes of connection group objects organized as
+     * All possible attributes of work objects organized as
      * individual, logical forms.
      */
     public static final Collection<Form> ATTRIBUTES = Collections.unmodifiableCollection(Arrays.asList(
@@ -72,7 +72,7 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
 
     /**
      * The names of all attributes which are explicitly supported by this
-     * extension's ConnectionGroup objects.
+     * extension's Work objects.
      */
     public static final Set<String> ATTRIBUTE_NAMES =
             Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
