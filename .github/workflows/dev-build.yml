@@ -21,9 +21,9 @@ jobs:
           echo COMMIT_SHA=${{ github.sha }} >> $GITHUB_ENV
       - name: Create tag name
         run: |
-          echo TAG_NAME=develop-${ COMMIT_SHA:1:8 } >> $GITHUB_ENV
+          echo TAG_NAME=develop-$(echo ${{ env.COMMIT_SHA }} | sed 's/^\(.\{4\}\).*$/\1/')>> $GITHUB_ENV
       - name: Create tag
         if: contains(toJSON(github.event.commits.*.message), '[[DEVELOP]]')
         run: |
-          git tag -a ${TAG_NAME} -m "create at $(date +'%Y%m%d%H%M%S')"
+          git tag -a ${{ env.TAG_NAME }} -m "create at $(date +'%Y%m%d%H%M%S')"
           git push --tags
