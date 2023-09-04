@@ -20,7 +20,6 @@
 package org.apache.guacamole.rest.work;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -41,7 +40,6 @@ import com.google.inject.assistedinject.AssistedInject;
  * A REST resource which abstracts the operations available on an existing
  * Work.
  */
-@Path("/works")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
@@ -86,7 +84,7 @@ public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
      * @throws GuacamoleException
      *     If the group membership for this user group cannot be retrieved.
      */
-    @GET
+    @Path("works")
     public RelatedObjectSetResource getWorks() throws GuacamoleException {
         return new RelatedObjectSetResource(getInternalObject().getWorks());
     }
