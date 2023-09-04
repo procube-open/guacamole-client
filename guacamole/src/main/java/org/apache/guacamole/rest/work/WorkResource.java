@@ -45,7 +45,7 @@ import com.google.inject.assistedinject.AssistedInject;
 public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
     
     /**
-     * Creates a new UserGroupResource which exposes the operations and
+     * Creates a new WorkResource which exposes the operations and
      * subresources available for the given UserGroup.
      *
      * @param authenticatedUser
@@ -58,7 +58,7 @@ public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
      *     The Directory which contains the given UserGroup.
      *
      * @param work
-     *     The UserGroup that this UserGroupResource should represent.
+     *     The UserGroup that this WorkResource should represent.
      *
      * @param translator
      *     A DirectoryObjectTranslator implementation which handles Users.
@@ -74,12 +74,12 @@ public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
 
     /**
      * Returns a resource which abstracts operations available on the set of
-     * user groups of which the UserGroup represented by this UserGroupResource
+     * user groups of which the UserGroup represented by this WorkResource
      * is a member.
      *
      * @return
      *     A resource which represents the set of user groups of which the
-     *     UserGroup represented by this UserGroupResource is a member.
+     *     UserGroup represented by this WorkResource is a member.
      *
      * @throws GuacamoleException
      *     If the group membership for this user group cannot be retrieved.
