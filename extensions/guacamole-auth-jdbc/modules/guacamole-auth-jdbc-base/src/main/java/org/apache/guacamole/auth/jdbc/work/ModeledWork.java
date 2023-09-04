@@ -130,8 +130,8 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
     }
 
     @Override
-    public RelatedObjectSet getWork() {
-        throw new UnsupportedOperationException("Unimplemented method 'getWork'");
+    public RelatedObjectSet getWorks() {
+        return RelatedObjectSet.EMPTY_SET;
     }
 
 }

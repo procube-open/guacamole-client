@@ -19,7 +19,10 @@
 
 package org.apache.guacamole.rest.work;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
@@ -33,6 +36,12 @@ import org.apache.guacamole.rest.identifier.RelatedObjectSetResource;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
+/**
+ * A REST resource which abstracts the operations available on an existing
+ * Work.
+ */
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
     
     /**
@@ -77,7 +86,7 @@ public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
      */
     @Path("works")
     public RelatedObjectSetResource getWorks() throws GuacamoleException {
-        return new RelatedObjectSetResource(getInternalObject().getWork());
+        return new RelatedObjectSetResource(getInternalObject().getWorks());
     }
 
 }

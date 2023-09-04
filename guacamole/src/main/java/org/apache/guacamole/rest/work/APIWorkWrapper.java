@@ -73,7 +73,7 @@ public class APIWorkWrapper implements Work {
     }
 
     @Override
-    public RelatedObjectSet getWork() {
-        throw new UnsupportedOperationException("Unimplemented method 'getWork'");
+    public RelatedObjectSet getWorks() {
+        throw new UnsupportedOperationException("Unimplemented method 'getWorks'");
     }
 }
