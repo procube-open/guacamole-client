@@ -49,7 +49,7 @@ public class WorkModule extends AbstractModule {
                 )
                 .build(new TypeLiteral<DirectoryObjectResourceFactory<Work, APIWork>>() {}));
 
-        // Bind translator for converting between UserGroup and APIUserGroup
+        // Bind translator for converting between Work and APIWork 
         bind(new TypeLiteral<DirectoryObjectTranslator<Work, APIWork>>() {})
                 .to(WorkObjectTranslator.class);
 
