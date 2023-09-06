@@ -178,6 +178,18 @@ public abstract class AbstractUser extends AbstractIdentifiable
     /**
      * {@inheritDoc}
      *
+     * <p>This implementation simply an immutable, empty permission set.
+     * Implementations that wish to expose permissions should override this
+     * function.
+     */
+    @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        return ObjectPermissionSet.EMPTY_SET;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * <p>This implementation simply an immutable, empty related object set.
      * Implementations that wish to expose group membership should override
      * this function.

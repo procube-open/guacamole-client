@@ -148,6 +148,11 @@ public class DelegatingUser implements User {
     }
 
     @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        return user.getWorkPermissions();
+    }
+
+    @Override
     public RelatedObjectSet getUserGroups() throws GuacamoleException {
         return user.getUserGroups();
     }

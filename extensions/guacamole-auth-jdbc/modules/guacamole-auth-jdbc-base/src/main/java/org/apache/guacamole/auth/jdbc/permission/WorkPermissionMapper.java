@@ -17,40 +17,9 @@
  * under the License.
  */
 
-package org.apache.guacamole.auth.jdbc.work;
+package org.apache.guacamole.auth.jdbc.permission;
 
-import org.apache.guacamole.auth.jdbc.base.ObjectModel;
-
-public class WorkModel extends ObjectModel {
-    /**
-     * The human-readable name associated with this work.
-     */
-    private String name;
-
-    /**
-     * Creates a new, empty WorkModel.
-     */
-    public WorkModel() {
-    }
-
-    /**
-     * Returns the name associated with this work.
-     *
-     * @return
-     *     The name associated with this work.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name associated with this work.
-     *
-     * @param name
-     *     The name to associate with this work.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-}
+/**
+ * Mapper for work permissions.
+ */
+public interface WorkPermissionMapper extends ObjectPermissionMapper {}

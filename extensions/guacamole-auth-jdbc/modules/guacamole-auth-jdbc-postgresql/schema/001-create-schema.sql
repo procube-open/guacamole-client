@@ -141,17 +141,6 @@ CREATE TABLE guacamole_connection (
 CREATE INDEX guacamole_connection_parent_id
     ON guacamole_connection(parent_id);
 
-CREATE TABLE guacamole_work (
-
-  work_id      serial       NOT NULL,
-  work_name    varchar(128) NOT NULL,
-
-  start_date  timestamptz with time zone,
-  end_date    timestamptz with time zone,
-
-  PRIMARY KEY (work_id)
-)
-
 --
 -- Table of base entities which may each be either a user or user group. Other
 -- tables which represent qualities shared by both users and groups will point

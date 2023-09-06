@@ -40,6 +40,7 @@ import org.apache.guacamole.auth.jdbc.sharingprofile.SharingProfileDirectory;
 import org.apache.guacamole.auth.jdbc.usergroup.ModeledUserGroup;
 import org.apache.guacamole.auth.jdbc.usergroup.UserGroupDirectory;
 import org.apache.guacamole.auth.jdbc.work.ModeledWork;
+import org.apache.guacamole.auth.jdbc.work.WorkDirectory;
 import org.apache.guacamole.form.Form;
 import org.apache.guacamole.net.auth.ActiveConnection;
 import org.apache.guacamole.net.auth.ActivityRecord;
@@ -52,6 +53,7 @@ import org.apache.guacamole.net.auth.SharingProfile;
 import org.apache.guacamole.net.auth.User;
 import org.apache.guacamole.net.auth.UserContext;
 import org.apache.guacamole.net.auth.UserGroup;
+import org.apache.guacamole.net.auth.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,6 +110,13 @@ public class ModeledUserContext extends RestrictedObject
      */
     @Inject
     private ActiveConnectionDirectory activeConnectionDirectory;
+
+    /**
+     * ActiveConnection directory restricted by the permissions of the user
+     * associated with this context.
+     */
+    @Inject
+    private WorkDirectory workDirectory;
 
     /**
      * Provider for creating the root group.
@@ -247,6 +256,12 @@ public class ModeledUserContext extends RestrictedObject
     public Directory<ActiveConnection> getActiveConnectionDirectory()
             throws GuacamoleException {
         return activeConnectionDirectory;
+    }
+
+    @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return workDirectory;
     }
 
     @Override

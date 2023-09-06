@@ -53,6 +53,11 @@ public class SystemPermission implements Permission<SystemPermission.Type> {
         CREATE_CONNECTION_GROUP,
 
         /**
+         * Create work.
+         */
+        CREATE_WORK,
+
+        /**
          * Create sharing profiles.
          */
         CREATE_SHARING_PROFILE,

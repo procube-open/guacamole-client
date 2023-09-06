@@ -19,38 +19,8 @@
 
 package org.apache.guacamole.auth.jdbc.work;
 
-import org.apache.guacamole.auth.jdbc.base.ObjectModel;
+import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 
-public class WorkModel extends ObjectModel {
-    /**
-     * The human-readable name associated with this work.
-     */
-    private String name;
-
-    /**
-     * Creates a new, empty WorkModel.
-     */
-    public WorkModel() {
-    }
-
-    /**
-     * Returns the name associated with this work.
-     *
-     * @return
-     *     The name associated with this work.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name associated with this work.
-     *
-     * @param name
-     *     The name to associate with this work.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
+public interface WorkMapper extends ModeledDirectoryObjectMapper<WorkModel> {
+    
 }

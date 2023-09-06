@@ -126,4 +126,17 @@ public interface Permissions {
      */
     ObjectPermissionSet getUserGroupPermissions() throws GuacamoleException;
 
+    /**
+     * Returns all work permissions given to this object.
+     *
+     * @return
+     *     An ObjectPermissionSet of all work permissions granted to this
+     *     object.
+     *
+     * @throws GuacamoleException
+     *     If an error occurs while retrieving permissions, or if reading all
+     *     permissions is not allowed.
+     */
+    ObjectPermissionSet getWorkPermissions() throws GuacamoleException;
+
 }

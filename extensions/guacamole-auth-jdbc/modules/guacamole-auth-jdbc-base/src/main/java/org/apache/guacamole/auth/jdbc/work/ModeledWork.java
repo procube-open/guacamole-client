@@ -20,7 +20,6 @@
 package org.apache.guacamole.auth.jdbc.work;
 
 
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,40 +27,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.guacamole.auth.jdbc.base.ModeledChildDirectoryObject;
-import org.apache.guacamole.form.DateField;
+import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObject;
 import org.apache.guacamole.form.Field;
 import org.apache.guacamole.form.Form;
 import org.apache.guacamole.net.auth.RelatedObjectSet;
 import org.apache.guacamole.net.auth.Work;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implements Work {
-
-    /**
-     * Logger for this class.
-     */
-    private static final Logger logger = LoggerFactory.getLogger(ModeledWork.class);
-
-    /**
-     * The name of the attribute which date to start work.
-     */
-    public static final String START_DATE_NAME = "start-date";
-
-    /**
-     * The name of the attribute which date to end work.
-     */
-    public static final String END_DATE_NAME = "end-date";
+public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Work {
 
     /**
      * All attributes related to restricting user accounts, within a logical
      * form.
      */
-    public static final Form PERIOD = new Form("period", Arrays.<Field>asList(
-        new DateField(START_DATE_NAME),
-        new DateField(END_DATE_NAME)
-    ));
+    public static final Form PERIOD = new Form("period", Arrays.<Field>asList());
 
     /**
      * All possible attributes of work objects organized as
@@ -76,10 +54,7 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
      * extension's Work objects.
      */
     public static final Set<String> ATTRIBUTE_NAMES =
-            Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
-                START_DATE_NAME,
-                END_DATE_NAME
-            )));
+            Collections.unmodifiableSet(new HashSet<String>(Arrays.asList()));
 
     @Override
     public String getName() {
@@ -97,12 +72,6 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
         // Include any defined arbitrary attributes
         Map<String, String> attributes = super.getAttributes();
         
-        // Set start date attribute
-        attributes.put(START_DATE_NAME, DateField.format(getModel().getStartDate()));
-
-        // Set end date attribute
-        attributes.put(END_DATE_NAME, DateField.format(getModel().getEndDate()));
-
         return attributes;   
     }
 
@@ -112,21 +81,6 @@ public class ModeledWork extends ModeledChildDirectoryObject<WorkModel> implemen
         // Set arbitrary attributes
         super.setAttributes(attributes);
         
-        // Translate start date attribute
-        try {
-            getModel().setStartDate(DateField.parse(attributes.get(START_DATE_NAME)));
-        }
-        catch (ParseException e) {
-            logger.warn("Ignoring invalid start date \"{}\" for work \"{}\".", attributes.get(START_DATE_NAME), getName());
-        }
-
-        // Translate end date attribute
-        try {
-            getModel().setEndDate(DateField.parse(attributes.get(END_DATE_NAME)));
-        }
-        catch (ParseException e) {
-            logger.warn("Ignoring invalid end date \"{}\" for work \"{}\".", attributes.get(END_DATE_NAME), getName());
-        }
     }
 
     @Override

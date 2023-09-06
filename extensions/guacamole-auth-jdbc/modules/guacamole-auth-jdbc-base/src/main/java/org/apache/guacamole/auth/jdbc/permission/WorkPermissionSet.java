@@ -17,40 +17,26 @@
  * under the License.
  */
 
-package org.apache.guacamole.auth.jdbc.work;
+package org.apache.guacamole.auth.jdbc.permission;
 
-import org.apache.guacamole.auth.jdbc.base.ObjectModel;
+import com.google.inject.Inject;
 
-public class WorkModel extends ObjectModel {
+/**
+ * A database implementation of ObjectPermissionSet which uses an injected
+ * service to query and manipulate the work permissions associated with
+ * a particular user.
+ */
+public class WorkPermissionSet extends ObjectPermissionSet {
+
     /**
-     * The human-readable name associated with this work.
+     * Service for querying and manipulating work permissions.
      */
-    private String name;
-
-    /**
-     * Creates a new, empty WorkModel.
-     */
-    public WorkModel() {
+    @Inject
+    private WorkPermissionService workPermissionService;
+    
+    @Override
+    protected ObjectPermissionService getObjectPermissionService() {
+        return workPermissionService;
     }
-
-    /**
-     * Returns the name associated with this work.
-     *
-     * @return
-     *     The name associated with this work.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name associated with this work.
-     *
-     * @param name
-     *     The name to associate with this work.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
+ 
 }

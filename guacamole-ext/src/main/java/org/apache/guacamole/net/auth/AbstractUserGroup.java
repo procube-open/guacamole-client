@@ -144,6 +144,11 @@ public class AbstractUserGroup extends AbstractIdentifiable implements UserGroup
         return ObjectPermissionSet.EMPTY_SET;
     }
 
+    @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        return ObjectPermissionSet.EMPTY_SET;
+    }
+
     /**
      * {@inheritDoc}
      *

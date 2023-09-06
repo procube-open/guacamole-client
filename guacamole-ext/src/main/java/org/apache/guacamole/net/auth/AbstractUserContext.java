@@ -125,6 +125,19 @@ public abstract class AbstractUserContext implements UserContext {
      * {@inheritDoc}
      *
      * <p>This implementation simply returns an empty {@link Directory}.
+     * Implementations that wish to expose the status of active connections
+     * should override this function.
+     */
+    @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return new SimpleDirectory<Work>();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation simply returns an empty {@link Directory}.
      * Implementations that wish to provide screen sharing functionality
      * through the use of sharing profiles should override this function.
      */

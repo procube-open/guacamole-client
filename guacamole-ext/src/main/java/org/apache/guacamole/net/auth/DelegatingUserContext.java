@@ -88,6 +88,12 @@ public class DelegatingUserContext implements UserContext {
     }
 
     @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return userContext.getWorkDirectory();
+    }
+
+    @Override
     public Directory<ConnectionGroup> getConnectionGroupDirectory()
             throws GuacamoleException {
         return userContext.getConnectionGroupDirectory();
