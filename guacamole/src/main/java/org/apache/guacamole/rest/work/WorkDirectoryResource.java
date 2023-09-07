@@ -40,8 +40,8 @@ import org.apache.guacamole.rest.directory.DirectoryResource;
 public class WorkDirectoryResource extends DirectoryResource<Work, APIWork> {
     
     /**
-     * Creates a new UserGroupDirectoryResource which exposes the operations
-     * and subresources available for the given UserGroup Directory.
+     * Creates a new WorkDirectoryResource which exposes the operations
+     * and subresources available for the given Work Directory.
      *
      * @param authenticatedUser
      *     The user that is accessing this resource.
@@ -54,11 +54,11 @@ public class WorkDirectoryResource extends DirectoryResource<Work, APIWork> {
      *
      * @param translator
      *     A DirectoryObjectTranslator implementation which handles
-     *     UserGroups.
+     *     Works.
      *
      * @param resourceFactory
      *     A factory which can be used to create instances of resources
-     *     representing UserGroups.
+     *     representing Works.
      */
     @AssistedInject
     public WorkDirectoryResource(
@@ -73,6 +73,6 @@ public class WorkDirectoryResource extends DirectoryResource<Work, APIWork> {
     @Override
     protected ObjectPermissionSet getObjectPermissions(Permissions permissions)
             throws GuacamoleException {
-        return permissions.getUserGroupPermissions();
+        return permissions.getWorkPermissions();
     }
 }

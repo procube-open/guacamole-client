@@ -35,7 +35,7 @@ import com.google.inject.Provider;
 
 /**
  * Service which provides convenience methods for creating, retrieving, and
- * manipulating connections.
+ * manipulating works.
  */
 public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work, WorkModel> {
 
@@ -52,7 +52,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
     private WorkPermissionMapper workPermissionMapper;
     
     /**
-     * Provider for creating connections.
+     * Provider for creating works.
      */
     @Inject
     private Provider<ModeledWork> workProvider;
@@ -84,7 +84,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         WorkModel model = new WorkModel();
         ModeledWork work = getObjectInstance(currentUser, model);
 
-        // Set model contents through ModeledWork, copying the provided connection
+        // Set model contents through ModeledWork, copying the provided work
         work.setName(object.getName());
         work.setAttributes(object.getAttributes());
 
@@ -95,7 +95,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
     @Override
     protected boolean hasCreatePermission(ModeledAuthenticatedUser user) throws GuacamoleException {
 
-        // Return whether user has explicit connection creation permission
+        // Return whether user has explicit work creation permission
         SystemPermissionSet permissionSet = user.getUser().getEffectivePermissions().getSystemPermissions();
         return permissionSet.hasPermission(SystemPermission.Type.CREATE_WORK);
 
@@ -105,7 +105,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
     protected ObjectPermissionSet getEffectivePermissionSet(ModeledAuthenticatedUser user) throws GuacamoleException {
 
         // Return permissions related to works
-        return user.getUser().getEffectivePermissions().getConnectionPermissions();
+        return user.getUser().getEffectivePermissions().getWorkPermissions();
 
     }
 

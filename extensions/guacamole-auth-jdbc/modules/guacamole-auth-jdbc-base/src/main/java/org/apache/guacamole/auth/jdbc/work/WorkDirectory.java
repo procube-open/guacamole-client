@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 public class WorkDirectory extends JDBCDirectory<Work> {
 
     /**
-     * Service for managing connection objects.
+     * Service for managing work objects.
      */
     @Inject
     private WorkService workService;

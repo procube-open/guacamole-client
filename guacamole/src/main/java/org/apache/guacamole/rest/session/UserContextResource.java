@@ -213,8 +213,7 @@ public class UserContextResource {
      *     If an error occurs while retrieving the Work Directory.
      */
     @Path("works")
-    public DirectoryResource<Work, APIWork>
-        getWorkDirectoryResource() throws GuacamoleException {
+    public DirectoryResource<Work, APIWork> getWorkDirectoryResource() throws GuacamoleException {
         return workDirectoryResourceFactory.create(authenticatedUser,
                 userContext, userContext.getWorkDirectory());
     }

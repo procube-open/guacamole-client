@@ -174,6 +174,7 @@ public class ModeledUserContext extends RestrictedObject
         connectionGroupDirectory.init(currentUser);
         sharingProfileDirectory.init(currentUser);
         activeConnectionDirectory.init(currentUser);
+        workDirectory.init(currentUser);
 
     }
 
