@@ -22,6 +22,12 @@ package org.apache.guacamole.auth.jdbc.work;
 import org.apache.guacamole.auth.jdbc.base.ObjectModel;
 
 public class WorkModel extends ObjectModel {
+
+    /**
+     * The unique identifier associated for IDM with this work.
+     */
+    private String idmIdentifier;
+
     /**
      * The human-readable name associated with this work.
      */
@@ -31,6 +37,26 @@ public class WorkModel extends ObjectModel {
      * Creates a new, empty WorkModel.
      */
     public WorkModel() {
+    }
+
+    /**
+     * Returns the unique identifier associated for IDM with this work.
+     * 
+     * @return
+     *     The unique identifier associated for IDM with this work.
+     */
+    public String getIdmIdentifier() {
+        return idmIdentifier;
+    }
+
+    /**
+     * Sets the unique identifier associated for IDM with this work.
+     * 
+     * @param idmIdentifier
+     *     The unique identifier to associate for IDM with this work.
+     */
+    public void setIdmIdentifier(String idmIdentifier) {
+        this.idmIdentifier = idmIdentifier;
     }
 
     /**
