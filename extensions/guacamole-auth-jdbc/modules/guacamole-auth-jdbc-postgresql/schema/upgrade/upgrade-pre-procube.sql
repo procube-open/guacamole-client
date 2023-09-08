@@ -78,25 +78,3 @@ CREATE TABLE guacamole_work_attribute (
 
 CREATE INDEX guacamole_work_attribute_work_id
     ON guacamole_work_attribute(work_id);
-
---
--- Table of work parameters. Each parameter is simply a name/value pair
--- associated with a work.
---
-
-CREATE TABLE guacamole_work_parameter (
-
-  work_id         integer       NOT NULL,
-  parameter_name  varchar(128)  NOT NULL,
-  parameter_value varchar(4096) NOT NULL,
-
-  PRIMARY KEY (work_id, parameter_name),
-
-  CONSTRAINT guacamole_work_parameter_ibfk_1
-    FOREIGN KEY (work_id)
-    REFERENCES guacamole_work (work_id) ON DELETE CASCADE
-
-);
-
-CREATE INDEX guacamole_work_parameter_work_id
-    ON guacamole_work_parameter(work_id);
