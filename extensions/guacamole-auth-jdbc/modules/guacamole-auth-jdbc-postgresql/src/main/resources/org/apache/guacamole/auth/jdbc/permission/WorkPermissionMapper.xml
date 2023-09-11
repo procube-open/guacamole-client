@@ -62,8 +62,8 @@
                 <property name="entityID" value="#{entity.entityID,jdbcType=INTEGER}"/>
                 <property name="groups"   value="effectiveGroups"/>
             </include>
-            AND permission = #{type,jdbcType=VARCHAR}
-            AND work_id = #{identifier,jdbcType=VARCHAR}
+            AND permission = #{type,jdbcType=VARCHAR}::guacamole_object_permission_type
+            AND work_id = #{identifier,jdbcType=INTEGER}::integer
 
     </select>
 
@@ -81,12 +81,12 @@
             AND work_id IN
                 <foreach collection="identifiers" item="identifier"
                          open="(" separator="," close=")">
-                    #{identifier,jdbcType=VARCHAR}
+                    #{identifier,jdbcType=INTEGER}::integer
                 </foreach>
             AND permission IN
                 <foreach collection="permissions" item="permission"
                          open="(" separator="," close=")">
-                    #{permission,jdbcType=VARCHAR}
+                    #{permission,jdbcType=VARCHAR}::guacamole_object_permisson_type
                 </foreach>
 
     </select>
@@ -99,8 +99,8 @@
             <foreach collection="permissions" item="permission"
                      open="(" separator="," close=")">
                 (#{permission.entityID,jdbcType=INTEGER},
-                 #{permission.type,jdbcType=VARCHAR},
-                 #{permission.objectIdentifier,jdbcType=VARCHAR})
+                 #{permission.type,jdbcType=VARCHAR}::guacamole_object_permisson_type,
+                 #{permission.objectIdentifier,jdbcType=VARCHAR}::integer)
             </foreach>
 
     </delete>
@@ -108,17 +108,30 @@
     <!-- Insert all given permissions -->
     <insert id="insert" parameterType="org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel">
 
-        INSERT IGNORE INTO guacamole_work_permission (
+        INSERT INTO guacamole_work_permission (
             entity_id,
             permission,
             work_id
         )
-        VALUES
-            <foreach collection="permissions" item="permission" separator=",">
-                (#{permission.entityID,jdbcType=INTEGER},
-                 #{permission.type,jdbcType=VARCHAR},
-                 #{permission.objectIdentifier,jdbcType=VARCHAR})
+        SELECT DISTINCT
+            permissions.entity_id,
+            permissions.permission,
+            permissions.work_id
+        FROM
+            <foreach collection="permissions" item="permission"
+                     open="(" separator="UNION ALL" close=")">
+                SELECT #{permission.entityID,jdbcType=INTEGER}                               AS entity_id,
+                       #{permission.type,jdbcType=VARCHAR}::guacamole_object_permission_type AS permission,
+                       #{permission.objectIdentifier,jdbcType=INTEGER}::integer              AS work_id
             </foreach>
+        AS permissions
+        WHERE (entity_id, permission, work_id) NOT IN (
+            SELECT
+                guacamole_work_permission.entity_id,
+                guacamole_work_permission.permission,
+                guacamole_work_permission.work_id
+            FROM guacamole_work_permission
+        );
 
     </insert>
 
