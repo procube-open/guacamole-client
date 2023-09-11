@@ -93,7 +93,7 @@
         WHERE guacamole_work.work_id IN
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
-                #{identifier,jdbcType=VARCHAR}
+                #{identifier,jdbcType=INTEGER}::integer
             </foreach>
         GROUP BY guacamole_work.work_id;
 
@@ -105,7 +105,7 @@
         WHERE work_id IN
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
-                #{identifier,jdbcType=VARCHAR}
+                #{identifier,jdbcType=INTEGER}::integer
             </foreach>;
 
     </select>
@@ -122,7 +122,7 @@
         WHERE guacamole_work.work_id IN
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
-                #{identifier,jdbcType=VARCHAR}
+                #{identifier,jdbcType=INTEGER}::integer
             </foreach>
             AND guacamole_work.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
@@ -140,7 +140,7 @@
         WHERE guacamole_work_attribute.work_id IN
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
-                #{identifier,jdbcType=VARCHAR}
+                #{identifier,jdbcType=INTEGER}::integer
             </foreach>
             AND guacamole_work_attribute.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
@@ -154,7 +154,7 @@
     <!-- Delete single work by identifier -->
     <delete id="delete">
         DELETE FROM guacamole_work
-        WHERE work_id = #{identifier,jdbcType=VARCHAR}
+        WHERE work_id = #{identifier,jdbcType=INTEGER}::integer
     </delete>
 
     <!-- Insert single work -->
@@ -183,7 +183,7 @@
     <!-- Delete attributes associated with work -->
     <delete id="deleteAttributes">
         DELETE FROM guacamole_work_attribute
-        WHERE work_id = #{object.objectID,jdbcType=INTEGER}
+        WHERE work_id = #{object.objectID,jdbcType=INTEGER}::integer
     </delete>
 
     <!-- Insert attributes for work -->
@@ -195,7 +195,7 @@
         )
         VALUES
             <foreach collection="object.arbitraryAttributes" item="attribute" separator=",">
-                (#{object.objectID,jdbcType=INTEGER},
+                (#{object.objectID,jdbcType=INTEGER}::integer,
                  #{attribute.name,jdbcType=VARCHAR},
                  #{attribute.value,jdbcType=VARCHAR})
             </foreach>
