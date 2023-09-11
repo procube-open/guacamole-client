@@ -30,6 +30,7 @@ import org.apache.guacamole.net.auth.Work;
 public class APIWork {
     private String name;
     private String identifier;
+    private String idmIdentifier;
     private Map<String, String> attributes;
 
     public APIWork() {}
@@ -60,5 +61,13 @@ public class APIWork {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIdmIdentifier() {
+        return idmIdentifier;
+    }
+    
+    public void setIdmIdentifier(String idmIdentifier) {
+        this.idmIdentifier = idmIdentifier;
     }
 }

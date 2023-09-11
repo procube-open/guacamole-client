@@ -73,7 +73,18 @@ public class APIWorkWrapper implements Work {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return apiWork.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        apiWork.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public RelatedObjectSet getWorks() {
         throw new UnsupportedOperationException("Unimplemented method 'getWorks'");
     }
+
 }

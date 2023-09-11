@@ -67,6 +67,16 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return getModel().getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        getModel().setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public Map<String, String> getAttributes() {
         
         // Include any defined arbitrary attributes

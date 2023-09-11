@@ -86,6 +86,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
 
         // Set model contents through ModeledWork, copying the provided work
         work.setName(object.getName());
+        work.setIdmIdentifier(object.getIdmIdentifier());
         work.setAttributes(object.getAttributes());
 
         return model;

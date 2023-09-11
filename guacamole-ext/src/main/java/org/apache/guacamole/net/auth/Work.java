@@ -22,4 +22,20 @@ package org.apache.guacamole.net.auth;
 public interface Work extends Identifiable, Attributes, Nameable {
 
     RelatedObjectSet getWorks();
+
+    /**
+     * Returns the unique identifier of IDM for this Work.
+     * 
+     * @return The unique identifier of IDM for
+     * this Connection.
+     */
+    public String getIdmIdentifier();
+
+    /**
+     * Sets the unique identifier of IDM for this Work.
+     * 
+     * @param idmIdentifier Sets the unique identifier of IDM for this Work.
+     */
+    public void setIdmIdentifier(String idmIdentifier);
+
 }
