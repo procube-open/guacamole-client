@@ -35,7 +35,9 @@ public class APIWork {
 
     public APIWork() {}
     public APIWork(Work work) {
+        this.name = work.getName();
         this.identifier = work.getIdentifier();
+        this.idmIdentifier = work.getIdmIdentifier();
         this.attributes = work.getAttributes();
     }
 
