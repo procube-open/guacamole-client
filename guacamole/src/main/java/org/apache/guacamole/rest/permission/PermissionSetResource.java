@@ -81,6 +81,12 @@ public class PermissionSetResource {
     private static final String USER_GROUP_PERMISSION_PATCH_PATH_PREFIX = "/userGroupPermissions/";
 
     /**
+     * The prefix of any path within an operation of a JSON patch which modifies
+     * the permissions of a user or user group regarding a specific work.
+     */
+    private static final String WORK_PERMISSION_PATCH_PATH_PREFIX = "/workPermissions/";
+
+    /**
      * The path of any operation within a JSON patch which modifies the
      * permissions of a user or user group regarding the entire system.
      */
@@ -188,6 +194,7 @@ public class PermissionSetResource {
         PermissionSetPatch<ObjectPermission> activeConnectionPermissionPatch = new PermissionSetPatch<ObjectPermission>();
         PermissionSetPatch<ObjectPermission> userPermissionPatch             = new PermissionSetPatch<ObjectPermission>();
         PermissionSetPatch<ObjectPermission> userGroupPermissionPatch        = new PermissionSetPatch<ObjectPermission>();
+        PermissionSetPatch<ObjectPermission> workPermissionPatch             = new PermissionSetPatch<ObjectPermission>();
         PermissionSetPatch<SystemPermission> systemPermissionPatch           = new PermissionSetPatch<SystemPermission>();
 
         // Apply all patch operations individually
@@ -273,6 +280,19 @@ public class PermissionSetResource {
 
             }
 
+            // Create work permission if path is work path
+            else if (path.startsWith(WORK_PERMISSION_PATCH_PATH_PREFIX)) {
+
+                // Get identifier and type from patch operation
+                String identifier = path.substring(WORK_PERMISSION_PATCH_PATH_PREFIX.length());
+                ObjectPermission.Type type = ObjectPermission.Type.valueOf(patch.getValue());
+
+                // Create and update corresponding permission
+                ObjectPermission permission = new ObjectPermission(type, identifier);
+                updatePermissionSet(patch.getOp(), workPermissionPatch, permission);
+
+            }
+
             // Create system permission if path is system path
             else if (path.equals(SYSTEM_PERMISSION_PATCH_PATH)) {
 
@@ -298,6 +318,7 @@ public class PermissionSetResource {
         activeConnectionPermissionPatch.apply(permissions.getActiveConnectionPermissions());
         userPermissionPatch.apply(permissions.getUserPermissions());
         userGroupPermissionPatch.apply(permissions.getUserGroupPermissions());
+        workPermissionPatch.apply(permissions.getWorkPermissions());
         systemPermissionPatch.apply(permissions.getSystemPermissions());
 
     }
