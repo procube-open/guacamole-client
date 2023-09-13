@@ -19,9 +19,10 @@
 
 package org.apache.guacamole.rest.work;
 
+import java.util.List;
 import java.util.Map;
 
-import org.apache.guacamole.net.auth.RelatedObjectSet;
+import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
 
 public class APIWorkWrapper implements Work {
@@ -83,8 +84,13 @@ public class APIWorkWrapper implements Work {
     }
 
     @Override
-    public RelatedObjectSet getWorks() {
-        throw new UnsupportedOperationException("Unimplemented method 'getWorks'");
+    public List<Period> getPeriods() {
+        return apiWork.getPeriods();
+    }
+
+    @Override
+    public void setPeriods(List<Period> periods) {
+        apiWork.setPeriods(periods);
     }
 
 }

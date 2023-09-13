@@ -78,3 +78,27 @@ CREATE TABLE guacamole_work_attribute (
 
 CREATE INDEX guacamole_work_attribute_work_id
     ON guacamole_work_attribute(work_id);
+
+--
+-- Table of work periods. Each work period is a time interval during which
+-- a work is available for use.
+--
+
+CREATE TABLE guacamole_work_period (
+
+  work_id       integer      NOT NULL,
+  work_start_time  time         NOT NULL,
+  work_end_time    time         NOT NULL,
+  work_valid_from  date       NOT NULL,
+  work_valid_until date      NOT NULL,
+
+  PRIMARY KEY (work_id, work_start_time, work_end_time, work_valid_from, work_valid_until),
+
+  CONSTRAINT guacamole_work_period_ibfk_1
+    FOREIGN KEY (work_id)
+    REFERENCES guacamole_work (work_id) ON DELETE CASCADE
+
+);
+
+CREATE INDEX guacamole_work_period_work_id
+    ON guacamole_work_period(work_id);

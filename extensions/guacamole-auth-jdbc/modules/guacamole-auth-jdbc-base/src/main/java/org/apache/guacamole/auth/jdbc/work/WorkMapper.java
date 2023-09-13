@@ -20,7 +20,31 @@
 package org.apache.guacamole.auth.jdbc.work;
 
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
+import org.apache.ibatis.annotations.Param;
 
 public interface WorkMapper extends ModeledDirectoryObjectMapper<WorkModel> {
-    
+
+    /**
+     * Deletes any Periods currently associated with the given work
+     * in the database.
+     * 
+     * @param object
+     *     The work whose periods shold be deleted.
+     * 
+     * @return
+     *     The number of rows deleted.
+     */
+    int deletePeriods(@Param("object") WorkModel object);
+
+    /**
+     * Inserts all Periods associated with the given work.
+     * 
+     * @param object
+     *     The work whose periods should be inserted.
+     * 
+     * @return
+     *     The number of rows inserted.
+     */
+    int insertPeriods(@Param("object") WorkModel object);
+
 }

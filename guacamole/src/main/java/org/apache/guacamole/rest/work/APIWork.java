@@ -22,7 +22,11 @@ package org.apache.guacamole.rest.work;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import java.util.List;
 import java.util.Map;
+
+import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -32,6 +36,7 @@ public class APIWork {
     private String identifier;
     private String idmIdentifier;
     private Map<String, String> attributes;
+    private List<Period> periods;
 
     public APIWork() {}
     public APIWork(Work work) {
@@ -39,6 +44,7 @@ public class APIWork {
         this.identifier = work.getIdentifier();
         this.idmIdentifier = work.getIdmIdentifier();
         this.attributes = work.getAttributes();
+        this.periods = work.getPeriods();
     }
 
     public String getIdentifier() {
@@ -71,5 +77,13 @@ public class APIWork {
     
     public void setIdmIdentifier(String idmIdentifier) {
         this.idmIdentifier = idmIdentifier;
+    }
+
+    public List<Period> getPeriods() {
+        return periods;
+    }
+
+    public void setPeriods(List<Period> periods){
+        this.periods = periods;
     }
 }

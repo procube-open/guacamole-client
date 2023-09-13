@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.auth.jdbc.work;
 
+import java.util.Collection;
+
 import org.apache.guacamole.auth.jdbc.base.ObjectModel;
 
 public class WorkModel extends ObjectModel {
@@ -32,6 +34,11 @@ public class WorkModel extends ObjectModel {
      * The human-readable name associated with this work.
      */
     private String name;
+
+    /**
+     * The work periods associated with this work.
+     */
+    private Collection<WorkPeriodModel> workPeriods;
 
     /**
      * Creates a new, empty WorkModel.
@@ -77,6 +84,44 @@ public class WorkModel extends ObjectModel {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns the work periods associated with this work.
+     *
+     * @return
+     *     The work periods associated with this work.
+     */
+    public Collection<WorkPeriodModel> getWorkPeriods() {
+        return workPeriods;
+    }
+
+    /**
+     * Sets the work periods associated with this work.
+     *
+     * @param workPeriods
+     *     The work periods to associate with this work.
+     */
+    public void setWorkPeriods(Collection<WorkPeriodModel> workPeriods) {
+        this.workPeriods = workPeriods;
+    }
+
+    @Override
+    public String getIdentifier() {
+
+        // If no associated ID, then no associated identifier
+        Integer id = getObjectID();
+        if (id == null)
+            return null;
+
+        // Otherwise, the identifier is the ID as a string
+        return id.toString();
+
+    }
+
+    @Override
+    public void setIdentifier(String identifier) {
+        throw new UnsupportedOperationException("Connection identifiers are derived from IDs. They cannot be set.");
     }
 
 }

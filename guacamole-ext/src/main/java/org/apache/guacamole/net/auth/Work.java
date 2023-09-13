@@ -19,9 +19,9 @@
 
 package org.apache.guacamole.net.auth;
 
-public interface Work extends Identifiable, Attributes, Nameable {
+import java.util.List;
 
-    RelatedObjectSet getWorks();
+public interface Work extends Identifiable, Attributes, Nameable {
 
     /**
      * Returns the unique identifier of IDM for this Work.
@@ -38,4 +38,7 @@ public interface Work extends Identifiable, Attributes, Nameable {
      */
     public void setIdmIdentifier(String idmIdentifier);
 
+    public List<Period> getPeriods();
+
+    public void setPeriods(List<Period> periods);
 }

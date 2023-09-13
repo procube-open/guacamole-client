@@ -20,18 +20,15 @@
 package org.apache.guacamole.rest.work;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Directory;
 import org.apache.guacamole.net.auth.UserContext;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.rest.directory.DirectoryObjectResource;
 import org.apache.guacamole.rest.directory.DirectoryObjectTranslator;
-import org.apache.guacamole.rest.identifier.RelatedObjectSetResource;
 
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
@@ -70,23 +67,6 @@ public class WorkResource extends DirectoryObjectResource<Work, APIWork> {
             @Assisted Work work,
             DirectoryObjectTranslator<Work, APIWork> translator) {
         super(authenticatedUser, userContext, Work.class, directory, work, translator);
-    }
-
-    /**
-     * Returns a resource which abstracts operations available on the set of
-     * user groups of which the UserGroup represented by this WorkResource
-     * is a member.
-     *
-     * @return
-     *     A resource which represents the set of user groups of which the
-     *     UserGroup represented by this WorkResource is a member.
-     *
-     * @throws GuacamoleException
-     *     If the group membership for this user group cannot be retrieved.
-     */
-    @Path("works")
-    public RelatedObjectSetResource getWorks() throws GuacamoleException {
-        return new RelatedObjectSetResource(getInternalObject().getWorks());
     }
 
 }

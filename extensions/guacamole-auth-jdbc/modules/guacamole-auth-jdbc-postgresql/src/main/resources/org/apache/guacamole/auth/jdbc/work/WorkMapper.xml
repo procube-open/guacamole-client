@@ -39,6 +39,16 @@
             <result property="value"    column="attribute_value" jdbcType="VARCHAR"/>
         </collection>
 
+        <!-- Work periods -->
+        <collection property="workPeriods" resultSet="workPeriods"
+                    ofType="org.apache.guacamole.auth.jdbc.work.WorkPeriodModel"
+                    column="work_id" foreignColumn="work_id">
+            <result property="startTime" column="work_start_time" jdbcType="TIME"/>
+            <result property="endTime"   column="work_end_time"   jdbcType="TIME"/>
+            <result property="validFrom" column="work_valid_from" jdbcType="DATE"/>
+            <result property="validUntil" column="work_valid_until" jdbcType="DATE"/>
+        </collection>
+
     </resultMap>
 
     <!-- Select all work identifiers -->
@@ -83,7 +93,7 @@
 
     <!-- Select multiple works by identifier -->
     <select id="select" resultMap="WorkResultMap"
-            resultSets="works,arbitraryAttributes">
+            resultSets="works,arbitraryAttributes,workPeriods">
 
         SELECT
             work_id,
@@ -108,11 +118,24 @@
                 #{identifier,jdbcType=INTEGER}::integer
             </foreach>;
 
+        SELECT
+            work_id,
+            work_start_time,
+            work_end_time,
+            work_valid_from,
+            work_valid_until
+        FROM guacamole_work_period
+        WHERE work_id IN
+            <foreach collection="identifiers" item="identifier"
+                     open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}::integer
+            </foreach>;
+
     </select>
 
     <!-- Select multiple works by identifier only if readable -->
     <select id="selectReadable" resultMap="WorkResultMap"
-            resultSets="works,sharingProfiles,arbitraryAttributes">
+            resultSets="works,arbitraryAttributes,workPeriods">
 
         SELECT
             work_id,
@@ -143,6 +166,25 @@
                 #{identifier,jdbcType=INTEGER}::integer
             </foreach>
             AND guacamole_work_attribute.work_id IN (
+                <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
+                    <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
+                    <property name="groups"   value="effectiveGroups"/>
+                </include>
+            );
+
+        SELECT
+            work_id,
+            work_start_time,
+            work_end_time,
+            work_valid_from,
+            work_valid_until
+        FROM guacamole_work_period
+        WHERE work_id IN
+            <foreach collection="identifiers" item="identifier"
+                     open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}::integer
+            </foreach>;
+            AND guacamole_work_period.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
                     <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
                     <property name="groups"   value="effectiveGroups"/>
@@ -198,6 +240,31 @@
                 (#{object.objectID,jdbcType=INTEGER}::integer,
                  #{attribute.name,jdbcType=VARCHAR},
                  #{attribute.value,jdbcType=VARCHAR})
+            </foreach>
+    </insert>
+
+    <!-- Delete periods associated with work -->
+    <delete id="deletePeriods">
+        DELETE FROM guacamole_work_period
+        WHERE work_id = #{object.objectID,jdbcType=INTEGER}::integer
+    </delete>
+
+    <!-- Insert periods for work -->
+    <insert id="insertPeriods" parameterType="org.apache.guacamole.auth.jdbc.work.WorkPeriodModel">
+        INSERT INTO guacamole_work_period (
+            work_id,
+            work_start_time,
+            work_end_time,
+            work_valid_from,
+            work_valid_until
+        )
+        VALUES
+            <foreach collection="object.workPeriods" item="period" separator=",">
+                (#{object.objectID,jdbcType=INTEGER}::integer,
+                 #{period.startTime,jdbcType=TIME},
+                 #{period.endTime,jdbcType=TIME},
+                 #{period.validFrom,jdbcType=DATE},
+                 #{period.validUntil,jdbcType=DATE})
             </foreach>
     </insert>
 
