@@ -23,6 +23,7 @@ package org.apache.guacamole.auth.jdbc.work;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -158,9 +159,18 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     @Override
     public List<Period> getPeriods() {
         Collection<WorkPeriodModel> modeledPeriods = getModel().getWorkPeriods();
-        List<Period> periods = Collections.emptyList();
+        if (modeledPeriods == null)
+            return new ArrayList<Period>(0);
+        List<Period> periods = new ArrayList<Period>(modeledPeriods.size());
         for (WorkPeriodModel modeledPeriod : modeledPeriods) {
-            logger.debug("Modeled period: {}", modeledPeriod);
+            logger.debug(
+                "Modeled period: work {} from {} {} until {} {}",
+                getModel().getIdentifier(),
+                modeledPeriod.getValidFrom().toString(),
+                modeledPeriod.getStartTime().toString(),
+                modeledPeriod.getValidUntil().toString(),
+                modeledPeriod.getEndTime().toString()
+            );
             Period period = new Period(
                 modeledPeriod.getStartTime().toString(),
                 modeledPeriod.getEndTime().toString(),
@@ -174,7 +184,7 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
 
     @Override
     public void setPeriods(List<Period> periods) {
-        Collection<WorkPeriodModel> modeledPeriods = Collections.emptyList();
+        Collection<WorkPeriodModel> modeledPeriods = new ArrayList<>(periods.size());
         for (Period period : periods) {
             WorkPeriodModel modeledPeriod = new WorkPeriodModel();
             try {
