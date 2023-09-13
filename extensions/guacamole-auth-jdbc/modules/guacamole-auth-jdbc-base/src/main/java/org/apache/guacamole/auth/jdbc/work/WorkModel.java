@@ -41,6 +41,11 @@ public class WorkModel extends ObjectModel {
     private Collection<WorkPeriodModel> workPeriods;
 
     /**
+     * The identifiers of all connections associated with this work.
+     */
+    private Collection<String> connectionIdentifiers;
+
+    /**
      * Creates a new, empty WorkModel.
      */
     public WorkModel() {
@@ -104,6 +109,26 @@ public class WorkModel extends ObjectModel {
      */
     public void setWorkPeriods(Collection<WorkPeriodModel> workPeriods) {
         this.workPeriods = workPeriods;
+    }
+
+    /**
+     * Returns the identifiers of all connections associated with this work.
+     *
+     * @return
+     *     The identifiers of all connections associated with this work.
+     */
+    public Collection<String> getConnectionIdentifiers() {
+        return connectionIdentifiers;
+    }
+
+    /**
+     * Sets the identifiers of all connections associated with this work.
+     *
+     * @param connectionIdentifiers
+     *     The identifiers of all connections to associate with this work.
+     */
+    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers) {
+        this.connectionIdentifiers = connectionIdentifiers;
     }
 
     @Override

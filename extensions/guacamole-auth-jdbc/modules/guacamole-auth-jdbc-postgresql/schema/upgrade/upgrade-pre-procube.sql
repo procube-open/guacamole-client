@@ -102,3 +102,30 @@ CREATE TABLE guacamole_work_period (
 
 CREATE INDEX guacamole_work_period_work_id
     ON guacamole_work_period(work_id);
+
+--
+-- Relation table of works and connections.
+--
+
+CREATE TABLE guacamole_works_connections (
+
+  work_id       integer      NOT NULL,
+  connection_id integer      NOT NULL,
+
+  PRIMARY KEY (work_id, connection_id),
+
+  CONSTRAINT guacamole_works_connections_ibfk_1
+    FOREIGN KEY (work_id)
+    REFERENCES guacamole_work (work_id) ON DELETE CASCADE,
+
+  CONSTRAINT guacamole_works_connections_ibfk_2
+    FOREIGN KEY (connection_id)
+    REFERENCES guacamole_connection (connection_id) ON DELETE CASCADE
+
+);
+
+CREATE INDEX guacamole_works_connections_work_id
+    ON guacamole_works_connections(work_id);
+
+CREATE INDEX guacamole_works_connections_connection_id
+    ON guacamole_works_connections(connection_id);

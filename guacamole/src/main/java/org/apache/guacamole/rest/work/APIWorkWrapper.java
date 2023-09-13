@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.rest.work;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +92,16 @@ public class APIWorkWrapper implements Work {
     @Override
     public void setPeriods(List<Period> periods) {
         apiWork.setPeriods(periods);
+    }
+
+    @Override
+    public Collection<String> getConnectionIdentifiers() {
+        return apiWork.getConnections();
+    }
+
+    @Override
+    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers) {
+        apiWork.setConnections(connectionIdentifiers);
     }
 
 }

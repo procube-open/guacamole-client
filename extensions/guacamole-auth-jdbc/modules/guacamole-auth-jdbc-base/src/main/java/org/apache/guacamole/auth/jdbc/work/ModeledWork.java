@@ -201,4 +201,14 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
         getModel().setWorkPeriods(modeledPeriods);
     }
 
+    @Override
+    public Collection<String> getConnectionIdentifiers() {
+        return getModel().getConnectionIdentifiers();
+    }
+
+    @Override
+    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers) {
+        getModel().setConnectionIdentifiers(connectionIdentifiers);
+    }
+
 }

@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.net.auth;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface Work extends Identifiable, Attributes, Nameable {
@@ -41,4 +42,8 @@ public interface Work extends Identifiable, Attributes, Nameable {
     public List<Period> getPeriods();
 
     public void setPeriods(List<Period> periods);
+
+    public Collection<String> getConnectionIdentifiers();
+
+    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers);
 }

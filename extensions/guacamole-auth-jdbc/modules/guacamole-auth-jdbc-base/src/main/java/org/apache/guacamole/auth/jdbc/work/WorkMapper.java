@@ -47,4 +47,27 @@ public interface WorkMapper extends ModeledDirectoryObjectMapper<WorkModel> {
      */
     int insertPeriods(@Param("object") WorkModel object);
 
+    /**
+     * Deletes any connections currently associated with the given work
+     * in the database.
+     * 
+     * @param object
+     *     The work whose connections should be deleted.
+     * 
+     * @return
+     *     The number of rows deleted.
+     */
+    int deleteConnections(@Param("object") WorkModel object);
+
+    /**
+     * Inserts all connections associated with the given work.
+     * 
+     * @param object
+     *     The work whose connections should be inserted.
+     * 
+     * @return
+     *     The number of rows inserted.
+     */
+    int insertConnections(@Param("object") WorkModel object);
+
 }

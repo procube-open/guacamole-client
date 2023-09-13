@@ -93,7 +93,7 @@
 
     <!-- Select multiple works by identifier -->
     <select id="select" resultMap="WorkResultMap"
-            resultSets="works,arbitraryAttributes,workPeriods">
+            resultSets="works,arbitraryAttributes,workPeriods,connectionIdentifiers">
 
         SELECT
             work_id,
@@ -125,6 +125,15 @@
             work_valid_from,
             work_valid_until
         FROM guacamole_work_period
+        WHERE work_id IN
+            <foreach collection="identifiers" item="identifier"
+                     open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}::integer
+            </foreach>;
+
+        SELECT
+            connection_id
+        FROM guacamole_works_connections
         WHERE work_id IN
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
@@ -185,6 +194,21 @@
                 #{identifier,jdbcType=INTEGER}::integer
             </foreach>;
             AND guacamole_work_period.work_id IN (
+                <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
+                    <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
+                    <property name="groups"   value="effectiveGroups"/>
+                </include>
+            );
+
+        SELECT
+            connection_id
+        FROM guacamole_works_connections
+        WHERE work_id IN
+            <foreach collection="identifiers" item="identifier"
+                     open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}::integer
+            </foreach>;
+            AND guacamole_works_connections.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
                     <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
                     <property name="groups"   value="effectiveGroups"/>
@@ -265,6 +289,25 @@
                  #{period.endTime,jdbcType=TIME},
                  #{period.validFrom,jdbcType=DATE},
                  #{period.validUntil,jdbcType=DATE})
+            </foreach>
+    </insert>
+
+    <!-- Delete connections associated with work -->
+    <delete id="deleteConnections">
+        DELETE FROM guacamole_works_connections
+        WHERE work_id = #{object.objectID,jdbcType=INTEGER}::integer
+    </delete>
+
+    <!-- Insert connections for work -->
+    <insert id="insertConnections" parameterType="org.apache.guacamole.auth.jdbc.work.WorkModel">
+        INSERT INTO guacamole_works_connections (
+            work_id,
+            connection_id
+        )
+        VALUES
+            <foreach collection="object.connectionIdentifiers" item="connectionIdentifier" separator=",">
+                (#{object.objectID,jdbcType=INTEGER}::integer,
+                 #{connectionIdentifier,jdbcType=INTEGER}::integer)
             </foreach>
     </insert>
 

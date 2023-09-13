@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public class APIWork {
     private String idmIdentifier;
     private Map<String, String> attributes;
     private List<Period> periods;
+    private Collection<String> connections;
 
     public APIWork() {}
     public APIWork(Work work) {
@@ -45,6 +47,7 @@ public class APIWork {
         this.idmIdentifier = work.getIdmIdentifier();
         this.attributes = work.getAttributes();
         this.periods = work.getPeriods();
+        this.connections = work.getConnectionIdentifiers();
     }
 
     public String getIdentifier() {
@@ -86,4 +89,13 @@ public class APIWork {
     public void setPeriods(List<Period> periods){
         this.periods = periods;
     }
+
+    public Collection<String> getConnections() {
+        return connections;
+    }
+
+    public void setConnections(Collection<String> connections) {
+        this.connections = connections;
+    }
+
 }
