@@ -202,13 +202,30 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     }
 
     @Override
-    public Collection<String> getConnectionIdentifiers() {
-        return getModel().getConnectionIdentifiers();
+    public List<String> getConnectionIdentifiers() {
+        Collection<String> connectionIdentifiers = getModel().getConnectionIdentifiers();
+        if (connectionIdentifiers == null)
+            return new ArrayList<String>(0);
+        List<String> connections = new ArrayList<>(connectionIdentifiers.size());
+        for (String connectionIdentifier : connectionIdentifiers) {
+            connectionIdentifiers.add(connectionIdentifier);
+        }
+        return connections;
     }
 
     @Override
-    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers) {
+    public void setConnectionIdentifiers(List<String> connections) {
+        Collection<String> connectionIdentifiers = new ArrayList<>(connections.size());
+        for (String connection : connections) {
+            connectionIdentifiers.add(connection);
+        }
         getModel().setConnectionIdentifiers(connectionIdentifiers);
+    }
+
+    @Override
+    public List<String> getUserIdentifiers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUserIdentifiers'");
     }
 
 }

@@ -49,6 +49,12 @@
             <result property="validUntil" column="work_valid_until" jdbcType="DATE"/>
         </collection>
 
+        <!-- Connection identifiers -->
+        <collection property="connectionIdentifiers" resultSet="connectionIdentifiers"
+                    ofType="string" column="connection_id">
+            <result property="value" column="connection_id" jdbcType="INTEGER"/>
+        </collection>
+
     </resultMap>
 
     <!-- Select all work identifiers -->
@@ -144,7 +150,7 @@
 
     <!-- Select multiple works by identifier only if readable -->
     <select id="selectReadable" resultMap="WorkResultMap"
-            resultSets="works,arbitraryAttributes,workPeriods">
+            resultSets="works,arbitraryAttributes,workPeriods,connectionIdentifiers">
 
         SELECT
             work_id,

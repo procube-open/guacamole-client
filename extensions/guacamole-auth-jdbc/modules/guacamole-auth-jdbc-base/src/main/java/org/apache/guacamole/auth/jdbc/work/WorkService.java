@@ -19,16 +19,23 @@
 
 package org.apache.guacamole.auth.jdbc.work;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
+import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel;
 import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
 import org.apache.guacamole.net.auth.Work;
+import org.apache.guacamole.net.auth.permission.ObjectPermission;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.apache.guacamole.net.auth.permission.SystemPermission;
 import org.apache.guacamole.net.auth.permission.SystemPermissionSet;
+import org.mybatis.guice.transactional.Transactional;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -108,6 +115,29 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         // Return permissions related to works
         return user.getUser().getEffectivePermissions().getWorkPermissions();
 
+    }
+
+    @Override
+    @Transactional
+    public ModeledWork createObject(ModeledAuthenticatedUser user, Work object) throws GuacamoleException {
+
+        ModeledWork modeledWork = super.createObject(user, object);
+
+        List<String> userIdentifiers = object.getUserIdentifiers();
+        String workIdentifier = modeledWork.getIdentifier();
+        Collection<ObjectPermissionModel> permissions = new ArrayList<>(userIdentifiers.size());
+        
+        for (String userIdentifier : userIdentifiers) {
+            ObjectPermissionModel permission = new ObjectPermissionModel();
+            permission.setEntityID(Integer.parseInt(userIdentifier));
+            permission.setObjectIdentifier(workIdentifier);
+            permission.setType(ObjectPermission.Type.READ);
+            permissions.add(permission);
+        }
+
+        getPermissionMapper().insert(permissions);
+
+        return modeledWork;
     }
 
 }
