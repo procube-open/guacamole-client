@@ -51,7 +51,7 @@
 
         <!-- Connection identifiers -->
         <collection property="connectionIdentifiers" resultSet="connectionIdentifiers"
-                    ofType="string" column="connection_id">
+                    ofType="string" column="work_id" foreignColumn="work_id">
             <result property="value" column="connection_id" jdbcType="INTEGER"/>
         </collection>
 
