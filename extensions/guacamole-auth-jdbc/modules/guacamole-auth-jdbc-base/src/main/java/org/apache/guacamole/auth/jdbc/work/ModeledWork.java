@@ -203,21 +203,25 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
 
     @Override
     public List<String> getConnectionIdentifiers() {
-        Collection<String> connectionIdentifiers = getModel().getConnectionIdentifiers();
+        Collection<WorkConnectionsModel> connectionIdentifiers = getModel().getConnectionIdentifiers();
         if (connectionIdentifiers == null)
             return new ArrayList<String>(0);
         List<String> connections = new ArrayList<>(connectionIdentifiers.size());
-        for (String connectionIdentifier : connectionIdentifiers) {
-            connectionIdentifiers.add(connectionIdentifier);
+        for (WorkConnectionsModel connectionIdentifier : connectionIdentifiers) {
+            connections.add(connectionIdentifier.getConnectionIdentifier());
         }
         return connections;
     }
 
     @Override
     public void setConnectionIdentifiers(List<String> connections) {
-        Collection<String> connectionIdentifiers = new ArrayList<>(connections.size());
+        Collection<WorkConnectionsModel> connectionIdentifiers = new ArrayList<>(connections.size());
+        String workIdentifier = getModel().getIdentifier();
         for (String connection : connections) {
-            connectionIdentifiers.add(connection);
+            WorkConnectionsModel connectionIdentifier = new WorkConnectionsModel();
+            connectionIdentifier.setWorkIdentifier(workIdentifier);
+            connectionIdentifier.setConnectionIdentifier(connection);
+            connectionIdentifiers.add(connectionIdentifier);
         }
         getModel().setConnectionIdentifiers(connectionIdentifiers);
     }
