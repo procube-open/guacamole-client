@@ -51,9 +51,8 @@
 
         <!-- Connection identifiers -->
         <collection property="connectionIdentifiers" resultSet="connectionIdentifiers"
-                    ofType="org.apache.guacamole.auth.jdbc.work.WorkConnectionsModel"
-                    column="work_id" foreignColumn="work_id">
-            <result property="connectionIdentifier" column="connection_id" jdbcType="INTEGER"/>
+                    ofType="string" >
+            <result property="value" column="connection_id" jdbcType="INTEGER"/>
         </collection>
 
     </resultMap>
@@ -126,7 +125,6 @@
             </foreach>;
 
         SELECT
-            work_id,
             work_start_time,
             work_end_time,
             work_valid_from,
@@ -189,7 +187,6 @@
             );
 
         SELECT
-            work_id,
             work_start_time,
             work_end_time,
             work_valid_from,
@@ -208,7 +205,6 @@
             );
 
         SELECT
-            work_id,
             connection_id
         FROM guacamole_works_connections
         WHERE work_id IN

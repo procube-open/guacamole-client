@@ -43,7 +43,7 @@ public class WorkModel extends ObjectModel {
     /**
      * The identifiers of all connections associated with this work.
      */
-    private Collection<WorkConnectionsModel> connectionIdentifiers;
+    private Collection<String> connectionIdentifiers;
 
     /**
      * Creates a new, empty WorkModel.
@@ -117,7 +117,7 @@ public class WorkModel extends ObjectModel {
      * @return
      *     The identifiers of all connections associated with this work.
      */
-    public Collection<WorkConnectionsModel> getConnectionIdentifiers() {
+    public Collection<String> getConnectionIdentifiers() {
         return connectionIdentifiers;
     }
 
@@ -127,7 +127,7 @@ public class WorkModel extends ObjectModel {
      * @param connectionIdentifiers
      *     The identifiers of all connections to associate with this work.
      */
-    public void setConnectionIdentifiers(Collection<WorkConnectionsModel> connectionIdentifiers) {
+    public void setConnectionIdentifiers(Collection<String> connectionIdentifiers) {
         this.connectionIdentifiers = connectionIdentifiers;
     }
 
