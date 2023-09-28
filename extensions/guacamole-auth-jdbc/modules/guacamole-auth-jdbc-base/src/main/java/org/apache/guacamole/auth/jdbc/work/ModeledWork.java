@@ -224,8 +224,7 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
 
     @Override
     public List<String> getUserIdentifiers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserIdentifiers'");
+        return new ArrayList<String>(0);
     }
 
 }
