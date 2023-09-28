@@ -208,7 +208,7 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
             return new ArrayList<String>(0);
         List<String> connections = new ArrayList<>(connectionIdentifiers.size());
         for (String connectionIdentifier : connectionIdentifiers) {
-            connectionIdentifiers.add(connectionIdentifier);
+            connections.add(connectionIdentifier);
         }
         return connections;
     }
