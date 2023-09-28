@@ -53,7 +53,7 @@
         <collection property="connectionIdentifiers" resultSet="connectionIdentifiers"
                     ofType="org.apache.guacamole.auth.jdbc.work.WorkConnectionsModel"
                     column="work_id" foreignColumn="work_id">
-            <result property="value" column="connection_id" jdbcType="INTEGER"/>
+            <result property="connectionIdentifier" column="connection_id" jdbcType="INTEGER"/>
         </collection>
 
     </resultMap>
