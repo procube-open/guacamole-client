@@ -96,7 +96,6 @@ public class RESTServiceModule extends ServletModule {
 
         // Serve REST services using Jersey 2.x
         bind(ServletContainer.class).in(Scopes.SINGLETON);
-        filter("/api/*").through(RESTServiceFilter.class);
         serve("/api/*").with(ServletContainer.class, Collections.singletonMap(
             ServletProperties.JAXRS_APPLICATION_CLASS,
             GuacamoleApplication.class.getName()
