@@ -24,6 +24,8 @@ public class Period {
     private String endTime;
     private String vaildFrom;
     private String validUntil;
+
+    public Period() {}
     
     public Period(String startTime, String endTime, String vaildFrom, String validUntil) {
         this.startTime = startTime;
