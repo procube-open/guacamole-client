@@ -100,6 +100,7 @@ public class RESTServiceModule extends ServletModule {
             ServletProperties.JAXRS_APPLICATION_CLASS,
             GuacamoleApplication.class.getName()
         ));
+        filter("/api/*").through(RESTServiceFilter.class);
 
     }
 
