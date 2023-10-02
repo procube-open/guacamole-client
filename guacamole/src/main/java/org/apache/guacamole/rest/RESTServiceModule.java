@@ -79,6 +79,9 @@ public class RESTServiceModule extends ServletModule {
         bind(AuthTokenGenerator.class).to(SecureRandomAuthTokenGenerator.class);
         bind(DecorationService.class);
 
+        // Bind fliters on sigleton
+        bind(RESTServiceFilter.class).in(Scopes.SINGLETON);
+
         // Root-level resources
         install(new FactoryModuleBuilder().build(SessionResourceFactory.class));
         install(new FactoryModuleBuilder().build(TunnelCollectionResourceFactory.class));
