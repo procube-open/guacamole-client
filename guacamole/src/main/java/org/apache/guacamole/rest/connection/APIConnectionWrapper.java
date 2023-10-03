@@ -52,6 +52,16 @@ public class APIConnectionWrapper implements Connection {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return apiConnection.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        apiConnection.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public String getName() {
         return apiConnection.getName();
     }

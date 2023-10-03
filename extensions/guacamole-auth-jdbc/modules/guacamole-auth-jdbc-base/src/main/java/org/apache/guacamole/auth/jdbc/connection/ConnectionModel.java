@@ -32,6 +32,11 @@ import org.apache.guacamole.net.auth.GuacamoleProxyConfiguration.EncryptionMetho
 public class ConnectionModel extends ChildObjectModel {
 
     /**
+     * The unique identifier associated for IDM with this connection.
+     */
+    private String idmIdentifier;
+
+    /**
      * The human-readable name associated with this connection.
      */
     private String name;
@@ -103,6 +108,26 @@ public class ConnectionModel extends ChildObjectModel {
      * Creates a new, empty connection.
      */
     public ConnectionModel() {
+    }
+
+    /**
+     * Returns the unique identifier associated for IDM with this connection.
+     * 
+     * @return
+     *     The unique identifier associated for IDM with this connection.
+     */
+    public String getIdmIdentifier() {
+        return idmIdentifier;
+    }
+
+    /**
+     * Sets the unique identifier associated for IDM with this connection.
+     * 
+     * @param idmIdentifier
+     *     The unique identifier to associate for IDM with this connection.
+     */
+    public void setIdmIdentifier(String idmIdentifier) {
+        this.idmIdentifier = idmIdentifier;
     }
 
     /**

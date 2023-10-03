@@ -129,3 +129,9 @@ CREATE INDEX guacamole_works_connections_work_id
 
 CREATE INDEX guacamole_works_connections_connection_id
     ON guacamole_works_connections(connection_id);
+
+--
+-- Add idm_id column to guacamole_connection table
+--
+
+ALTER TABLE guacamole_connection ADD COLUMN connection_idm_id varchar(64) NOT NULL;

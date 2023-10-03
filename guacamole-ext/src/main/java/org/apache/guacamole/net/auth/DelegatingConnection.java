@@ -90,6 +90,16 @@ public class DelegatingConnection implements Connection {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return connection.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        connection.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public String getName() {
         return connection.getName();
     }

@@ -26,7 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.guacamole.auth.jdbc.tunnel.GuacamoleTunnelService;
@@ -212,6 +211,16 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * Creates a new, empty ModeledConnection.
      */
     public ModeledConnection() {
+    }
+
+    @Override
+    public String getIdmIdentifier() {
+        return getModel().getIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        getModel().setIdentifier(idmIdentifier);
     }
 
     @Override

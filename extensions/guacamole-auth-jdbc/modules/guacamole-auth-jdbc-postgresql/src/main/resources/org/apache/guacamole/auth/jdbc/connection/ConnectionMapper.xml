@@ -28,6 +28,7 @@
 
         <!-- Connection properties -->
         <id     column="connection_id"            property="objectID"              jdbcType="INTEGER"/>
+        <result column="connection_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
         <result column="connection_name"          property="name"                  jdbcType="VARCHAR"/>
         <result column="parent_id"                property="parentIdentifier"      jdbcType="INTEGER"/>
         <result column="protocol"                 property="protocol"              jdbcType="VARCHAR"/>
@@ -127,6 +128,7 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
             protocol,
@@ -174,6 +176,7 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
             protocol,
@@ -238,6 +241,7 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
             protocol,
@@ -270,6 +274,7 @@
             parameterType="org.apache.guacamole.auth.jdbc.connection.ConnectionModel">
 
         INSERT INTO guacamole_connection (
+            connection_idm_id,
             connection_name,
             parent_id,
             protocol,
@@ -299,7 +304,8 @@
     <!-- Update single connection -->
     <update id="update" parameterType="org.apache.guacamole.auth.jdbc.connection.ConnectionModel">
         UPDATE guacamole_connection
-        SET connection_name          = #{object.name,jdbcType=VARCHAR},
+        SET connection_idm_id        = #{object.idmIdentifier,jdbcType=VARCHAR},
+            connection_name          = #{object.name,jdbcType=VARCHAR},
             parent_id                = #{object.parentIdentifier,jdbcType=INTEGER}::integer,
             protocol                 = #{object.protocol,jdbcType=VARCHAR},
             max_connections          = #{object.maxConnections,jdbcType=INTEGER},
