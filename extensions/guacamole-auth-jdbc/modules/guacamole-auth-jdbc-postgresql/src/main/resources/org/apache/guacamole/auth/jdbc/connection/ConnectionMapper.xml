@@ -287,6 +287,7 @@
             failover_only
         )
         VALUES (
+            #{object.idmIdentifier,jdbcType=VARCHAR},
             #{object.name,jdbcType=VARCHAR},
             #{object.parentIdentifier,jdbcType=INTEGER}::integer,
             #{object.protocol,jdbcType=VARCHAR},
