@@ -55,6 +55,7 @@ public class ConnectionObjectTranslator
         // Update the connection
         existingObject.setConfiguration(config);
         existingObject.setParentIdentifier(object.getParentIdentifier());
+        existingObject.setIdmIdentifier(object.getIdmIdentifier());
         existingObject.setName(object.getName());
         existingObject.setAttributes(object.getAttributes());
 

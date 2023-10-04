@@ -215,11 +215,15 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
 
     @Override
     public String getIdmIdentifier() {
+        logger.info("Get idmIdentifier");
+        logger.info(getModel().getIdmIdentifier());
         return getModel().getIdmIdentifier();
     }
 
     @Override
     public void setIdmIdentifier(String idmIdentifier) {
+        logger.info("Set idmIdentifier");
+        logger.info(idmIdentifier);
         getModel().setIdmIdentifier(idmIdentifier);
     }
 
