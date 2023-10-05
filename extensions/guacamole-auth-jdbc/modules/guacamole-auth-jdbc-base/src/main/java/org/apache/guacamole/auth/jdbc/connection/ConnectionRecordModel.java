@@ -39,6 +39,11 @@ public class ConnectionRecordModel extends ActivityRecordModel {
     private String connectionName;
 
     /**
+     * The identifier of the work associated with this connection record.
+     */
+    private String workIdentifier;
+
+    /**
      * The identifier of the sharing profile associated with this connection
      * record. If no sharing profile was used, or the sharing profile that was
      * used was deleted, this will be null.
@@ -75,6 +80,31 @@ public class ConnectionRecordModel extends ActivityRecordModel {
      */
     public void setConnectionIdentifier(String connectionIdentifier) {
         this.connectionIdentifier = connectionIdentifier;
+    }
+
+
+    /**
+     * Returns the name of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The name of the connection associated with this connection
+     *     record.
+     */
+    public String getWorkIdentifier() {
+        return workIdentifier;
+    }
+
+    /**
+     * Sets the name of the connection associated with this connection
+     * record.
+     *
+     * @param workIdentifier
+     *     The name of the connection to associate with this connection
+     *     record.
+     */
+    public void setWorkIdentifier(String workIdentifier) {
+        this.workIdentifier = workIdentifier;
     }
 
 

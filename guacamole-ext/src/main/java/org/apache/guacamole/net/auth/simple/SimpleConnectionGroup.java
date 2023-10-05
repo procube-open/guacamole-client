@@ -110,15 +110,16 @@ public class SimpleConnectionGroup extends AbstractConnectionGroup {
 
     @Override
     @Deprecated
-    public GuacamoleTunnel connect(GuacamoleClientInformation info)
+    public GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
         throw new GuacamoleSecurityException("Permission denied.");
     }
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
-        return connect(info);
+        return connect(info, workIdentifier);
     }
 
 }

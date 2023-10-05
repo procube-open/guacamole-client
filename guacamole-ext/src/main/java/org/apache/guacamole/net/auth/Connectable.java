@@ -65,9 +65,9 @@ public interface Connectable {
      *     connect is denied.
      */
     @Deprecated
-    default GuacamoleTunnel connect(GuacamoleClientInformation info)
+    default GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
-        return this.connect(info, Collections.emptyMap());
+        return this.connect(info, workIdentifier, Collections.emptyMap());
     }
 
     /**
@@ -96,6 +96,7 @@ public interface Connectable {
      *     connect is denied.
      */
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException;
 
     /**

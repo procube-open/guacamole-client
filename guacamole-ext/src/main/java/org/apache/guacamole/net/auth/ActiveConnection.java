@@ -52,6 +52,22 @@ public interface ActiveConnection extends Identifiable, Connectable,
     void setConnectionIdentifier(String connnectionIdentifier);
 
     /**
+     * Returns the name of the connection being actively used.
+     *
+     * @return
+     *     The name of the connection being actively used.
+     */
+    String getWorkIdentifier();
+
+    /**
+     * Sets the name of the connection being actively used.
+     *
+     * @param workIdentifier
+     *     The name of the connection being actively used.
+     */
+    void setWorkIdentifier(String workIdentifier);
+
+    /**
      * Returns the identifier of the sharing profile being actively used. If
      * the connection is being accessed directly, this will be null.
      *
@@ -159,6 +175,7 @@ public interface ActiveConnection extends Identifiable, Connectable,
 
     @Override
     default GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
         throw new GuacamoleSecurityException("Permission denied.");
     }

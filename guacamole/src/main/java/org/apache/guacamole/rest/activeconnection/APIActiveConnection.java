@@ -38,6 +38,12 @@ public class APIActiveConnection {
      * active connection.
      */
     private final String connectionIdentifier;
+
+    /**
+     * The identifier of the connection associated with this
+     * active connection.
+     */
+    private final String workIdentifier;
     
     /**
      * The date and time the connection began.
@@ -69,6 +75,7 @@ public class APIActiveConnection {
     public APIActiveConnection(ActiveConnection connection) {
         this.identifier           = connection.getIdentifier();
         this.connectionIdentifier = connection.getConnectionIdentifier();
+        this.workIdentifier       = connection.getWorkIdentifier();
         this.startDate            = connection.getStartDate();
         this.remoteHost           = connection.getRemoteHost();
         this.username             = connection.getUsername();
@@ -83,6 +90,16 @@ public class APIActiveConnection {
      */
     public String getConnectionIdentifier() {
         return connectionIdentifier;
+    }
+
+    /**
+     * Returns the identifier of the work associated with this tunnel.
+     *
+     * @return
+     *     The identifier of the work associated with this tunnel.
+     */
+    public String getWorkIdentifier() {
+        return workIdentifier;
     }
     
     /**

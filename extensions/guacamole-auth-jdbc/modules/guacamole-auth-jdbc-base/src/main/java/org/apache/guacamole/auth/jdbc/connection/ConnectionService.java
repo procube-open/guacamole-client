@@ -477,12 +477,13 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
      *     If permission to connect to this connection is denied.
      */
     public GuacamoleTunnel connect(ModeledAuthenticatedUser user,
-            ModeledConnection connection, GuacamoleClientInformation info,
+            ModeledConnection connection, String workIdetifier,
+            GuacamoleClientInformation info,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Connect only if READ permission is granted
         if (hasObjectPermission(user, connection.getIdentifier(), ObjectPermission.Type.READ))
-            return tunnelService.getGuacamoleTunnel(user, connection, info, tokens);
+            return tunnelService.getGuacamoleTunnel(user, connection, workIdetifier, info, tokens);
 
         // The user does not have permission to connect
         throw new GuacamoleSecurityException("Permission denied.");

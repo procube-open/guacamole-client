@@ -28,6 +28,7 @@
         <id     column="history_id"           property="recordID"                 jdbcType="INTEGER"/>
         <result column="connection_id"        property="connectionIdentifier"     jdbcType="INTEGER"/>
         <result column="connection_name"      property="connectionName"           jdbcType="VARCHAR"/>
+        <result column="work_id"              property="workIdentifier"           jdbcType="VARCHAR"/>
         <result column="remote_host"          property="remoteHost"               jdbcType="VARCHAR"/>
         <result column="sharing_profile_id"   property="sharingProfileIdentifier" jdbcType="INTEGER"/>
         <result column="sharing_profile_name" property="sharingProfileName"       jdbcType="VARCHAR"/>
@@ -44,6 +45,7 @@
         INSERT INTO guacamole_connection_history (
             connection_id,
             connection_name,
+            work_id,
             remote_host,
             sharing_profile_id,
             sharing_profile_name,
@@ -55,6 +57,7 @@
         VALUES (
             #{record.connectionIdentifier,jdbcType=INTEGER}::integer,
             #{record.connectionName,jdbcType=VARCHAR},
+            #{record.workIdentifier,jdbcType=VARCHAR},
             #{record.remoteHost,jdbcType=VARCHAR},
             #{record.sharingProfileIdentifier,jdbcType=INTEGER}::integer,
             #{record.sharingProfileName,jdbcType=VARCHAR},
@@ -84,6 +87,7 @@
             guacamole_connection_history.history_id,
             guacamole_connection_history.connection_id,
             guacamole_connection_history.connection_name,
+            guacamole_connection_history.work_id,
             guacamole_connection_history.remote_host,
             guacamole_connection_history.sharing_profile_id,
             guacamole_connection_history.sharing_profile_name,
@@ -152,6 +156,7 @@
             guacamole_connection_history.history_id,
             guacamole_connection_history.connection_id,
             guacamole_connection_history.connection_name,
+            guacamole_connection_history.work_id,
             guacamole_connection_history.remote_host,
             guacamole_connection_history.sharing_profile_id,
             guacamole_connection_history.sharing_profile_name,

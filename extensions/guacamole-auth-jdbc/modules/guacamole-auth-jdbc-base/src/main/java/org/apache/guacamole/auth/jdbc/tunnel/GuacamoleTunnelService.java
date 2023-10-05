@@ -87,7 +87,9 @@ public interface GuacamoleTunnelService {
      *     rules.
      */
     GuacamoleTunnel getGuacamoleTunnel(ModeledAuthenticatedUser user,
-            ModeledConnection connection, GuacamoleClientInformation info,
+            ModeledConnection connection,
+            String workIdentifier,
+            GuacamoleClientInformation info,
             Map<String, String> tokens) throws GuacamoleException;
 
     /**
@@ -136,6 +138,7 @@ public interface GuacamoleTunnelService {
      */
     GuacamoleTunnel getGuacamoleTunnel(ModeledAuthenticatedUser user,
             ModeledConnectionGroup connectionGroup,
+            String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException;
 
@@ -186,6 +189,7 @@ public interface GuacamoleTunnelService {
      */
     GuacamoleTunnel getGuacamoleTunnel(RemoteAuthenticatedUser user,
             SharedConnectionDefinition definition,
+            String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException;
 

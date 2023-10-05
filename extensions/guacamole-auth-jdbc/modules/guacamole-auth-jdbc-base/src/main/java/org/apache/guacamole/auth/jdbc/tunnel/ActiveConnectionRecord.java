@@ -124,6 +124,7 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
      */
     private static ConnectionRecordModel createModel(RemoteAuthenticatedUser user,
             ModeledConnection connection,
+            String workIdentifier,
             ModeledSharingProfile sharingProfile) {
 
         // Create model object representing an active connection that started
@@ -138,6 +139,8 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
         // ... to the given connection ...
         recordModel.setConnectionIdentifier(connection.getIdentifier());
         recordModel.setConnectionName(connection.getName());
+
+        recordModel.setWorkIdentifier(workIdentifier);
 
         // ... using the given sharing profile (if any)
         if (sharingProfile != null) {
@@ -181,8 +184,9 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
             RemoteAuthenticatedUser user,
             ModeledConnectionGroup balancingGroup,
             ModeledConnection connection,
+            String workIdentifier,
             ModeledSharingProfile sharingProfile) {
-        super(createModel(user, connection, sharingProfile));
+        super(createModel(user, connection, workIdentifier, sharingProfile));
         this.connectionMap = connectionMap;
         this.user = user;
         this.balancingGroup = balancingGroup;
@@ -214,8 +218,9 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
     public ActiveConnectionRecord(SharedConnectionMap connectionMap,
             RemoteAuthenticatedUser user,
             ModeledConnectionGroup balancingGroup,
-            ModeledConnection connection) {
-        this(connectionMap, user, balancingGroup, connection, null);
+            ModeledConnection connection,
+            String workIdentifier) {
+        this(connectionMap, user, balancingGroup, connection, workIdentifier, null);
     }
 
     /**
@@ -235,8 +240,9 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
      *     The connection to associate with this connection record.
      */
     public ActiveConnectionRecord(SharedConnectionMap connectionMap,
-            RemoteAuthenticatedUser user, ModeledConnection connection) {
-        this(connectionMap, user, null, connection);
+            RemoteAuthenticatedUser user, ModeledConnection connection,
+            String workIdentifier) {
+        this(connectionMap, user, null, connection, workIdentifier);
     }
 
     /**
@@ -266,8 +272,9 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
     public ActiveConnectionRecord(SharedConnectionMap connectionMap,
             RemoteAuthenticatedUser user,
             ActiveConnectionRecord activeConnection,
+            String workIdentifier,
             ModeledSharingProfile sharingProfile) {
-        this(connectionMap, user, null, activeConnection.getConnection(), sharingProfile);
+        this(connectionMap, user, null, activeConnection.getConnection(), workIdentifier, sharingProfile);
         this.connectionID = activeConnection.getConnectionID();
     }
 

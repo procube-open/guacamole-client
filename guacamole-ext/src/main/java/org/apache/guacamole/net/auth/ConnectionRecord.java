@@ -48,6 +48,16 @@ public interface ConnectionRecord extends ActivityRecord {
     public String getConnectionName();
 
     /**
+     * Returns the identifier of the user that used the connection associated
+     * with this connection record.
+     *
+     * @return
+     *     The identifier of the user that used the connection associated with
+     *     this connection record.
+     */
+    public String getWorkIdentifier();
+
+    /**
      * Returns the identifier of the sharing profile that was used to access the
      * connection associated with this connection record. If the connection was
      * accessed directly (without involving a sharing profile), this will be

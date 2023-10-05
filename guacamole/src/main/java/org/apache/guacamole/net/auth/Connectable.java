@@ -64,11 +64,11 @@ public interface Connectable {
      *     connect is denied.
      */
     @Deprecated
-    default GuacamoleTunnel connect(GuacamoleClientInformation info)
+    default GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
 
         // Pass through usages of the old API to the new API
-        return this.connect(info, Collections.emptyMap());
+        return this.connect(info, workIdentifier, Collections.emptyMap());
 
     }
 
@@ -90,10 +90,11 @@ public interface Connectable {
      *     the Connectable interface, as defined by guacamole-ext.
      */
     default GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Allow old implementations of Connectable to continue to work
-        return this.connect(info);
+        return this.connect(info, workIdentifier);
 
     }
 
