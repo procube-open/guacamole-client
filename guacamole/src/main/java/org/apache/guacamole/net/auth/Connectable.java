@@ -55,6 +55,9 @@ public interface Connectable {
      *
      * @param info
      *     Information associated with the connecting client.
+     * 
+     * @param workIdentifier
+     *     The name of the connection being actively used.
      *
      * @return
      *     A fully-established GuacamoleTunnel.
