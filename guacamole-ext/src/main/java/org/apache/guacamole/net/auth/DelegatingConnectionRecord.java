@@ -19,10 +19,6 @@
 
 package org.apache.guacamole.net.auth;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
-
 /**
  * ConnectionRecord implementation which simply delegates all function calls to
  * an underlying ConnectionRecord.
@@ -66,6 +62,11 @@ public class DelegatingConnectionRecord extends DelegatingActivityRecord
     @Override
     public String getConnectionName() {
         return record.getConnectionName();
+    }
+
+    @Override
+    public String getWorkIdentifier() {
+        return record.getWorkIdentifier();
     }
 
     @Override

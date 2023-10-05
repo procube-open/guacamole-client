@@ -89,6 +89,18 @@
             AND permission = 'READ'
     </sql>
 
+    <sql id="getReadableIdmIDs">
+        SELECT DISTINCT work_idm_id
+        FROM guacamole_work
+        WHERE
+            work_id IN (
+                <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
+                    <property name="entityID" value="${entityID}"/>
+                    <property name="groups"   value="${groups}"/>
+                </include>
+            )
+    </sql>
+
     <!-- Select identifiers of all readable works -->
     <select id="selectReadableIdentifiers" resultType="string">
         <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">

@@ -135,3 +135,5 @@ CREATE INDEX guacamole_works_connections_connection_id
 --
 
 ALTER TABLE guacamole_connection ADD COLUMN connection_idm_id varchar(64) DEFAULT '' NOT NULL;
+
+ALTER TABLE guacamole_connection_history ADD COLUMN work_id varchar(16) DEFAULT '' NOT NULL;
