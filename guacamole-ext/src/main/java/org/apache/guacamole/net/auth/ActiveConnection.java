@@ -160,13 +160,13 @@ public interface ActiveConnection extends Identifiable, Connectable,
 
     /**
      * Returns whether this ActiveConnection may be joined through a call to
-     * {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, java.util.Map)}
+     * {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, String, java.util.Map)}
      * by the user that retrieved this ActiveConnection.
      *
      * @return
      *     true if the user that retrieved this ActiveConnection may join the
      *     ActiveConnection through a call to
-     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, java.util.Map)},
+     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, String, java.util.Map)},
      *     false otherwise.
      */
     default boolean isConnectable() {
