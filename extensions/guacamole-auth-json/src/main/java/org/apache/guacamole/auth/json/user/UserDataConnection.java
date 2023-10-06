@@ -178,6 +178,7 @@ public class UserDataConnection implements Connection {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Prevent future use immediately upon connect

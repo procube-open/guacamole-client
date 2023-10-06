@@ -213,7 +213,7 @@ public class TunnelRequestService {
                     + "destination does not exist.");
 
         // Connect tunnel to destination
-        GuacamoleTunnel tunnel = connectable.connect(info, tokens);
+        GuacamoleTunnel tunnel = connectable.connect(info, workIdentifier, tokens);
         logger.info("User \"{}\" connected to {} \"{}\".",
                 context.self().getIdentifier(), type.NAME, id);
         return tunnel;

@@ -138,7 +138,7 @@ public class ModeledConnectionGroup extends ModeledChildDirectoryObject<Connecti
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
             String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
-        return connectionGroupService.connect(getCurrentUser(), this, info, tokens);
+        return connectionGroupService.connect(getCurrentUser(), this, workIdentifier, info, tokens);
     }
 
     @Override
