@@ -19,33 +19,26 @@
 
 package org.apache.guacamole.net.auth;
 
-import java.util.List;
+import java.util.Date;
 
-public interface Work extends Identifiable, Attributes, Nameable {
+public class WorkConnection {
+    String identifier;
+    String parentIdentifier;
+    String name;
+    String protocol;
+    Date lastActive;
 
-    /**
-     * Returns the unique identifier of IDM for this Work.
-     * 
-     * @return The unique identifier of IDM for
-     * this Connection.
-     */
-    public String getIdmIdentifier();
+    public WorkConnection() {}
 
-    /**
-     * Sets the unique identifier of IDM for this Work.
-     * 
-     * @param idmIdentifier Sets the unique identifier of IDM for this Work.
-     */
-    public void setIdmIdentifier(String idmIdentifier);
+    public WorkConnection(String identifier, String parentIdentifier, String name, String protocol, Date lastActive) {
+        this.identifier = identifier;
+        this.parentIdentifier = parentIdentifier;
+        this.name = name;
+        this.protocol = protocol;
+        this.lastActive = lastActive;
+    }
 
-    public List<Period> getPeriods();
-
-    public void setPeriods(List<Period> periods);
-
-    public List<WorkConnection> getConnections();
-
-    public void setConnections(List<WorkConnection> connections);
-
-    public List<String> getUserIdentifiers();
-
+    public String getIdentifier() {
+        return identifier;
+    }
 }

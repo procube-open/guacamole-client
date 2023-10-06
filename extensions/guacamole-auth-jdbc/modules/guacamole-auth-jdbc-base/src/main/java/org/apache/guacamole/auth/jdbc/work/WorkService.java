@@ -26,11 +26,14 @@ import java.util.List;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
+import org.apache.guacamole.auth.jdbc.connection.ConnectionMapper;
+import org.apache.guacamole.auth.jdbc.connection.ConnectionModel;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel;
 import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
 import org.apache.guacamole.net.auth.Work;
+import org.apache.guacamole.net.auth.WorkConnection;
 import org.apache.guacamole.net.auth.permission.ObjectPermission;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.apache.guacamole.net.auth.permission.SystemPermission;
@@ -51,6 +54,12 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
      */
     @Inject
     private WorkMapper workMapper;
+
+    /**
+     * Mapper for accessing connections.
+     */
+    @Inject
+    private ConnectionMapper connectionMapper;
 
     /**
      * Mapper for manipulating work permissions.
@@ -138,6 +147,26 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         getPermissionMapper().insert(permissions);
 
         return modeledWork;
+    }
+
+    public List<WorkConnection> getWorkConnections(ModeledAuthenticatedUser user, Collection<String> connectionIdentifiers) throws GuacamoleException {
+        Collection<ConnectionModel> connectionModels = connectionMapper.selectReadable(user.getUser().getModel(), connectionIdentifiers, null);
+        List<WorkConnection> workConnections = new ArrayList<>(connectionIdentifiers.size());
+        
+        for (String connectionIdentifier : connectionIdentifiers) {
+            connectionModels.stream().filter(connectionModel -> connectionModel.getIdentifier().equals(connectionIdentifier)).forEach(connectionModel -> {
+                WorkConnection workConnection = new WorkConnection(
+                    connectionModel.getIdentifier(),
+                    connectionModel.getParentIdentifier(),
+                    connectionModel.getName(),
+                    connectionModel.getProtocol(),
+                    connectionModel.getLastActive()
+                );
+                workConnections.add(workConnection);
+            });
+        }
+
+        return workConnections;
     }
 
 }

@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
+import org.apache.guacamole.net.auth.WorkConnection;
 
 public class APIWorkWrapper implements Work {
     
@@ -94,13 +95,13 @@ public class APIWorkWrapper implements Work {
     }
 
     @Override
-    public List<String> getConnectionIdentifiers() {
+    public List<WorkConnection> getConnections() {
         return apiWork.getConnections();
     }
 
     @Override
-    public void setConnectionIdentifiers(List<String> connectionIdentifiers) {
-        apiWork.setConnections(connectionIdentifiers);
+    public void setConnections(List<WorkConnection> connections) {
+        apiWork.setConnections(connections);
     }
 
     @Override

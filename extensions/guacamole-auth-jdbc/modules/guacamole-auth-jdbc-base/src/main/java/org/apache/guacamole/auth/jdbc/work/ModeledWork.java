@@ -32,14 +32,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObject;
 import org.apache.guacamole.form.DateField;
 import org.apache.guacamole.form.Form;
 import org.apache.guacamole.form.TimeField;
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
+import org.apache.guacamole.net.auth.WorkConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.inject.Inject;
 
 public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Work {
 
@@ -47,6 +51,9 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
      * Logger for this class.
      */
     private static final Logger logger = LoggerFactory.getLogger(ModeledWork.class);
+
+    @Inject
+    private WorkService workService;
 
     /**
      * All possible attributes of work objects organized as
@@ -202,22 +209,25 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     }
 
     @Override
-    public List<String> getConnectionIdentifiers() {
+    public List<WorkConnection> getConnections() {
         Collection<String> connectionIdentifiers = getModel().getConnectionIdentifiers();
         if (connectionIdentifiers == null)
-            return new ArrayList<String>(0);
-        List<String> connections = new ArrayList<>(connectionIdentifiers.size());
-        for (String connectionIdentifier : connectionIdentifiers) {
-            connections.add(connectionIdentifier);
+            return new ArrayList<WorkConnection>(0);
+        try {
+            List<WorkConnection> connections = workService.getWorkConnections(getCurrentUser(), connectionIdentifiers);
+            return connections;
         }
-        return connections;
+        catch (GuacamoleException e) {
+            logger.error("Unable to retrieve connections for work: {}", getModel().getIdentifier(), e);
+            return new ArrayList<WorkConnection>(0);
+        }
     }
 
     @Override
-    public void setConnectionIdentifiers(List<String> connections) {
+    public void setConnections(List<WorkConnection> connections) {
         Collection<String> connectionIdentifiers = new ArrayList<>(connections.size());
-        for (String connection : connections) {
-            connectionIdentifiers.add(connection);
+        for (WorkConnection connection : connections) {
+            connectionIdentifiers.add(connection.getIdentifier());
         }
         getModel().setConnectionIdentifiers(connectionIdentifiers);
     }

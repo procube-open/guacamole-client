@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
+import org.apache.guacamole.net.auth.WorkConnection;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value=Include.NON_NULL)
@@ -37,7 +38,7 @@ public class APIWork {
     private String idmIdentifier;
     private Map<String, String> attributes;
     private List<Period> periods;
-    private List<String> connections;
+    private List<WorkConnection> connections;
     private List<String> users;
 
     public APIWork() {}
@@ -47,7 +48,7 @@ public class APIWork {
         this.idmIdentifier = work.getIdmIdentifier();
         this.attributes = work.getAttributes();
         this.periods = work.getPeriods();
-        this.connections = work.getConnectionIdentifiers();
+        this.connections = work.getConnections();
         this.users = work.getUserIdentifiers();
     }
 
@@ -91,11 +92,11 @@ public class APIWork {
         this.periods = periods;
     }
 
-    public List<String> getConnections() {
+    public List<WorkConnection> getConnections() {
         return connections;
     }
 
-    public void setConnections(List<String> connections) {
+    public void setConnections(List<WorkConnection> connections) {
         this.connections = connections;
     }
 
