@@ -131,6 +131,20 @@ CREATE INDEX guacamole_works_connections_connection_id
     ON guacamole_works_connections(connection_id);
 
 --
+-- Relation table of notifications.
+--
+
+CREATE TABLE guacamole_notification (
+
+  notification_id      serial       NOT NULL,
+  notification_idm_id  varchar(10)  NOT NULL,
+  notification_title   varchar(128) NOT NULL,
+  notification_message varchar(4096) NOT NULL,
+
+  PRIMARY KEY (work_id)
+);
+
+--
 -- Add idm_id column to guacamole_connection table
 --
 
