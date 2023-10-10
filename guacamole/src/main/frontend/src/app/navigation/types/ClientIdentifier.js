@@ -68,6 +68,13 @@ angular.module('navigation').factory('ClientIdentifier', ['$injector',
          */
         this.id = template.id;
 
+        /**
+         * The unique identifier of IDM for works
+         * 
+         *
+         * @type String
+         */
+        this.workId = template.workId;
     };
 
     /**
@@ -198,7 +205,8 @@ angular.module('navigation').factory('ClientIdentifier', ['$injector',
             return new ClientIdentifier({
                 id         : values[0],
                 type       : values[1],
-                dataSource : values[2]
+                dataSource : values[2],
+                workId     : values[3] ? values[3] : null,
             });
         }
 
