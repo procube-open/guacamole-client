@@ -39,6 +39,8 @@ import org.apache.guacamole.auth.jdbc.sharingprofile.ModeledSharingProfile;
 import org.apache.guacamole.auth.jdbc.sharingprofile.SharingProfileDirectory;
 import org.apache.guacamole.auth.jdbc.usergroup.ModeledUserGroup;
 import org.apache.guacamole.auth.jdbc.usergroup.UserGroupDirectory;
+import org.apache.guacamole.auth.jdbc.work.ModeledWork;
+import org.apache.guacamole.auth.jdbc.work.WorkDirectory;
 import org.apache.guacamole.form.Form;
 import org.apache.guacamole.net.auth.ActiveConnection;
 import org.apache.guacamole.net.auth.ActivityRecord;
@@ -51,6 +53,7 @@ import org.apache.guacamole.net.auth.SharingProfile;
 import org.apache.guacamole.net.auth.User;
 import org.apache.guacamole.net.auth.UserContext;
 import org.apache.guacamole.net.auth.UserGroup;
+import org.apache.guacamole.net.auth.Work;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,6 +112,13 @@ public class ModeledUserContext extends RestrictedObject
     private ActiveConnectionDirectory activeConnectionDirectory;
 
     /**
+     * ActiveConnection directory restricted by the permissions of the user
+     * associated with this context.
+     */
+    @Inject
+    private WorkDirectory workDirectory;
+
+    /**
      * Provider for creating the root group.
      */
     @Inject
@@ -164,6 +174,7 @@ public class ModeledUserContext extends RestrictedObject
         connectionGroupDirectory.init(currentUser);
         sharingProfileDirectory.init(currentUser);
         activeConnectionDirectory.init(currentUser);
+        workDirectory.init(currentUser);
 
     }
 
@@ -249,6 +260,12 @@ public class ModeledUserContext extends RestrictedObject
     }
 
     @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return workDirectory;
+    }
+
+    @Override
     public ConnectionRecordSet getConnectionHistory()
             throws GuacamoleException {
         ConnectionRecordSet connectionRecordSet = connectionRecordSetProvider.get();
@@ -297,6 +314,11 @@ public class ModeledUserContext extends RestrictedObject
     @Override
     public Collection<Form> getSharingProfileAttributes() {
         return ModeledSharingProfile.ATTRIBUTES;
+    }
+
+    @Override
+    public Collection<Form> getWorkAttributes() {
+        return ModeledWork.ATTRIBUTES;
     }
 
     @Override

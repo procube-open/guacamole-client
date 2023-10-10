@@ -60,6 +60,11 @@ public class TrackedActiveConnection extends RestrictedObject implements ActiveC
     private String identifier;
 
     /**
+     * The identifier of the work associated with this active connection.
+     */
+    private String workIdentifier;
+
+    /**
      * The actual connection record from which this ActiveConnection derives its
      * data.
      */
@@ -136,6 +141,7 @@ public class TrackedActiveConnection extends RestrictedObject implements ActiveC
         this.connection               = activeConnectionRecord.getConnection();
         this.sharingProfileIdentifier = activeConnectionRecord.getSharingProfileIdentifier();
         this.identifier               = activeConnectionRecord.getUUID().toString();
+        this.workIdentifier           = activeConnectionRecord.getWorkIdentifier();
         this.startDate                = activeConnectionRecord.getStartDate();
 
         // Include sensitive data, too, if requested
@@ -155,6 +161,16 @@ public class TrackedActiveConnection extends RestrictedObject implements ActiveC
     @Override
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    @Override
+    public String getWorkIdentifier() {
+        return workIdentifier;
+    }
+
+    @Override
+    public void setWorkIdentifier(String workIdentifier) {
+        this.workIdentifier = workIdentifier;
     }
 
     /**
@@ -266,11 +282,12 @@ public class TrackedActiveConnection extends RestrictedObject implements ActiveC
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Establish connection only if connecting is allowed
         if (isConnectable())
-            return tunnelService.getGuacamoleTunnel(getCurrentUser(), share(null), info, tokens);
+            return tunnelService.getGuacamoleTunnel(getCurrentUser(), share(null),workIdentifier, info, tokens);
 
         throw new GuacamoleSecurityException("Permission denied.");
 

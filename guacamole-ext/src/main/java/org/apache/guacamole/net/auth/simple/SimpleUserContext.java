@@ -28,6 +28,7 @@ import org.apache.guacamole.net.auth.AuthenticationProvider;
 import org.apache.guacamole.net.auth.Connection;
 import org.apache.guacamole.net.auth.Directory;
 import org.apache.guacamole.net.auth.User;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.apache.guacamole.protocol.GuacamoleConfiguration;
 
@@ -54,6 +55,12 @@ public class SimpleUserContext extends AbstractUserContext {
      * associated with this UserContext.
      */
     private final Directory<Connection> connectionDirectory;
+
+    /**
+     * The Directory with access to all connections within the root group
+     * associated with this UserContext.
+     */
+    private final Directory<Work> workDirectory;
 
     /**
      * Creates a new SimpleUserContext which provides access to only those
@@ -138,6 +145,7 @@ public class SimpleUserContext extends AbstractUserContext {
         this.username = username;
         this.authProvider = authProvider;
         this.connectionDirectory = new SimpleDirectory<Connection>(connections);
+        this.workDirectory = new SimpleDirectory<Work>();
 
     }
 
@@ -172,6 +180,12 @@ public class SimpleUserContext extends AbstractUserContext {
     public Directory<Connection> getConnectionDirectory()
             throws GuacamoleException {
         return connectionDirectory;
+    }
+
+    @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return workDirectory;
     }
 
 }

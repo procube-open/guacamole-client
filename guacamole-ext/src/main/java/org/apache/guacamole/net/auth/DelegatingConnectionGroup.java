@@ -140,20 +140,21 @@ public class DelegatingConnectionGroup implements ConnectionGroup {
 
     @Override
     @Deprecated
-    public GuacamoleTunnel connect(GuacamoleClientInformation info)
+    public GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
-        return connectionGroup.connect(info, currentTokens.get());
+        return connectionGroup.connect(info, workIdentifier, currentTokens.get());
     }
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Make received tokens available within the legacy connect() strictly
         // in context of the current connect() call
         try {
             currentTokens.set(tokens);
-            return connect(info);
+            return connect(info, workIdentifier);
         }
         finally {
             currentTokens.remove();

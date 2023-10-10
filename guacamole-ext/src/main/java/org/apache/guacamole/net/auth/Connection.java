@@ -37,6 +37,20 @@ import org.apache.guacamole.protocol.GuacamoleConfiguration;
 public interface Connection extends Identifiable, Connectable, Attributes, Nameable {
 
     /**
+     * Returns the unique identifier of IDM of this Connection.
+     *
+     * @return The unique identifier of IDM of this Connection.
+     */
+    public String getIdmIdentifier();
+
+    /**
+     * Sets the unique identifier of IDM of this Connection.
+     *
+     * @param idmIdentifier The unique identifier of IDM of this Connection.
+     */
+    public void setIdmIdentifier(String idmIdentifier);
+
+    /**
      * Returns the unique identifier of the parent ConnectionGroup for
      * this Connection.
      * 

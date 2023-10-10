@@ -88,6 +88,12 @@ public class DelegatingUserContext implements UserContext {
     }
 
     @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return userContext.getWorkDirectory();
+    }
+
+    @Override
     public Directory<ConnectionGroup> getConnectionGroupDirectory()
             throws GuacamoleException {
         return userContext.getConnectionGroupDirectory();
@@ -150,6 +156,11 @@ public class DelegatingUserContext implements UserContext {
     @Override
     public Collection<Form> getSharingProfileAttributes() {
         return userContext.getSharingProfileAttributes();
+    }
+
+    @Override
+    public Collection<Form> getWorkAttributes() {
+        return userContext.getWorkAttributes();
     }
 
     @Override

@@ -42,6 +42,12 @@ public class APIConnectionRecord extends APIActivityRecord {
     private final String sharingProfileIdentifier;
 
     /**
+     * The identifier of the work associated with this
+     * record.
+     */
+    private final String workId;
+
+    /**
      * The identifier of the sharing profile associated with this record.
      */
     private final String sharingProfileName;
@@ -57,6 +63,7 @@ public class APIConnectionRecord extends APIActivityRecord {
         super(record);
         this.connectionIdentifier     = record.getConnectionIdentifier();
         this.connectionName           = record.getConnectionName();
+        this.workId                   = record.getWorkIdentifier();
         this.sharingProfileIdentifier = record.getSharingProfileIdentifier();
         this.sharingProfileName       = record.getSharingProfileName();
     }
@@ -80,6 +87,17 @@ public class APIConnectionRecord extends APIActivityRecord {
      */
     public String getConnectionName() {
         return connectionName;
+    }
+
+    /**
+     * Returns the identifier of the work associated with this
+     * record.
+     *
+     * @return
+     *     The identifier of the work associated with this record.
+     */
+    public String getWorkId() {
+        return workId;
     }
 
     /**

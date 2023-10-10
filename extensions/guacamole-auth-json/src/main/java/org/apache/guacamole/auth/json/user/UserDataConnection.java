@@ -104,6 +104,16 @@ public class UserDataConnection implements Connection {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        throw new UnsupportedOperationException("UserDataConnection is immutable.");
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        throw new UnsupportedOperationException("UserDataConnection is immutable.");
+    }
+
+    @Override
     public String getName() {
         return identifier;
     }
@@ -168,6 +178,7 @@ public class UserDataConnection implements Connection {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Prevent future use immediately upon connect

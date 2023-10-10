@@ -56,6 +56,9 @@ import org.apache.guacamole.auth.jdbc.permission.ConnectionPermissionSet;
 import org.apache.guacamole.auth.jdbc.permission.UserPermissionMapper;
 import org.apache.guacamole.auth.jdbc.permission.UserPermissionService;
 import org.apache.guacamole.auth.jdbc.permission.UserPermissionSet;
+import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
+import org.apache.guacamole.auth.jdbc.permission.WorkPermissionService;
+import org.apache.guacamole.auth.jdbc.permission.WorkPermissionSet;
 import org.apache.guacamole.auth.jdbc.activeconnection.ActiveConnectionDirectory;
 import org.apache.guacamole.auth.jdbc.activeconnection.ActiveConnectionPermissionService;
 import org.apache.guacamole.auth.jdbc.activeconnection.ActiveConnectionPermissionSet;
@@ -91,6 +94,10 @@ import org.apache.guacamole.auth.jdbc.usergroup.UserGroupMemberUserGroupMapper;
 import org.apache.guacamole.auth.jdbc.usergroup.UserGroupMemberUserMapper;
 import org.apache.guacamole.auth.jdbc.usergroup.UserGroupParentUserGroupMapper;
 import org.apache.guacamole.auth.jdbc.usergroup.UserGroupService;
+import org.apache.guacamole.auth.jdbc.work.ModeledWork;
+import org.apache.guacamole.auth.jdbc.work.WorkDirectory;
+import org.apache.guacamole.auth.jdbc.work.WorkMapper;
+import org.apache.guacamole.auth.jdbc.work.WorkService;
 import org.mybatis.guice.MyBatisModule;
 import org.apache.guacamole.auth.jdbc.user.UserParentUserGroupMapper;
 
@@ -155,6 +162,8 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         addMapperClass(UserParentUserGroupMapper.class);
         addMapperClass(UserPermissionMapper.class);
         addMapperClass(UserRecordMapper.class);
+        addMapperClass(WorkMapper.class);
+        addMapperClass(WorkPermissionMapper.class);
         
         // Bind core implementations of guacamole-ext classes
         bind(ActiveConnectionDirectory.class);
@@ -180,6 +189,9 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         bind(UserGroupDirectory.class);
         bind(UserGroupPermissionSet.class);
         bind(UserPermissionSet.class);
+        bind(WorkDirectory.class);
+        bind(WorkPermissionSet.class);
+        bind(ModeledWork.class);
         
         // Bind services
         bind(ActiveConnectionService.class);
@@ -203,6 +215,8 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         bind(UserGroupPermissionService.class);
         bind(UserPermissionService.class);
         bind(UserService.class);
+        bind(WorkService.class);
+        bind(WorkPermissionService.class);
         
     }
 

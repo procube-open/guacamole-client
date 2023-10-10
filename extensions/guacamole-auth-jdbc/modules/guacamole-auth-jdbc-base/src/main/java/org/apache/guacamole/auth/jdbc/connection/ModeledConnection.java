@@ -26,7 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.guacamole.auth.jdbc.tunnel.GuacamoleTunnelService;
@@ -215,6 +214,16 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return getModel().getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        getModel().setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public String getName() {
         return getModel().getName();
     }
@@ -270,8 +279,9 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
-        return connectionService.connect(getCurrentUser(), this, info, tokens);
+        return connectionService.connect(getCurrentUser(), this, workIdentifier, info, tokens);
     }
 
     @Override

@@ -624,14 +624,16 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
     @Override
     @Transactional
     public GuacamoleTunnel getGuacamoleTunnel(final ModeledAuthenticatedUser user,
-            final ModeledConnection connection, GuacamoleClientInformation info,
+            final ModeledConnection connection, 
+            final String workIdentifier,
+            GuacamoleClientInformation info,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Acquire access to single connection, ignoring the failover-only flag
         acquire(user, Collections.singletonList(connection), true);
 
         // Connect only if the connection was successfully acquired
-        ActiveConnectionRecord connectionRecord = new ActiveConnectionRecord(connectionMap, user, connection);
+        ActiveConnectionRecord connectionRecord = new ActiveConnectionRecord(connectionMap, user, connection, workIdentifier);
         return assignGuacamoleTunnel(connectionRecord, info, tokens, false);
 
     }
@@ -645,6 +647,7 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
     @Transactional
     public GuacamoleTunnel getGuacamoleTunnel(ModeledAuthenticatedUser user,
             ModeledConnectionGroup connectionGroup,
+            String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException {
 
@@ -677,7 +680,7 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
             try {
 
                 // Connect to acquired child
-                ActiveConnectionRecord connectionRecord = new ActiveConnectionRecord(connectionMap, user, connectionGroup, connection);
+                ActiveConnectionRecord connectionRecord = new ActiveConnectionRecord(connectionMap, user, connectionGroup, connection, workIdentifier);
                 GuacamoleTunnel tunnel = assignGuacamoleTunnel(connectionRecord,
                         info, tokens, connections.size() > 1);
 
@@ -728,12 +731,13 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
     @Transactional
     public GuacamoleTunnel getGuacamoleTunnel(RemoteAuthenticatedUser user,
             SharedConnectionDefinition definition,
+            String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException {
 
         // Create a connection record which describes the shared connection
         ActiveConnectionRecord connectionRecord = new ActiveConnectionRecord(connectionMap,
-                user, definition.getActiveConnection(), definition.getSharingProfile());
+                user, definition.getActiveConnection(), workIdentifier, definition.getSharingProfile());
 
         // Connect to shared connection described by the created record
         GuacamoleTunnel tunnel = assignGuacamoleTunnel(connectionRecord, info, tokens, false);

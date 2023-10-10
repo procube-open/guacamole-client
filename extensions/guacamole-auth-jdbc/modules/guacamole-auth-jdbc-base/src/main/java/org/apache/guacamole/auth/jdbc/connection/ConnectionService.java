@@ -23,7 +23,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +117,7 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
 
         // Set model contents through ModeledConnection, copying the provided connection
         connection.setParentIdentifier(object.getParentIdentifier());
+        connection.setIdmIdentifier(object.getIdmIdentifier());
         connection.setName(object.getName());
         connection.setConfiguration(object.getConfiguration());
         connection.setAttributes(object.getAttributes());
@@ -245,6 +245,7 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
 
         // Create connection
         ModeledConnection connection = super.createObject(user, object);
+        connection.setIdmIdentifier(object.getIdmIdentifier());
         connection.setConfiguration(object.getConfiguration());
 
         // Insert new parameters, if any
@@ -476,12 +477,13 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
      *     If permission to connect to this connection is denied.
      */
     public GuacamoleTunnel connect(ModeledAuthenticatedUser user,
-            ModeledConnection connection, GuacamoleClientInformation info,
+            ModeledConnection connection, String workIdetifier,
+            GuacamoleClientInformation info,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Connect only if READ permission is granted
         if (hasObjectPermission(user, connection.getIdentifier(), ObjectPermission.Type.READ))
-            return tunnelService.getGuacamoleTunnel(user, connection, info, tokens);
+            return tunnelService.getGuacamoleTunnel(user, connection, workIdetifier, info, tokens);
 
         // The user does not have permission to connect
         throw new GuacamoleSecurityException("Permission denied.");

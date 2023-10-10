@@ -58,6 +58,11 @@ public class ModeledConnectionRecord extends ModeledActivityRecord
     }
 
     @Override
+    public String getWorkIdentifier() {
+        return model.getWorkIdentifier();
+    }
+
+    @Override
     public String getSharingProfileIdentifier() {
         return model.getSharingProfileIdentifier();
     }

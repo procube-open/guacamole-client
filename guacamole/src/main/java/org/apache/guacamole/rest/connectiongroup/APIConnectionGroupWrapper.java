@@ -113,6 +113,7 @@ public class APIConnectionGroupWrapper implements ConnectionGroup {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
         throw new UnsupportedOperationException("Operation not supported.");
     }

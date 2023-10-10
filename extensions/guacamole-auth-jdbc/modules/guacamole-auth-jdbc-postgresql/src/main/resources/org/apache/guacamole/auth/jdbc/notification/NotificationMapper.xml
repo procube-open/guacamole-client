@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this notification for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in NotificationMapper writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+
+<mapper namespace="org.apache.guacamole.auth.jdbc.notification.NotificationMapper" >
+
+    <!-- Result mapper for notification objects -->
+    <resultMap id="NotificainResultMap" type="org.apache.guacamole.auth.jdbc.notification.NotificationModel" >
+
+        <!-- Notificatin properties -->
+        <id     column="notification_id"            property="objectID"              jdbcType="INTEGER"/>
+        <result column="notification_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
+        <result column="notification_title"         property="name"                  jdbcType="VARCHAR"/>
+        <result column="notification_type"          property="type"                  jdbcType="VARCHAR"
+            javaType="org.apache.guacamole.net.auth.NotificationType"/>
+        <result column="notification_message"       property="message"               jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!-- Select all notification identifiers -->
+    <select id="selectIdentifiers" resultType="string">
+        SELECT notification_id 
+        FROM guacamole_notification
+    </select>
+
+    <!-- Select multiple notifications by identifier -->
+    <select id="select" resultMap="NotificationResultMap"
+            resultSets="notifications">
+
+        SELECT
+            notification_id,
+            notification_idm_id,
+            notification_title,
+            notification_type,
+            notification_message
+        FROM guacamole_notification
+        WHERE guacamole_notification.notification_id IN
+            <foreach collection="identifiers" item="identifier"
+                     open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}::integer
+            </foreach>
+        GROUP BY guacamole_notification.notification_id;
+
+    </select>
+
+    <!-- Delete single notification by identifier -->
+    <delete id="delete">
+        DELETE FROM guacamole_notification
+        WHERE notification_id = #{identifier,jdbcType=INTEGER}::integer
+    </delete>
+
+    <!-- Insert single notification -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="object.objectID"
+            parameterType="org.apache.guacamole.auth.jdbc.notification.NotificationModel">
+
+        INSERT INTO guacamole_notification (
+            notification_idm_id,
+            notification_title,
+            notification_type,
+            notification_message
+        )
+        VALUES (
+            #{object.idmIdentifier,jdbcType=VARCHAR},
+            #{object.title,jdbcType=VARCHAR},
+            #{object.type,jdbcType=VARCHAR},
+            #{object.message,jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+    <!-- Update single notification -->
+    <update id="update" parameterType="org.apache.guacamole.auth.jdbc.notification.NotificationModel">
+        UPDATE guacamole_notification
+        SET notification_idm_id          = #{object.idmIdentifier,jdbcType=VARCHAR},
+            notification_title            = #{object.title,jdbcType=VARCHAR},
+            notification_type             = #{object.type,jdbcType=VARCHAR},
+            notification_message          = #{object.message,jdbcType=VARCHAR}
+        WHERE notification_id = #{object.objectID,jdbcType=INTEGER}
+    </update>
+
+</mapper>
+

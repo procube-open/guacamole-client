@@ -125,6 +125,19 @@ public abstract class AbstractUserContext implements UserContext {
      * {@inheritDoc}
      *
      * <p>This implementation simply returns an empty {@link Directory}.
+     * Implementations that wish to expose the status of active connections
+     * should override this function.
+     */
+    @Override
+    public Directory<Work> getWorkDirectory()
+            throws GuacamoleException {
+        return new SimpleDirectory<Work>();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation simply returns an empty {@link Directory}.
      * Implementations that wish to provide screen sharing functionality
      * through the use of sharing profiles should override this function.
      */
@@ -240,6 +253,18 @@ public abstract class AbstractUserContext implements UserContext {
      */
     @Override
     public Collection<Form> getSharingProfileAttributes() {
+        return Collections.<Form>emptyList();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>This implementation simply returns an empty {@link Collection}.
+     * Implementations that wish to expose custom sharing profile attributes as
+     * fields within sharing profile edit screens should override this function.
+     */
+    @Override
+    public Collection<Form> getWorkAttributes() {
         return Collections.<Form>emptyList();
     }
 

@@ -202,7 +202,7 @@ public class TunnelRequestService {
      *     If an error occurs while creating the tunnel.
      */
     protected GuacamoleTunnel createConnectedTunnel(UserContext context,
-            final TunnelRequestType type, String id,
+            final TunnelRequestType type, String id, String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException {
 
@@ -213,7 +213,7 @@ public class TunnelRequestService {
                     + "destination does not exist.");
 
         // Connect tunnel to destination
-        GuacamoleTunnel tunnel = connectable.connect(info, tokens);
+        GuacamoleTunnel tunnel = connectable.connect(info, workIdentifier, tokens);
         logger.info("User \"{}\" connected to {} \"{}\".",
                 context.self().getIdentifier(), type.NAME, id);
         return tunnel;
@@ -333,6 +333,7 @@ public class TunnelRequestService {
         // Parse request parameters
         String authToken                = request.getAuthenticationToken();
         String id                       = request.getIdentifier();
+        String workIdentifier           = request.getWorkIdentifier();
         TunnelRequestType type          = request.getType();
         String authProviderIdentifier   = request.getAuthenticationProviderIdentifier();
         GuacamoleClientInformation info = getClientInformation(request);
@@ -350,7 +351,7 @@ public class TunnelRequestService {
 
             // Create connected tunnel using provided connection ID and client information
             GuacamoleTunnel tunnel = createConnectedTunnel(userContext, type,
-                    id, info, new StandardTokenMap(authenticatedUser));
+                    id, workIdentifier, info, new StandardTokenMap(authenticatedUser));
 
             // Notify listeners to allow connection to be vetoed
             fireTunnelConnectEvent(authenticatedUser, authenticatedUser.getCredentials(), tunnel);

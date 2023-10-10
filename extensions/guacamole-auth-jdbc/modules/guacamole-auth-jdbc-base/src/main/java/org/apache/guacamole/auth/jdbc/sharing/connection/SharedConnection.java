@@ -91,6 +91,16 @@ public class SharedConnection implements Connection {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return definition.getActiveConnection().getConnection().getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        throw new UnsupportedOperationException("Shared connections are immutable.");
+    }
+
+    @Override
     public String getName() {
         return definition.getActiveConnection().getConnection().getName();
     }
@@ -130,8 +140,9 @@ public class SharedConnection implements Connection {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
-        return tunnelService.getGuacamoleTunnel(user, definition, info, tokens);
+        return tunnelService.getGuacamoleTunnel(user, definition, workIdentifier, info, tokens);
     }
 
     @Override
