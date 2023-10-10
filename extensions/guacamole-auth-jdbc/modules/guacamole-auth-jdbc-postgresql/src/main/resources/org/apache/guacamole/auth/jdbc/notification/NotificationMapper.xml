@@ -30,8 +30,6 @@
         <id     column="notification_id"            property="objectID"              jdbcType="INTEGER"/>
         <result column="notification_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
         <result column="notification_title"         property="name"                  jdbcType="VARCHAR"/>
-        <result column="notification_type"          property="type"                  jdbcType="VARCHAR"
-            javaType="org.apache.guacamole.net.auth.NotificationType"/>
         <result column="notification_message"       property="message"               jdbcType="VARCHAR"/>
 
     </resultMap>
@@ -50,7 +48,6 @@
             notification_id,
             notification_idm_id,
             notification_title,
-            notification_type,
             notification_message
         FROM guacamole_notification
         WHERE guacamole_notification.notification_id IN
@@ -75,7 +72,6 @@
         INSERT INTO guacamole_notification (
             notification_idm_id,
             notification_title,
-            notification_type,
             notification_message
         )
         VALUES (
@@ -92,7 +88,6 @@
         UPDATE guacamole_notification
         SET notification_idm_id          = #{object.idmIdentifier,jdbcType=VARCHAR},
             notification_title            = #{object.title,jdbcType=VARCHAR},
-            notification_type             = #{object.type,jdbcType=VARCHAR},
             notification_message          = #{object.message,jdbcType=VARCHAR}
         WHERE notification_id = #{object.objectID,jdbcType=INTEGER}
     </update>

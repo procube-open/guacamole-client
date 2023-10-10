@@ -42,7 +42,7 @@ public class RESTServiceFilter implements Filter {
         if (response instanceof HttpServletResponse) {
             HttpServletResponse alteredResponse = ((HttpServletResponse)response);
             alteredResponse.addHeader("Access-Control-Allow-Origin", "*");
-            alteredResponse.addHeader("Access-Control-Allow-Method", "GET, POST");
+            alteredResponse.addHeader("Access-Control-Allow-Method", "GET,POST,HEAD,OPTIONS,PUT,DELETE,PATCH");
             alteredResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, Guacamoe-Token");
             alteredResponse.addHeader("Access-Control-Allow-Credentials", "true");
         }

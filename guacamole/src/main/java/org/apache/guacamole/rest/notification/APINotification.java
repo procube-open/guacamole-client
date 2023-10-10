@@ -17,41 +17,53 @@
  * under the License.
  */
 
-package org.apache.guacamole.auth.jdbc.notification;
+package org.apache.guacamole.rest.notification;
 
-import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObject;
 import org.apache.guacamole.net.auth.Notification;
 
-public class ModeledNotification extends ModeledDirectoryObject<NotificationModel> implements Notification {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-    @Override
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(value=Include.NON_NULL)
+public class APINotification {
+    
+    private String idmIdentifier;
+
+    private String title;
+
+    private String message;
+
+    public APINotification() {}
+    public APINotification(Notification notification) {
+        this.idmIdentifier = notification.getIdmIdentifier();
+        this.title = notification.getTitle();
+        this.message = notification.getMessage();
+    }
+
     public String getIdmIdentifier() {
-        return getModel().getIdmIdentifier();
+        return this.idmIdentifier;
     }
 
-    @Override
-    public String getTitle() {
-        return getModel().getTitle();
-    }
-
-    @Override
-    public String getMessage() {
-        return getModel().getMessage();
-    }
-
-    @Override
     public void setIdmIdentifier(String idmIdentifier) {
-        getModel().setIdmIdentifier(idmIdentifier);
+        this.idmIdentifier = idmIdentifier;
     }
 
-    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
     public void setTitle(String title) {
-        getModel().setTitle(title);
+        this.title = title;
     }
 
-    @Override
+    public String getMessage() {
+        return this.message;
+    }
+
     public void setMessage(String message) {
-        getModel().setMessage(message);
+        this.message= message;
     }
 
 }

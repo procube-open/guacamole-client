@@ -20,7 +20,6 @@
 package org.apache.guacamole.auth.jdbc.notification;
 
 import org.apache.guacamole.auth.jdbc.base.ObjectModel;
-import org.apache.guacamole.net.auth.NotificationType;
 
 public class NotificationModel extends ObjectModel {
 
@@ -30,8 +29,6 @@ public class NotificationModel extends ObjectModel {
     private String idmIdentifier;
 
     private String title;
-
-    private NotificationType type;
 
     private String message;
 
@@ -52,18 +49,6 @@ public class NotificationModel extends ObjectModel {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public NotificationType getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = NotificationType.valueOf(type);
-    }
-
-    public void setType(NotificationType type) {
-        this.type = type;
     }
 
     public String getMessage() {

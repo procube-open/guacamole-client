@@ -19,18 +19,24 @@
 
 package org.apache.guacamole.auth.jdbc.notification;
 
+import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
-import org.apache.guacamole.net.auth.AuthenticatedUser;
+import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
+import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
 import org.apache.guacamole.net.auth.Notification;
+import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class NotificationService extends ModeledDirectoryObjectService<ModeledNotification, Notification, NotificationModel> {
     
     @Inject
-    NotificationMapper notificationMapper;
+    private NotificationMapper notificationMapper;
+
+    @Inject
+    private Provider<ModeledNotification> notificationProvider;
 
     @Override
     protected ModeledDirectoryObjectMapper<NotificationModel> getObjectMapper() {
@@ -38,8 +44,38 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
     }
 
     @Override
-    protected ModeledNotification getObjectInstance(AuthenticatedUser user, NotificationModel object) {
-        return ModeledNotification(object);
+    protected ModeledNotification getObjectInstance(ModeledAuthenticatedUser user, NotificationModel object) {
+        ModeledNotification notification = notificationProvider.get();
+        notification.init(user, object);
+        return notification;
+    }
+
+    @Override
+    protected NotificationModel getModelInstance(ModeledAuthenticatedUser user, Notification object) {
+        NotificationModel model = new NotificationModel();
+        ModeledNotification notification = getObjectInstance(user, model);
+
+        notification.setIdmIdentifier(object.getIdmIdentifier());
+        notification.setTitle(object.getTitle());
+        notification.setMessage(object.getMessage());
+
+        return model;
+
+    }
+
+    @Override
+    protected ObjectPermissionMapper getPermissionMapper() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPermissionMapper'");
+    }
+
+    @Override
+    protected boolean hasCreatePermission(ModeledAuthenticatedUser user) throws GuacamoleException {
+        throw new UnsupportedOperationException("Unimplemented method 'hasCreatePermission'");
+    }
+
+    @Override
+    protected ObjectPermissionSet getEffectivePermissionSet(ModeledAuthenticatedUser user) throws GuacamoleException {
+        throw new UnsupportedOperationException("Unimplemented method 'getEffectivePermissionSet'");
     }
 
 }

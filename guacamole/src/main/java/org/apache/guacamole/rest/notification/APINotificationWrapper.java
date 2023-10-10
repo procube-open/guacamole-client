@@ -17,20 +17,8 @@
  * under the License.
  */
 
-package org.apache.guacamole.net.auth;
+package org.apache.guacamole.rest.notification;
 
-public interface Notification extends Identifiable {
-
-    public String getIdmIdentifier();
-
-    public void setIdmIdentifier(String idmIdentifier);
-
-    public String getTitle();
-
-    public void setTitle(String title);
-
-    public String getMessage();
-
-    public void setMessage(String message);
-
+public class APINotificationWrapper {
+    
 }
