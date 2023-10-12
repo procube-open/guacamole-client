@@ -80,7 +80,7 @@ public class RESTServiceModule extends ServletModule {
         bind(DecorationService.class);
 
         // Bind fliters on sigleton
-        bind(RESTServiceFilter.class).in(Scopes.SINGLETON);
+        // bind(RESTServiceFilter.class).in(Scopes.SINGLETON);
 
         // Root-level resources
         install(new FactoryModuleBuilder().build(SessionResourceFactory.class));
@@ -103,7 +103,7 @@ public class RESTServiceModule extends ServletModule {
             ServletProperties.JAXRS_APPLICATION_CLASS,
             GuacamoleApplication.class.getName()
         ));
-        filter("/api/*").through(RESTServiceFilter.class);
+        // filter("/api/*").through(RESTServiceFilter.class);
 
     }
 
