@@ -151,6 +151,20 @@ public interface UserContext {
 
     /**
      * Retrieves a Directory which can be used to view and manipulate
+     * notifications, but only as allowed by the permissions given to the
+     * user.
+     * 
+     * @return A Directory whose operations are bound by the permissions of
+     *         the user.
+     * 
+     * @throws GuacamoleException If an error occurs while creating the
+     *                            Directory.
+     */
+    Directory<Notification> getNotificationDirectory()
+            throws GuacamoleException;
+
+    /**
+     * Retrieves a Directory which can be used to view and manipulate
      * connection groups and their members, but only as allowed by the
      * permissions given to the user.
      *

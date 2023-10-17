@@ -41,6 +41,7 @@ import org.apache.guacamole.rest.tunnel.TunnelResourceFactory;
 import org.apache.guacamole.rest.user.UserModule;
 import org.apache.guacamole.rest.usergroup.UserGroupModule;
 import org.apache.guacamole.rest.work.WorkModule;
+import org.apache.guacamole.rest.notification.NotificationModule;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 
@@ -96,6 +97,7 @@ public class RESTServiceModule extends ServletModule {
         install(new UserModule());
         install(new UserGroupModule());
         install(new WorkModule());
+        install(new NotificationModule());
 
         // Serve REST services using Jersey 2.x
         bind(ServletContainer.class).in(Scopes.SINGLETON);

@@ -93,6 +93,12 @@ public abstract class AbstractUserContext implements UserContext {
         return new SimpleDirectory<Connection>();
     }
 
+    @Override
+    public Directory<Notification> getNotificationDirectory()
+            throws GuacamoleException {
+        return new SimpleDirectory<Notification>();
+    }
+
     /**
      * {@inheritDoc}
      *

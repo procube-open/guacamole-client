@@ -94,6 +94,12 @@ public class DelegatingUserContext implements UserContext {
     }
 
     @Override
+    public Directory<Notification> getNotificationDirectory()
+            throws GuacamoleException {
+        return userContext.getNotificationDirectory();
+    }
+
+    @Override
     public Directory<ConnectionGroup> getConnectionGroupDirectory()
             throws GuacamoleException {
         return userContext.getConnectionGroupDirectory();

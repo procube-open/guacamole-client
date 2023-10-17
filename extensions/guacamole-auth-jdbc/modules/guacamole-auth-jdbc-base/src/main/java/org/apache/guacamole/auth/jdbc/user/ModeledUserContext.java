@@ -21,6 +21,7 @@ package org.apache.guacamole.auth.jdbc.user;
 
 
 import org.apache.guacamole.auth.jdbc.connectiongroup.RootConnectionGroup;
+import org.apache.guacamole.auth.jdbc.notification.NotificationDirectory;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ConnectionGroupDirectory;
 import org.apache.guacamole.auth.jdbc.connection.ConnectionDirectory;
 import com.google.inject.Inject;
@@ -49,6 +50,7 @@ import org.apache.guacamole.net.auth.AuthenticationProvider;
 import org.apache.guacamole.net.auth.Connection;
 import org.apache.guacamole.net.auth.ConnectionGroup;
 import org.apache.guacamole.net.auth.Directory;
+import org.apache.guacamole.net.auth.Notification;
 import org.apache.guacamole.net.auth.SharingProfile;
 import org.apache.guacamole.net.auth.User;
 import org.apache.guacamole.net.auth.UserContext;
@@ -117,6 +119,12 @@ public class ModeledUserContext extends RestrictedObject
      */
     @Inject
     private WorkDirectory workDirectory;
+
+    /**
+     * Directory of all notification subscriptions.
+     */
+    @Inject
+    private NotificationDirectory notificationDirectory;
 
     /**
      * Provider for creating the root group.
@@ -263,6 +271,12 @@ public class ModeledUserContext extends RestrictedObject
     public Directory<Work> getWorkDirectory()
             throws GuacamoleException {
         return workDirectory;
+    }
+
+    @Override
+    public Directory<Notification> getNotificationDirectory()
+            throws GuacamoleException {
+        return notificationDirectory;
     }
 
     @Override

@@ -19,6 +19,64 @@
 
 package org.apache.guacamole.rest.notification;
 
-public class APINotificationWrapper {
+import org.apache.guacamole.net.auth.Notification;
+
+public class APINotificationWrapper implements Notification {
+
+    /**
+     * The wrapped APINotification.
+     */
+    APINotification apiNotification;
+
+    /**
+     * Creates a new APINotificationWrapper which wraps the given APINotification,
+     * exposing its properties through the Notification interface.
+     *
+     * @param apiNotification
+     *     The APINotification to wrap.
+     */
+    public APINotificationWrapper(APINotification apiNotification) {
+        this.apiNotification = apiNotification;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return apiNotification.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdentifier(String identifier) {
+        apiNotification.setIdmIdentifier(identifier);
+    }
+
+    @Override
+    public String getIdmIdentifier() {
+        return apiNotification.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        apiNotification.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
+    public String getTitle() {
+        return apiNotification.getTitle();
+    }
+
+    @Override
+    public void setTitle(String title) {
+        apiNotification.setTitle(title);
+    }
+
+    @Override
+    public String getMessage() {
+        return apiNotification.getMessage();
+    }
+
+    @Override
+    public void setMessage(String message) {
+        apiNotification.setMessage(message);
+    }
     
 }

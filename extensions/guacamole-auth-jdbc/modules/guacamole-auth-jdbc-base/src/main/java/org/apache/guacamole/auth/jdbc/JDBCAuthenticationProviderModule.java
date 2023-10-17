@@ -20,9 +20,14 @@
 package org.apache.guacamole.auth.jdbc;
 
 import com.google.inject.Scopes;
+
+import javax.management.Notification;
 import javax.sql.DataSource;
 import org.apache.guacamole.auth.jdbc.user.ModeledUserContext;
 import org.apache.guacamole.auth.jdbc.connectiongroup.RootConnectionGroup;
+import org.apache.guacamole.auth.jdbc.notification.ModeledNotification;
+import org.apache.guacamole.auth.jdbc.notification.NotificationMapper;
+import org.apache.guacamole.auth.jdbc.notification.NotificationService;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ModeledConnectionGroup;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ConnectionGroupDirectory;
 import org.apache.guacamole.auth.jdbc.connection.ConnectionDirectory;
@@ -164,6 +169,7 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         addMapperClass(UserRecordMapper.class);
         addMapperClass(WorkMapper.class);
         addMapperClass(WorkPermissionMapper.class);
+        addMapperClass(NotificationMapper.class);
         
         // Bind core implementations of guacamole-ext classes
         bind(ActiveConnectionDirectory.class);
@@ -192,6 +198,7 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         bind(WorkDirectory.class);
         bind(WorkPermissionSet.class);
         bind(ModeledWork.class);
+        bind(ModeledNotification.class);
         
         // Bind services
         bind(ActiveConnectionService.class);
@@ -217,6 +224,7 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         bind(UserService.class);
         bind(WorkService.class);
         bind(WorkPermissionService.class);
+        bind(NotificationService.class);
         
     }
 
