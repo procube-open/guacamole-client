@@ -150,7 +150,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
     }
 
     public List<WorkConnection> getWorkConnections(ModeledAuthenticatedUser user, Collection<String> connectionIdentifiers) throws GuacamoleException {
-        Collection<ConnectionModel> connectionModels = connectionMapper.selectReadable(user.getUser().getModel(), connectionIdentifiers, null);
+        Collection<ConnectionModel> connectionModels = connectionMapper.selectReadable(user.getUser().getModel(), connectionIdentifiers, user.getEffectiveUserGroups());
         List<WorkConnection> workConnections = new ArrayList<>(connectionIdentifiers.size());
         
         for (String connectionIdentifier : connectionIdentifiers) {
