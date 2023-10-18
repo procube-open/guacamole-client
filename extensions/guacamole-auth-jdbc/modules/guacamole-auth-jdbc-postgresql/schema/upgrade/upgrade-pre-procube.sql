@@ -141,7 +141,7 @@ CREATE TABLE guacamole_notification (
   notification_title   varchar(128) NOT NULL,
   notification_message varchar(4096) NOT NULL,
 
-  PRIMARY KEY (work_id)
+  PRIMARY KEY (notification_id)
 );
 
 --
