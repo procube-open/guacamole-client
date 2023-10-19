@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.auth.jdbc.notification;
 
+import java.util.Set;
+
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
@@ -61,6 +63,11 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
 
         return model;
 
+    }
+
+    @Override
+    public Set<String> getIdentifiers(ModeledAuthenticatedUser user) throws GuacamoleException {
+        return getObjectMapper().selectIdentifiers();
     }
 
     @Override
