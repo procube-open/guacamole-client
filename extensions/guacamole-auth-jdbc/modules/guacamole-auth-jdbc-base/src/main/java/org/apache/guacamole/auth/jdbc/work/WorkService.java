@@ -147,9 +147,10 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         String workIdentifier = modeledWork.getIdentifier();
         Collection<ObjectPermissionModel> permissions = new ArrayList<>(userIdentifiers.size());
         
-        for (String userIdentifier : userIdentifiers) {
+        Collection<UserModel> userModels = userMapper.select(userIdentifiers);
+
+        for (UserModel userModel : userModels) {
             ObjectPermissionModel permission = new ObjectPermissionModel();
-            UserModel userModel = userMapper.selectOne(userIdentifier);
             permission.setEntityID(userModel.getEntityID());
             permission.setObjectIdentifier(workIdentifier);
             permission.setType(ObjectPermission.Type.READ);
@@ -165,17 +166,15 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         Collection<ConnectionModel> connectionModels = connectionMapper.selectReadable(user.getUser().getModel(), connectionIdentifiers, user.getEffectiveUserGroups());
         List<WorkConnection> workConnections = new ArrayList<>(connectionIdentifiers.size());
         
-        for (String connectionIdentifier : connectionIdentifiers) {
-            connectionModels.stream().filter(connectionModel -> connectionModel.getIdentifier().equals(connectionIdentifier)).forEach(connectionModel -> {
-                WorkConnection workConnection = new WorkConnection(
-                    connectionModel.getIdentifier(),
-                    connectionModel.getParentIdentifier(),
-                    connectionModel.getName(),
-                    connectionModel.getProtocol(),
-                    connectionModel.getLastActive()
-                );
-                workConnections.add(workConnection);
-            });
+        for (ConnectionModel connectionModel : connectionModels) {
+            WorkConnection workConnection = new WorkConnection(
+                connectionModel.getIdentifier(),
+                connectionModel.getParentIdentifier(),
+                connectionModel.getName(),
+                connectionModel.getProtocol(),
+                connectionModel.getLastActive()
+            );
+            workConnections.add(workConnection);
         }
 
         return workConnections;
