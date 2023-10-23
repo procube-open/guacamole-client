@@ -211,9 +211,12 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     @Override
     public List<WorkConnection> getConnections() {
         Collection<String> connectionIdentifiers = getModel().getConnectionIdentifiers();
-        if (connectionIdentifiers == null)
+        if (connectionIdentifiers == null) {
+            logger.info("No connections found for work: {}", getModel().getIdmIdentifier());
             return new ArrayList<WorkConnection>(0);
+        }
         try {
+            logger.info("Retrieving connections for work: {}", getModel().getIdmIdentifier());
             List<WorkConnection> connections = workService.getWorkConnections(getCurrentUser(), connectionIdentifiers);
             return connections;
         }

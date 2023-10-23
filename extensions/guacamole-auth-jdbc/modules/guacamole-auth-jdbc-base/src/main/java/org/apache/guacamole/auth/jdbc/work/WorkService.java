@@ -32,6 +32,8 @@ import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel;
 import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
+import org.apache.guacamole.auth.jdbc.user.UserMapper;
+import org.apache.guacamole.auth.jdbc.user.UserModel;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
 import org.apache.guacamole.net.auth.permission.ObjectPermission;
@@ -60,6 +62,12 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
      */
     @Inject
     private ConnectionMapper connectionMapper;
+
+    /**
+     * Mapper for manipulating users.
+     */
+    @Inject
+    private UserMapper userMapper;
 
     /**
      * Mapper for manipulating work permissions.
@@ -132,13 +140,17 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
 
         ModeledWork modeledWork = super.createObject(user, object);
 
+        modeledWork.setPeriods(object.getPeriods());
+        modeledWork.setConnections(object.getConnections());
+
         List<String> userIdentifiers = object.getUserIdentifiers();
         String workIdentifier = modeledWork.getIdentifier();
         Collection<ObjectPermissionModel> permissions = new ArrayList<>(userIdentifiers.size());
         
         for (String userIdentifier : userIdentifiers) {
             ObjectPermissionModel permission = new ObjectPermissionModel();
-            permission.setEntityID(Integer.parseInt(userIdentifier));
+            UserModel userModel = userMapper.selectOne(userIdentifier);
+            permission.setEntityID(userModel.getEntityID());
             permission.setObjectIdentifier(workIdentifier);
             permission.setType(ObjectPermission.Type.READ);
             permissions.add(permission);
