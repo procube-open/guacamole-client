@@ -26,14 +26,14 @@ import java.util.List;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
-import org.apache.guacamole.auth.jdbc.connection.ConnectionMapper;
-import org.apache.guacamole.auth.jdbc.connection.ConnectionModel;
+import org.apache.guacamole.auth.jdbc.connection.ConnectionService;
+import org.apache.guacamole.auth.jdbc.connection.ModeledConnection;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel;
 import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
-import org.apache.guacamole.auth.jdbc.user.UserMapper;
-import org.apache.guacamole.auth.jdbc.user.UserModel;
+import org.apache.guacamole.auth.jdbc.user.ModeledUser;
+import org.apache.guacamole.auth.jdbc.user.UserService;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
 import org.apache.guacamole.net.auth.permission.ObjectPermission;
@@ -61,13 +61,13 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
      * Mapper for accessing connections.
      */
     @Inject
-    private ConnectionMapper connectionMapper;
+    private ConnectionService connectionService;
 
     /**
      * Mapper for manipulating users.
      */
     @Inject
-    private UserMapper userMapper;
+    private UserService userService;
 
     /**
      * Mapper for manipulating work permissions.
@@ -146,32 +146,34 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         List<String> userIdentifiers = object.getUserIdentifiers();
         String workIdentifier = modeledWork.getIdentifier();
         Collection<ObjectPermissionModel> permissions = new ArrayList<>(userIdentifiers.size());
-        
-        Collection<UserModel> userModels = userMapper.select(userIdentifiers);
 
-        for (UserModel userModel : userModels) {
+        Collection<ModeledUser> userModels = userService.retrieveObjects(user, userIdentifiers);
+
+        for (ModeledUser userModel : userModels) {
             ObjectPermissionModel permission = new ObjectPermissionModel();
-            permission.setEntityID(userModel.getEntityID());
+            permission.setEntityID(userModel.getModel().getEntityID());
             permission.setObjectIdentifier(workIdentifier);
             permission.setType(ObjectPermission.Type.READ);
             permissions.add(permission);
         }
 
+        workMapper.insertPeriods(modeledWork.getModel());
+        workMapper.insertConnections(modeledWork.getModel());
         getPermissionMapper().insert(permissions);
 
         return modeledWork;
     }
 
     public List<WorkConnection> getWorkConnections(ModeledAuthenticatedUser user, Collection<String> connectionIdentifiers) throws GuacamoleException {
-        Collection<ConnectionModel> connectionModels = connectionMapper.selectReadable(user.getUser().getModel(), connectionIdentifiers, user.getEffectiveUserGroups());
+        Collection<ModeledConnection> connectionModels = connectionService.retrieveObjects(user, connectionIdentifiers);
         List<WorkConnection> workConnections = new ArrayList<>(connectionIdentifiers.size());
-        
-        for (ConnectionModel connectionModel : connectionModels) {
+
+        for (ModeledConnection connectionModel : connectionModels) {
             WorkConnection workConnection = new WorkConnection(
                 connectionModel.getIdentifier(),
                 connectionModel.getParentIdentifier(),
                 connectionModel.getName(),
-                connectionModel.getProtocol(),
+                connectionModel.getConfiguration().getProtocol(),
                 connectionModel.getLastActive()
             );
             workConnections.add(workConnection);
