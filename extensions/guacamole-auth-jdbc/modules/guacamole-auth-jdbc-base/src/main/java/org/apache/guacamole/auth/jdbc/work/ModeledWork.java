@@ -40,6 +40,9 @@ import org.apache.guacamole.form.TimeField;
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
+import org.apache.guacamole.net.auth.WorkUser;
+import org.apache.guacamole.net.auth.permission.ObjectPermission;
+import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -236,8 +239,32 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
     }
 
     @Override
-    public List<String> getUserIdentifiers() {
-        return new ArrayList<String>(0);
+    public List<WorkUser> getUsers() {
+        return new ArrayList<WorkUser>(0);
+    }
+
+    @Override
+    public Boolean isWorker() {
+        try {
+            ObjectPermissionSet permissions = workService.getEffectivePermissionSet(getCurrentUser());
+            return permissions.hasPermission(ObjectPermission.Type.WORKER, getIdentifier());
+        }
+        catch(GuacamoleException e) {
+            logger.error("Unable to retrieve effective permissions for user: {}", getCurrentUser().getIdentifier(), e);
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean isManager() {
+        try {
+            ObjectPermissionSet permissions = workService.getEffectivePermissionSet(getCurrentUser());
+            return permissions.hasPermission(ObjectPermission.Type.MANAGER, getIdentifier());
+        }
+        catch(GuacamoleException e) {
+            logger.error("Unable to retrieve effective permissions for user: {}", getCurrentUser().getIdentifier(), e);
+            return false;
+        }
     }
 
 }

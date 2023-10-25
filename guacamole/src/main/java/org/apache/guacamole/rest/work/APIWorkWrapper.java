@@ -25,6 +25,7 @@ import java.util.Map;
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
+import org.apache.guacamole.net.auth.WorkUser;
 
 public class APIWorkWrapper implements Work {
     
@@ -105,8 +106,18 @@ public class APIWorkWrapper implements Work {
     }
 
     @Override
-    public List<String> getUserIdentifiers() {
+    public List<WorkUser> getUsers() {
         return apiWork.getUsers();
+    }
+
+    @Override
+    public Boolean isWorker() {
+        return apiWork.isWorker();
+    }
+
+    @Override
+    public Boolean isManager() {
+        return apiWork.isManager();
     }
 
 }

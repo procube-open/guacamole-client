@@ -29,6 +29,7 @@ import java.util.Map;
 import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
+import org.apache.guacamole.net.auth.WorkUser;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value=Include.NON_NULL)
@@ -39,7 +40,9 @@ public class APIWork {
     private Map<String, String> attributes;
     private List<Period> periods;
     private List<WorkConnection> connections;
-    private List<String> users;
+    private List<WorkUser> users;
+    private Boolean isWorker;
+    private Boolean isManager;
 
     public APIWork() {}
     public APIWork(Work work) {
@@ -49,7 +52,9 @@ public class APIWork {
         this.attributes = work.getAttributes();
         this.periods = work.getPeriods();
         this.connections = work.getConnections();
-        this.users = work.getUserIdentifiers();
+        this.users = work.getUsers();
+        this.isWorker = work.isWorker();
+        this.isManager = work.isManager();
     }
 
     public String getIdentifier() {
@@ -100,12 +105,28 @@ public class APIWork {
         this.connections = connections;
     }
 
-    public List<String> getUsers() {
+    public List<WorkUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<String> users){
+    public void setUsers(List<WorkUser> users){
         this.users = users;
+    }
+
+    public Boolean isWorker() {
+        return isWorker;
+    }
+
+    public void setIsWorker(Boolean isWorker) {
+        this.isWorker = isWorker;
+    }
+
+    public Boolean isManager() {
+        return isManager;
+    }
+
+    public void setIsManager(Boolean isManager) {
+        this.isManager = isManager;
     }
 
 }

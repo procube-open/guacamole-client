@@ -19,63 +19,52 @@
 
 package org.apache.guacamole.net.auth;
 
-import java.util.Date;
+public class WorkUser {
 
-public class WorkConnection {
-    String identifier;
-    String parentIdentifier;
-    String name;
-    String protocol;
-    Date lastActive;
+    private String identifier;
+    private String name;
+    private Boolean isWorker;
+    private Boolean isManager;
 
-    public WorkConnection() {}
+    public WorkUser() {}
 
-    public WorkConnection(String identifier, String parentIdentifier, String name, String protocol, Date lastActive) {
+    public WorkUser(String identifier, String name, Boolean isWorker, Boolean isManager) {
         this.identifier = identifier;
-        this.parentIdentifier = parentIdentifier;
         this.name = name;
-        this.protocol = protocol;
-        this.lastActive = lastActive;
+        this.isWorker = isWorker;
+        this.isManager = isManager;
     }
 
     public String getIdentifier() {
         return identifier;
     }
 
-    public String getParentIdentifier() {
-        return parentIdentifier;
-    }
-
     public String getName() {
         return name;
     }
 
-    public String getProtocol() {
-        return protocol;
+    public Boolean getIsWorker() {
+        return isWorker;
     }
 
-    public Date getLastActive() {
-        return lastActive;
+    public Boolean getIsManager() {
+        return isManager;
     }
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
-    public void setParentIdentifier(String parentIdentifier) {
-        this.parentIdentifier = parentIdentifier;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
+    public void setIsWorker(Boolean isWorker) {
+        this.isWorker = isWorker;
     }
 
-    public void setLastActive(Date lastActive) {
-        this.lastActive = lastActive;
+    public void setIsManager(Boolean isManager) {
+        this.isManager = isManager;
     }
-
+   
 }

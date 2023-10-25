@@ -46,6 +46,10 @@ public interface Work extends Identifiable, Attributes, Nameable {
 
     public void setConnections(List<WorkConnection> connections);
 
-    public List<String> getUserIdentifiers();
+    public List<WorkUser> getUsers();
+
+    public Boolean isWorker();
+
+    public Boolean isManager();
 
 }

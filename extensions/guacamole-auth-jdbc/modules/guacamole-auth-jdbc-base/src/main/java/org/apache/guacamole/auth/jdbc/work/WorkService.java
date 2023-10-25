@@ -32,10 +32,10 @@ import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionModel;
 import org.apache.guacamole.auth.jdbc.permission.WorkPermissionMapper;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
-import org.apache.guacamole.auth.jdbc.user.ModeledUser;
 import org.apache.guacamole.auth.jdbc.user.UserService;
 import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.auth.WorkConnection;
+import org.apache.guacamole.net.auth.WorkUser;
 import org.apache.guacamole.net.auth.permission.ObjectPermission;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import org.apache.guacamole.net.auth.permission.SystemPermission;
@@ -143,18 +143,36 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         modeledWork.setPeriods(object.getPeriods());
         modeledWork.setConnections(object.getConnections());
 
-        List<String> userIdentifiers = object.getUserIdentifiers();
+        List<WorkUser> workUsers = object.getUsers();
         String workIdentifier = modeledWork.getIdentifier();
-        Collection<ObjectPermissionModel> permissions = new ArrayList<>(userIdentifiers.size());
+        Collection<ObjectPermissionModel> permissions = new ArrayList<>(workUsers.size() * 3);
 
-        Collection<ModeledUser> userModels = userService.retrieveObjects(user, userIdentifiers);
+        for (WorkUser workUser : workUsers) {
 
-        for (ModeledUser userModel : userModels) {
-            ObjectPermissionModel permission = new ObjectPermissionModel();
-            permission.setEntityID(userModel.getModel().getEntityID());
-            permission.setObjectIdentifier(workIdentifier);
-            permission.setType(ObjectPermission.Type.READ);
-            permissions.add(permission);
+            Integer entityID = userService.retrieveObject(user, workUser.getIdentifier()).getModel().getEntityID();
+
+            ObjectPermissionModel readPermission = new ObjectPermissionModel();
+            readPermission.setEntityID(entityID);
+            readPermission.setObjectIdentifier(workIdentifier);
+            readPermission.setType(ObjectPermission.Type.READ);
+            permissions.add(readPermission);
+
+            if (workUser.getIsWorker()) {
+                ObjectPermissionModel workerPermission = new ObjectPermissionModel();
+                workerPermission.setEntityID(entityID);
+                workerPermission.setObjectIdentifier(workIdentifier);
+                workerPermission.setType(ObjectPermission.Type.WORKER);
+                permissions.add(workerPermission);
+            }
+
+            if (workUser.getIsManager()) {
+                ObjectPermissionModel managerPermission = new ObjectPermissionModel();
+                managerPermission.setEntityID(entityID);
+                managerPermission.setObjectIdentifier(workIdentifier);
+                managerPermission.setType(ObjectPermission.Type.MANAGER);
+                permissions.add(managerPermission);
+            }
+
         }
 
         workMapper.insertPeriods(modeledWork.getModel());
