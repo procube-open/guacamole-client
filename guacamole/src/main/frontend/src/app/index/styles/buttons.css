@@ -91,6 +91,7 @@ input[type="submit"]:disabled, button:disabled, button.danger:disabled {
 .button.manage::before,          button.manage::before,
 .button.back::before,            button.back::before,
 .button.home::before,            button.home::before,
+.button.close::before,           button.close::before,
 .button.change-password::before, button.change-password::before {
     content: ' ';
     position: absolute;
