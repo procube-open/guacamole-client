@@ -19,9 +19,14 @@
 
 package org.apache.guacamole.auth.jdbc.notification;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.guacamole.GuacamoleException;
+import org.apache.guacamole.auth.jdbc.JDBCEnvironment;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectMapper;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObjectService;
 import org.apache.guacamole.auth.jdbc.permission.ObjectPermissionMapper;
@@ -29,6 +34,7 @@ import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
 import org.apache.guacamole.net.auth.Notification;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -39,6 +45,12 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
 
     @Inject
     private Provider<ModeledNotification> notificationProvider;
+
+    /**
+     * The environment of the Guacamole server.
+     */
+    @Inject
+    private JDBCEnvironment environment;
 
     @Override
     protected ModeledDirectoryObjectMapper<NotificationModel> getObjectMapper() {
@@ -63,6 +75,33 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
 
         return model;
 
+    }
+    
+    @Override
+    public Collection<ModeledNotification> retrieveObjects(ModeledAuthenticatedUser user,
+            Collection<String> identifiers) throws GuacamoleException {
+
+        // Ignore invalid identifiers
+        List<String> filteredIdentifiers = filterIdentifiers(identifiers);
+
+        // Do not query if no identifiers given
+        if (filteredIdentifiers.isEmpty())
+            return Collections.<ModeledNotification>emptyList();
+
+        int batchSize = environment.getBatchSize();
+
+        // Process the filteredIdentifiers in batches using Lists.partition() and flatMap
+        Collection<NotificationModel> allObjects = Lists.partition(filteredIdentifiers, batchSize).stream()
+                .flatMap(chunk -> {
+                    Collection<NotificationModel> objects;
+                    objects = getObjectMapper().select(chunk);
+
+                    return objects.stream();
+                })
+                .collect(Collectors.toList());
+
+        // Return collection of requested objects
+        return getObjectInstances(user, allObjects);
     }
 
     @Override

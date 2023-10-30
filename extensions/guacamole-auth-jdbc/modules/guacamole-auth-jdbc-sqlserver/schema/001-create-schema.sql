@@ -54,6 +54,8 @@ GO
 --
 
 CREATE RULE [guacamole_object_permission_list] AS @list IN (
+    'WORKER',
+    'MANAGER',
     'READ',
     'UPDATE',
     'DELETE',
