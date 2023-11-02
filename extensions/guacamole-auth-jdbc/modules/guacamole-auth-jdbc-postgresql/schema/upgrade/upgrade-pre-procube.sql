@@ -138,6 +138,7 @@ CREATE TABLE guacamole_notification (
 
   notification_id      serial       NOT NULL,
   notification_idm_id  varchar(10)  NOT NULL,
+  notification_timestamp timestamp    NOT NULL,
   notification_title   varchar(128) NOT NULL,
   notification_message varchar(4096) NOT NULL,
 

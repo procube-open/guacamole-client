@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.auth.jdbc.notification;
 
+import java.util.Date;
+
 import org.apache.guacamole.auth.jdbc.base.ObjectModel;
 
 public class NotificationModel extends ObjectModel {
@@ -27,6 +29,8 @@ public class NotificationModel extends ObjectModel {
      * The unique identifier associated for IDM with this notification.
      */
     private String idmIdentifier;
+
+    private Date timestamp;
 
     private String title;
 
@@ -41,6 +45,14 @@ public class NotificationModel extends ObjectModel {
 
     public void setIdmIdentifier(String idmIdentifier) {
         this.idmIdentifier = idmIdentifier;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getTitle() {

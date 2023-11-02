@@ -19,11 +19,17 @@
 
 package org.apache.guacamole.net.auth;
 
+import java.util.Date;
+
 public interface Notification extends Identifiable {
 
     public String getIdmIdentifier();
 
     public void setIdmIdentifier(String idmIdentifier);
+
+    public Date getTimestamp();
+
+    public void setTimestamp(Date timestamp);
 
     public String getTitle();
 

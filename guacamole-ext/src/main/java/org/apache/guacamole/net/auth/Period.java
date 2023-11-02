@@ -22,15 +22,15 @@ package org.apache.guacamole.net.auth;
 public class Period {
     private String startTime;
     private String endTime;
-    private String vaildFrom;
+    private String validFrom;
     private String validUntil;
 
     public Period() {}
     
-    public Period(String startTime, String endTime, String vaildFrom, String validUntil) {
+    public Period(String startTime, String endTime, String validFrom, String validUntil) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.vaildFrom = vaildFrom;
+        this.validFrom = validFrom;
         this.validUntil = validUntil;
     }
 
@@ -42,8 +42,8 @@ public class Period {
         return endTime;
     }
 
-    public String getVaildFrom() {
-        return vaildFrom;
+    public String getValidFrom() {
+        return validFrom;
     }
 
     public String getValidUntil() {
@@ -58,8 +58,8 @@ public class Period {
         this.endTime = endTime;
     }
 
-    public void setVaildFrom(String vaildFrom) {
-        this.vaildFrom = vaildFrom;
+    public void setvalidFrom(String validFrom) {
+        this.validFrom = validFrom;
     }
 
     public void setValidUntil(String validUntil) {

@@ -200,7 +200,7 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
             try {
                 modeledPeriod.setStartTime(parseTime(period.getStartTime()));
                 modeledPeriod.setEndTime(parseTime(period.getEndTime()));
-                modeledPeriod.setValidFrom(parseDate(period.getVaildFrom()));
+                modeledPeriod.setValidFrom(parseDate(period.getValidFrom()));
                 modeledPeriod.setValidUntil(parseDate(period.getValidUntil()));
             }
             catch (ParseException e) {

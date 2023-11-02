@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.rest.notification;
 
+import java.util.Date;
+
 import org.apache.guacamole.net.auth.Notification;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,6 +33,8 @@ public class APINotification {
     
     private String idmIdentifier;
 
+    private Date timestamp;
+
     private String title;
 
     private String message;
@@ -38,6 +42,7 @@ public class APINotification {
     public APINotification() {}
     public APINotification(Notification notification) {
         this.idmIdentifier = notification.getIdmIdentifier();
+        this.timestamp = notification.getTimestamp();
         this.title = notification.getTitle();
         this.message = notification.getMessage();
     }
@@ -48,6 +53,14 @@ public class APINotification {
 
     public void setIdmIdentifier(String idmIdentifier) {
         this.idmIdentifier = idmIdentifier;
+    }
+
+    public Date getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp= timestamp;
     }
 
     public String getTitle() {

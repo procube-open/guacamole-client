@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.auth.jdbc.notification;
 
+import java.util.Date;
+
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObject;
 import org.apache.guacamole.net.auth.Notification;
 
@@ -27,6 +29,11 @@ public class ModeledNotification extends ModeledDirectoryObject<NotificationMode
     @Override
     public String getIdmIdentifier() {
         return getModel().getIdmIdentifier();
+    }
+
+    @Override
+    public Date getTimestamp() {
+        return getModel().getTimestamp();
     }
 
     @Override
@@ -42,6 +49,11 @@ public class ModeledNotification extends ModeledDirectoryObject<NotificationMode
     @Override
     public void setIdmIdentifier(String idmIdentifier) {
         getModel().setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
+    public void setTimestamp(Date timestamp) {
+        getModel().setTimestamp(new Date());
     }
 
     @Override

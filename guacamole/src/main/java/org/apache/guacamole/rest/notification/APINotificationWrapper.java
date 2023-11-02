@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.rest.notification;
 
+import java.util.Date;
+
 import org.apache.guacamole.net.auth.Notification;
 
 public class APINotificationWrapper implements Notification {
@@ -57,6 +59,16 @@ public class APINotificationWrapper implements Notification {
     @Override
     public void setIdmIdentifier(String idmIdentifier) {
         apiNotification.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
+    public Date getTimestamp() {
+        return apiNotification.getTimestamp();
+    }
+
+    @Override
+    public void setTimestamp(Date timestamp) {
+        apiNotification.setTimestamp(timestamp);
     }
 
     @Override

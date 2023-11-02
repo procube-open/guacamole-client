@@ -113,7 +113,7 @@ public class APIWork {
         this.users = users;
     }
 
-    public Boolean isWorker() {
+    public Boolean getIsWorker() {
         return isWorker;
     }
 
@@ -121,11 +121,11 @@ public class APIWork {
         this.isWorker = isWorker;
     }
 
-    public Boolean isManager() {
+    public Boolean getIsAdmin() {
         return isManager;
     }
 
-    public void setIsManager(Boolean isManager) {
+    public void setIsAdmin(Boolean isManager) {
         this.isManager = isManager;
     }
 
