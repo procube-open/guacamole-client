@@ -112,12 +112,12 @@ public class APIWorkWrapper implements Work {
 
     @Override
     public Boolean isWorker() {
-        return apiWork.isWorker();
+        return apiWork.getIsWorker();
     }
 
     @Override
     public Boolean isManager() {
-        return apiWork.isManager();
+        return apiWork.getIsAdmin();
     }
 
 }
