@@ -31,6 +31,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(value=Include.NON_NULL)
 public class APINotification {
     
+    private String identifier;
+
     private String idmIdentifier;
 
     private Date timestamp;
@@ -41,10 +43,19 @@ public class APINotification {
 
     public APINotification() {}
     public APINotification(Notification notification) {
+        this.identifier = notification.getIdentifier();
         this.idmIdentifier = notification.getIdmIdentifier();
         this.timestamp = notification.getTimestamp();
         this.title = notification.getTitle();
         this.message = notification.getMessage();
+    }
+
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier= identifier;
     }
 
     public String getIdmIdentifier() {
