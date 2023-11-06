@@ -30,7 +30,7 @@
         <id     column="notification_id"            property="objectID"              jdbcType="INTEGER"/>
         <result column="notification_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
         <result column="notification_timestamp"     property="timestamp"             jdbcType="TIMESTAMP"/>
-        <result column="notification_title"         property="name"                  jdbcType="VARCHAR"/>
+        <result column="notification_title"         property="title"                 jdbcType="VARCHAR"/>
         <result column="notification_message"       property="message"               jdbcType="VARCHAR"/>
 
     </resultMap>
