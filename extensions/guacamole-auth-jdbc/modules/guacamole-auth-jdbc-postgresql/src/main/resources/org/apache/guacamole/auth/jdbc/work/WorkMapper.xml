@@ -211,7 +211,7 @@
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
                 #{identifier,jdbcType=INTEGER}::integer
-            </foreach>;
+            </foreach>
             AND guacamole_work_period.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
                     <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
@@ -226,7 +226,7 @@
             <foreach collection="identifiers" item="identifier"
                      open="(" separator="," close=")">
                 #{identifier,jdbcType=INTEGER}::integer
-            </foreach>;
+            </foreach>
             AND guacamole_works_connections.work_id IN (
                 <include refid="org.apache.guacamole.auth.jdbc.work.WorkMapper.getReadableIDs">
                     <property name="entityID" value="#{user.entityID,jdbcType=INTEGER}"/>
