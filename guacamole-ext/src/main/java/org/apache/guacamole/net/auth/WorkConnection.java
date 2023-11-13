@@ -23,18 +23,18 @@ import java.util.Date;
 
 public class WorkConnection {
     String identifier;
-    String parentIdentifier;
-    String name;
+    String hostname;
     String protocol;
+    String remark;
     Date lastActive;
 
     public WorkConnection() {}
 
-    public WorkConnection(String identifier, String parentIdentifier, String name, String protocol, Date lastActive) {
+    public WorkConnection(String identifier, String hostname, String remark, String protocol, Date lastActive) {
         this.identifier = identifier;
-        this.parentIdentifier = parentIdentifier;
-        this.name = name;
+        this.hostname = hostname;
         this.protocol = protocol;
+        this.remark = remark;
         this.lastActive = lastActive;
     }
 
@@ -42,16 +42,16 @@ public class WorkConnection {
         return identifier;
     }
 
-    public String getParentIdentifier() {
-        return parentIdentifier;
-    }
-
-    public String getName() {
-        return name;
+    public String getHostname() {
+        return hostname;
     }
 
     public String getProtocol() {
         return protocol;
+    }
+
+    public String getRemark() {
+        return remark;
     }
 
     public Date getLastActive() {
@@ -62,16 +62,16 @@ public class WorkConnection {
         this.identifier = identifier;
     }
 
-    public void setParentIdentifier(String parentIdentifier) {
-        this.parentIdentifier = parentIdentifier;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
     }
 
     public void setProtocol(String protocol) {
         this.protocol = protocol;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public void setLastActive(Date lastActive) {
