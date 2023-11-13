@@ -41,6 +41,8 @@ public class ConnectionModel extends ChildObjectModel {
      */
     private String name;
 
+    private String remark;
+
     /**
      * The name of the protocol to use when connecting to this connection.
      */
@@ -148,6 +150,26 @@ public class ConnectionModel extends ChildObjectModel {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns the remark associated with this connection.
+     *
+     * @return
+     *     The remark associated with this connection.
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * Sets the remark associated with this connection.
+     *
+     * @param remark
+     *     The remark to associate with this connection.
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     /**

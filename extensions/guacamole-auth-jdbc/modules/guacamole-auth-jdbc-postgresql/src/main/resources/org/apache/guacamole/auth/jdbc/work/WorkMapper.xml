@@ -220,6 +220,7 @@
             );
 
         SELECT
+            guacamole_works_connections.work_id,
             connection_id
         FROM guacamole_works_connections
         WHERE work_id IN

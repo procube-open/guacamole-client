@@ -62,6 +62,12 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
     private static final Logger logger = LoggerFactory.getLogger(ModeledConnection.class);
 
     /**
+     * The name of the attribute which contains the name of the remote desktop
+     * connection.
+     */
+    public static final String REMARK_NAME = "remark";
+
+    /**
      * The name of the attribute which overrides the hostname used to connect
      * to guacd for this connection.
      */
@@ -97,6 +103,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * connection.
      */
     public static final Form GUACD_PARAMETERS = new Form("guacd", Arrays.<Field>asList(
+        new TextField(REMARK_NAME),
         new TextField(GUACD_HOSTNAME_NAME),
         new NumericField(GUACD_PORT_NAME),
         new EnumField(GUACD_ENCRYPTION_NAME, Arrays.asList(
@@ -163,6 +170,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      */
     public static final Set<String> ATTRIBUTE_NAMES =
             Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
+                REMARK_NAME,
                 GUACD_HOSTNAME_NAME,
                 GUACD_PORT_NAME,
                 GUACD_ENCRYPTION_NAME,
@@ -363,6 +371,9 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
             logger.warn("Not setting maximum connections per user: {}", e.getMessage());
             logger.debug("Unable to parse numeric attribute.", e);
         }
+
+        // Translate remark attribute
+        getModel().setRemark(attributes.get(REMARK_NAME));
 
         // Translate guacd hostname
         getModel().setProxyHostname(TextField.parse(attributes.get(GUACD_HOSTNAME_NAME)));

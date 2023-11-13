@@ -113,6 +113,8 @@ CREATE TABLE guacamole_connection (
   parent_id           integer,
   protocol            varchar(32)  NOT NULL,
   
+  remark             varchar(4096) NOT NULL DEFAULT '',
+
   -- Concurrency limits
   max_connections          integer,
   max_connections_per_user integer,
