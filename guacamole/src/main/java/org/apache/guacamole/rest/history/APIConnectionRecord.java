@@ -31,6 +31,10 @@ public class APIConnectionRecord extends APIActivityRecord {
      */
     private final String connectionIdentifier;
 
+    private final String hostname;
+
+    private final String protocol;
+
     /**
      * The identifier of the connection associated with this record.
      */
@@ -62,6 +66,8 @@ public class APIConnectionRecord extends APIActivityRecord {
     public APIConnectionRecord(ConnectionRecord record) {
         super(record);
         this.connectionIdentifier     = record.getConnectionIdentifier();
+        this.hostname                 = record.getHostname();
+        this.protocol                 = record.getProtocol();
         this.connectionName           = record.getConnectionName();
         this.workId                   = record.getWorkIdentifier();
         this.sharingProfileIdentifier = record.getSharingProfileIdentifier();
@@ -77,6 +83,28 @@ public class APIConnectionRecord extends APIActivityRecord {
      */
     public String getConnectionIdentifier() {
         return connectionIdentifier;
+    }
+
+    /**
+     * Returns the hostname of the connection associated with this
+     * record.
+     *
+     * @return
+     *     The hostname of the connection associated with this record.
+     */
+    public String getHostname() {
+        return hostname;
+    }
+
+    /**
+     * Returns the protocol of the connection associated with this
+     * record.
+     *
+     * @return
+     *     The protocol of the connection associated with this record.
+     */
+    public String getProtocol() {
+        return protocol;
     }
 
     /**

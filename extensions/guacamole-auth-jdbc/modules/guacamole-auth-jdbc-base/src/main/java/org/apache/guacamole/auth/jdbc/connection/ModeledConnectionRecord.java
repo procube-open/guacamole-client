@@ -53,6 +53,16 @@ public class ModeledConnectionRecord extends ModeledActivityRecord
     }
 
     @Override
+    public String getHostname() {
+        return model.getHostname();
+    }
+
+    @Override
+    public String getProtocol() {
+        return model.getProtocol();
+    }
+
+    @Override
     public String getConnectionName() {
         return model.getConnectionName();
     }

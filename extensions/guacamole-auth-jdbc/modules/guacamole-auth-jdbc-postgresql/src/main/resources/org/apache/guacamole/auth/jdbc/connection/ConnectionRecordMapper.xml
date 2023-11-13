@@ -28,6 +28,8 @@
         <id     column="history_id"           property="recordID"                 jdbcType="INTEGER"/>
         <result column="connection_id"        property="connectionIdentifier"     jdbcType="INTEGER"/>
         <result column="connection_name"      property="connectionName"           jdbcType="VARCHAR"/>
+        <result column="hostname"             property="hostname"                 jdbcType="VARCHAR"/>
+        <result column="protocol"             property="protocol"                 jdbcType="VARCHAR"/>
         <result column="work_id"              property="workIdentifier"           jdbcType="VARCHAR"/>
         <result column="remote_host"          property="remoteHost"               jdbcType="VARCHAR"/>
         <result column="sharing_profile_id"   property="sharingProfileIdentifier" jdbcType="INTEGER"/>

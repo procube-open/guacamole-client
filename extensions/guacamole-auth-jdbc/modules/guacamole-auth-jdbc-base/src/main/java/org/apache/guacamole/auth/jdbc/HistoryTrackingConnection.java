@@ -97,6 +97,8 @@ public class HistoryTrackingConnection extends DelegatingConnection {
 
         // Set the connection information
         connectionRecordModel.setConnectionName(this.getDelegateConnection().getName());
+        connectionRecordModel.setHostname(this.getDelegateConnection().getConfiguration().getParameter("hostname"));
+        connectionRecordModel.setProtocol(this.getDelegateConnection().getConfiguration().getProtocol());
 
         // Insert the connection history record to mark the start of this connection
         connectionRecordMapper.insert(connectionRecordModel);
