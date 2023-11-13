@@ -318,6 +318,8 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
         attributes.put(GUACD_HOSTNAME_NAME, getModel().getProxyHostname());
         attributes.put(GUACD_PORT_NAME, NumericField.format(getModel().getProxyPort()));
 
+        attributes.put(REMARK_NAME, getModel().getRemark());
+
         // Set guacd (proxy) encryption method
         EncryptionMethod encryptionMethod = getModel().getProxyEncryptionMethod();
         if (encryptionMethod == null)
