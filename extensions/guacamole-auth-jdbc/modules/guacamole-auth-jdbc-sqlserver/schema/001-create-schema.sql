@@ -736,6 +736,8 @@ CREATE TABLE [guacamole_connection_history] (
     [remote_host]          [nvarchar](256),
     [connection_id]        [int],
     [connection_name]      [nvarchar](128)     NOT NULL,
+    [hostname]             [nvarchar](128),    NOT NULL,
+    [protocol]             [nvarchar](32)      NOT NULL,
     [sharing_profile_id]   [int],
     [sharing_profile_name] [nvarchar](128),
     [start_date]           [datetime]          NOT NULL,
