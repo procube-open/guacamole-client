@@ -65,6 +65,16 @@ public class DelegatingConnectionRecord extends DelegatingActivityRecord
     }
 
     @Override
+    public String getHostname() {
+        return record.getHostname();
+    }
+
+    @Override
+    public String getProtocol() {
+        return record.getProtocol();
+    }
+
+    @Override
     public String getWorkIdentifier() {
         return record.getWorkIdentifier();
     }
