@@ -190,8 +190,8 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
             WorkConnection workConnection = new WorkConnection(
                 connectionModel.getIdentifier(),
                 connectionModel.getConfiguration().getParameters().get("hostname"),
-                connectionModel.getConfiguration().getProtocol(),
                 connectionModel.getAttributes().get("remark"),
+                connectionModel.getConfiguration().getProtocol(),
                 connectionModel.getLastActive()
             );
             workConnections.add(workConnection);
