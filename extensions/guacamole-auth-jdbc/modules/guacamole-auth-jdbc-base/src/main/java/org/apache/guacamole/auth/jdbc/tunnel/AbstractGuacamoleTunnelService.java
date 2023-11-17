@@ -353,19 +353,19 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
             RemoteAuthenticatedUser user = activeConnection.getUser();
 
             // Release the associated connection if this is the primary connection
-            // if (activeConnection.isPrimaryConnection()) {
+            if (activeConnection.isPrimaryConnection()) {
 
-            //     // Get connection and associated identifiers
-            //     ModeledConnection connection = activeConnection.getConnection();
-            //     String identifier = connection.getIdentifier();
-            //     String parentIdentifier = connection.getParentIdentifier();
+                // Get connection and associated identifiers
+                ModeledConnection connection = activeConnection.getConnection();
+                String identifier = connection.getIdentifier();
+                String parentIdentifier = connection.getParentIdentifier();
 
-            //     // Release connection
-            //     activeConnections.remove(identifier, activeConnection);
-            //     activeConnectionGroups.remove(parentIdentifier, activeConnection);
-            //     release(user, connection);
+                // Release connection
+                activeConnections.remove(identifier, activeConnection);
+                activeConnectionGroups.remove(parentIdentifier, activeConnection);
+                release(user, connection);
 
-            // }
+            }
 
             // Release any associated group
             if (activeConnection.hasBalancingGroup())
