@@ -139,6 +139,8 @@ public class ActiveConnectionRecord extends ModeledConnectionRecord {
         // ... to the given connection ...
         recordModel.setConnectionIdentifier(connection.getIdentifier());
         recordModel.setConnectionName(connection.getName());
+        recordModel.setHostname(connection.getName());
+        recordModel.setProtocol(connection.getConfiguration().getProtocol());
 
         recordModel.setWorkIdentifier(workIdentifier);
 
