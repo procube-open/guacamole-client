@@ -210,6 +210,11 @@ public abstract class ModeledPermissions<ModelType extends EntityModel>
         return workPermissionService.getPermissionSet(getCurrentUser(), this, Collections.<String>emptySet()); 
     }
 
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return null;
+    }
+
     /**
      * Returns the identifiers of all user groups defined within the database
      * which apply to this user, including any groups inherited through
@@ -298,6 +303,12 @@ public abstract class ModeledPermissions<ModelType extends EntityModel>
             public ObjectPermissionSet getWorkPermissions()
                     throws GuacamoleException {
                 return workPermissionService.getPermissionSet(authenticatedUser, ModeledPermissions.this, effectiveGroups);
+            }
+
+            @Override
+            public ObjectPermissionSet getNotificationPermissions()
+                    throws GuacamoleException {
+                return null;
             }
 
         };

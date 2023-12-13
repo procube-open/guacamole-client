@@ -74,7 +74,7 @@ public class NotificationDirectoryResource extends DirectoryResource<Notificatio
 
     @Override
     protected ObjectPermissionSet getObjectPermissions(Permissions permissions) throws GuacamoleException {
-        throw new UnsupportedOperationException("Unimplemented method 'getObjectPermissions'");
+        return permissions.getNotificationPermissions();
     }
 
 }

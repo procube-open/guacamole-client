@@ -128,6 +128,11 @@ public class DelegatingUserGroup implements UserGroup {
     }
 
     @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return userGroup.getNotificationPermissions();
+    }
+
+    @Override
     public RelatedObjectSet getMemberUsers() throws GuacamoleException {
         return userGroup.getMemberUsers();
     }

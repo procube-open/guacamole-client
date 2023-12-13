@@ -187,6 +187,11 @@ public abstract class AbstractUser extends AbstractIdentifiable
         return ObjectPermissionSet.EMPTY_SET;
     }
 
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return ObjectPermissionSet.EMPTY_SET;
+    }
+
     /**
      * {@inheritDoc}
      *

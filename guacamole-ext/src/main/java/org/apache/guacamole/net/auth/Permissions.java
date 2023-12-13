@@ -138,5 +138,18 @@ public interface Permissions {
      *     permissions is not allowed.
      */
     ObjectPermissionSet getWorkPermissions() throws GuacamoleException;
+    
+    /**
+     * Returns all work group permissions given to this object.
+     *
+     * @return
+     *     An ObjectPermissionSet of all work group permissions granted to this
+     *     object.
+     *
+     * @throws GuacamoleException
+     *     If an error occurs while retrieving permissions, or if reading all
+     *     permissions is not allowed.
+     */
+    ObjectPermissionSet getNotificationPermissions() throws GuacamoleException;
 
 }

@@ -27,7 +27,6 @@ import org.apache.guacamole.auth.jdbc.user.ModeledUserContext;
 import org.apache.guacamole.auth.jdbc.connectiongroup.RootConnectionGroup;
 import org.apache.guacamole.auth.jdbc.notification.ModeledNotification;
 import org.apache.guacamole.auth.jdbc.notification.NotificationMapper;
-import org.apache.guacamole.auth.jdbc.notification.NotificationService;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ModeledConnectionGroup;
 import org.apache.guacamole.auth.jdbc.connectiongroup.ConnectionGroupDirectory;
 import org.apache.guacamole.auth.jdbc.connection.ConnectionDirectory;
@@ -224,7 +223,6 @@ public class JDBCAuthenticationProviderModule extends MyBatisModule {
         bind(UserService.class);
         bind(WorkService.class);
         bind(WorkPermissionService.class);
-        bind(NotificationService.class);
         
     }
 

@@ -153,6 +153,11 @@ public class DelegatingUser implements User {
     }
 
     @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return user.getNotificationPermissions();
+    }
+
+    @Override
     public RelatedObjectSet getUserGroups() throws GuacamoleException {
         return user.getUserGroups();
     }
