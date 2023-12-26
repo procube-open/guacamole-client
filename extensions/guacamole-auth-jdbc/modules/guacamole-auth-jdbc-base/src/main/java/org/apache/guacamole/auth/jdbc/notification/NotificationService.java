@@ -37,9 +37,16 @@ import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NotificationService extends ModeledDirectoryObjectService<ModeledNotification, Notification, NotificationModel> {
     
+    /**
+     * Logger for this class.
+     */
+    private final Logger logger = LoggerFactory.getLogger(NotificationService.class);
+
     @Inject
     private NotificationMapper notificationMapper;
 
@@ -106,7 +113,10 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
 
     @Override
     public Set<String> getIdentifiers(ModeledAuthenticatedUser user) throws GuacamoleException {
-        return getObjectMapper().selectIdentifiers();
+        Set<String> identifiers = getObjectMapper().selectIdentifiers();
+        logger.debug("getIdentifiers() - Found {} identifiers", identifiers.size());
+        logger.debug("getIdentifiers() - Identifiers: {}", identifiers);
+        return identifiers;
     }
 
     @Override
