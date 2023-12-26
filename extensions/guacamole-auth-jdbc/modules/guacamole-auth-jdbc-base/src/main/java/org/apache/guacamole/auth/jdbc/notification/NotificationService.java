@@ -114,8 +114,6 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
     @Override
     public Set<String> getIdentifiers(ModeledAuthenticatedUser user) throws GuacamoleException {
         Set<String> identifiers = getObjectMapper().selectIdentifiers();
-        logger.debug("getIdentifiers() - Found {} identifiers", identifiers.size());
-        logger.debug("getIdentifiers() - Identifiers: {}", identifiers);
         return identifiers;
     }
 

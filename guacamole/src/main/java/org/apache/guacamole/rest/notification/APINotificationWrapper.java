@@ -43,12 +43,12 @@ public class APINotificationWrapper implements Notification {
 
     @Override
     public String getIdentifier() {
-        return apiNotification.getIdmIdentifier();
+        return apiNotification.getIdentifier();
     }
 
     @Override
     public void setIdentifier(String identifier) {
-        apiNotification.setIdmIdentifier(identifier);
+        apiNotification.setIdentifier(identifier);
     }
 
     @Override
