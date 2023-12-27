@@ -27,11 +27,6 @@ import org.apache.guacamole.net.auth.Notification;
 public class ModeledNotification extends ModeledDirectoryObject<NotificationModel> implements Notification {
 
     @Override
-    public String getIdentifier() {
-        return "test";
-    }
-
-    @Override
     public String getIdmIdentifier() {
         return getModel().getIdmIdentifier();
     }

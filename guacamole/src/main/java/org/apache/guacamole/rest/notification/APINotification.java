@@ -90,4 +90,10 @@ public class APINotification {
         this.message= message;
     }
 
+    @Override
+    public String toString()
+    {
+        return "{" + this.identifier + " " + this.idmIdentifier + " " + this.timestamp + " " + this.title + this.message + "}";
+    }
+
 }
