@@ -421,7 +421,8 @@ public abstract class DirectoryResource<InternalType extends Identifiable, Exter
         // Translate each retrieved object into the corresponding external object
         Map<String, ExternalType> apiObjects = new HashMap<String, ExternalType>();
         for (InternalType object : directory.getAll(identifiers)) {
-            logger.debug("Retrieved object: {}", object.getIdentifier());
+            logger.debug("getObjects Retrieved object id: {}", object.getIdentifier());
+            logger.debug("getObjects Retrieved object contents: {}", translator.toExternalObject(object));
             apiObjects.put(object.getIdentifier(), translator.toExternalObject(object));
         }
 
