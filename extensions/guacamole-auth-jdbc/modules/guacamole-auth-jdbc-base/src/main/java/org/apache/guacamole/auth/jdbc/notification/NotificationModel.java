@@ -69,4 +69,22 @@ public class NotificationModel extends ObjectModel {
 
     public void setMessage(String message) { this.message = message; }
 
+    @Override
+    public String getIdentifier() {
+
+        // If no associated ID, then no associated identifier
+        Integer id = getObjectID();
+        if (id == null)
+            return null;
+
+        // Otherwise, the identifier is the ID as a string
+        return id.toString();
+
+    }
+
+    @Override
+    public void setIdentifier(String identifier) {
+        throw new UnsupportedOperationException("Notification identifiers are derived from IDs. They cannot be set.");
+    }
+
 }
