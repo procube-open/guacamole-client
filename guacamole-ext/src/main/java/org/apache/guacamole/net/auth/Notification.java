@@ -27,13 +27,13 @@ public interface Notification extends Identifiable {
 
     public void setIdmIdentifier(String idmIdentifier);
 
-    public Date getTimestamp();
+    public Date getStartDate();
 
-    public void setTimestamp(Date timestamp);
+    public void setStartDate(Date startDate);
 
-    public String getTitle();
+    public Date getEndDate();
 
-    public void setTitle(String title);
+    public void setEndDate(Date endDate);
 
     public String getMessage();
 

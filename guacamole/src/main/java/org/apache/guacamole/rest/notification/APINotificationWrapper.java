@@ -62,23 +62,23 @@ public class APINotificationWrapper implements Notification {
     }
 
     @Override
-    public Date getTimestamp() {
-        return apiNotification.getTimestamp();
+    public Date getStartDate() {
+        return apiNotification.getStartDate();
     }
 
     @Override
-    public void setTimestamp(Date timestamp) {
-        apiNotification.setTimestamp(timestamp);
+    public void setStartDate(Date startDate) {
+        apiNotification.setStartDate(startDate);
     }
 
     @Override
-    public String getTitle() {
-        return apiNotification.getTitle();
+    public Date getEndDate() {
+        return apiNotification.getEndDate();
     }
 
     @Override
-    public void setTitle(String title) {
-        apiNotification.setTitle(title);
+    public void setEndDate(Date endDate) {
+        apiNotification.setEndDate(endDate);
     }
 
     @Override

@@ -37,16 +37,9 @@ import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class NotificationService extends ModeledDirectoryObjectService<ModeledNotification, Notification, NotificationModel> {
     
-    /**
-     * Logger for this class.
-     */
-    private final Logger logger = LoggerFactory.getLogger(NotificationService.class);
-
     @Inject
     private NotificationMapper notificationMapper;
 
@@ -77,7 +70,8 @@ public class NotificationService extends ModeledDirectoryObjectService<ModeledNo
         ModeledNotification notification = getObjectInstance(user, model);
 
         notification.setIdmIdentifier(object.getIdmIdentifier());
-        notification.setTitle(object.getTitle());
+        notification.setStartDate(object.getStartDate());
+        notification.setEndDate(object.getEndDate());
         notification.setMessage(object.getMessage());
 
         return model;

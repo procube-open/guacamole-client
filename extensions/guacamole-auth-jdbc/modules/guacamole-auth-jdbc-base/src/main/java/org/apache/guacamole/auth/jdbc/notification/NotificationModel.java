@@ -30,9 +30,9 @@ public class NotificationModel extends ObjectModel {
      */
     private String idmIdentifier;
 
-    private Date timestamp;
+    private Date startDate;
 
-    private String title;
+    private Date endDate;
 
     private String message;
 
@@ -47,25 +47,15 @@ public class NotificationModel extends ObjectModel {
         this.idmIdentifier = idmIdentifier;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
+    public Date getStartDate() { return startDate; }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
 
-    public String getTitle() {
-        return title;
-    }
+    public Date getEndDate() { return endDate; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setEndDate(Date endDate) { this.endDate = endDate; }
 
-    public String getMessage() {
-        return message;
-    }
+    public String getMessage() { return message; }
 
     public void setMessage(String message) { this.message = message; }
 

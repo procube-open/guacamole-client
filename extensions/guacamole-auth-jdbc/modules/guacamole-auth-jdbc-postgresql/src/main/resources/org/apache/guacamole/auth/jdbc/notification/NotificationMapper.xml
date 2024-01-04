@@ -29,8 +29,8 @@
         <!-- Notificatin properties -->
         <id     column="notification_id"            property="objectID"              jdbcType="INTEGER"/>
         <result column="notification_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
-        <result column="notification_timestamp"     property="timestamp"             jdbcType="TIMESTAMP"/>
-        <result column="notification_title"         property="title"                 jdbcType="VARCHAR"/>
+        <result column="notification_start_date"    property="timestamp"             jdbcType="TIMESTAMP"/>
+        <result column="notification_end_date"      property="timestamp"             jdbcType="TIMESTAMP"/>
         <result column="notification_message"       property="message"               jdbcType="VARCHAR"/>
 
     </resultMap>
@@ -48,8 +48,8 @@
         SELECT
             notification_id,
             notification_idm_id,
-            notification_timestamp,
-            notification_title,
+            notification_start_date,
+            notification_end_date,
             notification_message
         FROM guacamole_notification
         WHERE guacamole_notification.notification_id IN
@@ -73,14 +73,14 @@
 
         INSERT INTO guacamole_notification (
             notification_idm_id,
-            notification_timestamp,
-            notification_title,
+            notification_start_date,
+            notification_end_date,
             notification_message
         )
         VALUES (
             #{object.idmIdentifier,jdbcType=VARCHAR},
-            #{object.timestamp,jdbcType=TIMESTAMP},
-            #{object.title,jdbcType=VARCHAR},
+            #{object.startDate,jdbcType=TIMESTAMP},
+            #{object.endDate,jdbcType=TIMESTAMP},
             #{object.message,jdbcType=VARCHAR}
         )
 
@@ -90,9 +90,9 @@
     <update id="update" parameterType="org.apache.guacamole.auth.jdbc.notification.NotificationModel">
         UPDATE guacamole_notification
         SET notification_idm_id          = #{object.idmIdentifier,jdbcType=VARCHAR},
-            notification_timestamp       = #{object.timestamp,jdbcType=TIMESTAMP},
-            notification_title            = #{object.title,jdbcType=VARCHAR},
-            notification_message          = #{object.message,jdbcType=VARCHAR}
+            notification_start_date      = #{object.startDate,jdbcType=TIMESTAMP},
+            notification_end_date        = #{object.endDate,jdbcType=TIMESTAMP},
+            notification_message         = #{object.message,jdbcType=VARCHAR}
         WHERE notification_id = #{object.objectID,jdbcType=INTEGER}
     </update>
 

@@ -32,13 +32,13 @@ public class ModeledNotification extends ModeledDirectoryObject<NotificationMode
     }
 
     @Override
-    public Date getTimestamp() {
-        return getModel().getTimestamp();
+    public Date getStartDate() {
+        return getModel().getStartDate();
     }
 
     @Override
-    public String getTitle() {
-        return getModel().getTitle();
+    public Date getEndDate() {
+        return getModel().getEndDate();
     }
 
     @Override
@@ -52,13 +52,13 @@ public class ModeledNotification extends ModeledDirectoryObject<NotificationMode
     }
 
     @Override
-    public void setTimestamp(Date timestamp) {
-        getModel().setTimestamp(new Date());
+    public void setStartDate(Date startDate) {
+        getModel().setStartDate(startDate);
     }
 
     @Override
-    public void setTitle(String title) {
-        getModel().setTitle(title);
+    public void setEndDate(Date endDate) {
+        getModel().setEndDate(endDate);
     }
 
     @Override

@@ -35,9 +35,9 @@ public class APINotification {
 
     private String idmIdentifier;
 
-    private Date timestamp;
+    private Date starDate;
 
-    private String title;
+    private Date endDate;
 
     private String message;
 
@@ -45,8 +45,8 @@ public class APINotification {
     public APINotification(Notification notification) {
         this.identifier = notification.getIdentifier();
         this.idmIdentifier = notification.getIdmIdentifier();
-        this.timestamp = notification.getTimestamp();
-        this.title = notification.getTitle();
+        this.starDate = notification.getStartDate();
+        this.endDate = notification.getEndDate();
         this.message = notification.getMessage();
     }
 
@@ -66,20 +66,20 @@ public class APINotification {
         this.idmIdentifier = idmIdentifier;
     }
 
-    public Date getTimestamp() {
-        return this.timestamp;
+    public Date getStartDate() {
+        return this.starDate;
     }
 
-    public void setTimestamp(Date timestamp) {
-        this.timestamp= timestamp;
+    public void setStartDate(Date startDate) {
+        this.starDate = startDate;
     }
 
-    public String getTitle() {
-        return this.title;
+    public Date getEndDate() {
+        return this.endDate;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEndDate(Date endDate) {
+        this.endDate= endDate;
     }
 
     public String getMessage() {
@@ -93,7 +93,7 @@ public class APINotification {
     @Override
     public String toString()
     {
-        return "{" + this.identifier + " " + this.idmIdentifier + " " + this.timestamp + " " + this.title + this.message + "}";
+        return "{" + this.identifier + " " + this.idmIdentifier + " " + this.starDate + " " + this.endDate + this.message + "}";
     }
 
 }
