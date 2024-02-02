@@ -19,6 +19,10 @@
 
 package org.apache.guacamole.net.auth;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Period {
     private String startTime;
     private String endTime;
@@ -64,6 +68,24 @@ public class Period {
 
     public void setValidUntil(String validUntil) {
         this.validUntil = validUntil;
+    }
+
+    public boolean isWithinPeriod() {
+        Date now = new Date();
+        SimpleDateFormat dsd = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat tsd = new SimpleDateFormat("HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        try {
+            Date validFrom = dsd.parse(this.validFrom);
+            cal.setTime(dsd.parse(this.validUntil));
+            cal.add(Calendar.DATE, 1);
+            Date validUntil = cal.getTime();
+            Date startTime = tsd.parse(this.startTime);
+            Date endTime = tsd.parse(this.endTime);
+            return now.after(validFrom) && now.before(validUntil) && now.after(startTime) && now.before(endTime);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

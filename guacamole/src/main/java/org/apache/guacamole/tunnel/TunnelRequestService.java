@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.tunnel;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -31,7 +32,9 @@ import org.apache.guacamole.net.GuacamoleTunnel;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Connectable;
 import org.apache.guacamole.net.auth.Credentials;
+import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.UserContext;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.event.TunnelCloseEvent;
 import org.apache.guacamole.net.event.TunnelConnectEvent;
 import org.apache.guacamole.rest.auth.AuthenticationService;
@@ -346,6 +349,16 @@ public class TunnelRequestService {
         String name = authenticatedUser.getIdentifier();
         if (name != null)
             info.setName(name);
+
+        Work work = userContext.getWorkDirectory().get(workIdentifier);
+        boolean withinPeriod = false;
+        for (Period period : work.getPeriods()) {
+            withinPeriod = period.isWithinPeriod() || withinPeriod;
+        }
+
+        if (!withinPeriod) {
+            throw new GuacamoleException("Work is not within a valid period.");
+        }
 
         try {
 
