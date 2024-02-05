@@ -22,6 +22,7 @@ package org.apache.guacamole.net.auth;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Period {
     private String startTime;
@@ -72,16 +73,20 @@ public class Period {
 
     public boolean isWithinPeriod() {
         Date now = new Date();
+        TimeZone tz = TimeZone.getTimeZone("Asia/Tokyo");
         SimpleDateFormat dsd = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat tsd = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat tsd = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        dsd.setTimeZone(tz);
+        tsd.setTimeZone(tz);
         Calendar cal = Calendar.getInstance();
         try {
             Date validFrom = dsd.parse(this.validFrom);
             cal.setTime(dsd.parse(this.validUntil));
             cal.add(Calendar.DATE, 1);
             Date validUntil = cal.getTime();
-            Date startTime = tsd.parse(this.startTime);
-            Date endTime = tsd.parse(this.endTime);
+            String todayStr = dsd.format(now);
+            Date startTime = tsd.parse(todayStr + this.startTime);
+            Date endTime = tsd.parse(todayStr + this.endTime);
             return now.after(validFrom) && now.before(validUntil) && now.after(startTime) && now.before(endTime);
         } catch (Exception e) {
             return false;

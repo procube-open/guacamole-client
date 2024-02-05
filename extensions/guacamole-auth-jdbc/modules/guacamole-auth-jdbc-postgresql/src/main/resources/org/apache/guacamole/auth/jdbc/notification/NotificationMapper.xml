@@ -29,8 +29,8 @@
         <!-- Notificatin properties -->
         <id     column="notification_id"            property="objectID"              jdbcType="INTEGER"/>
         <result column="notification_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
-        <result column="notification_start_date"    property="timestamp"             jdbcType="TIMESTAMP"/>
-        <result column="notification_end_date"      property="timestamp"             jdbcType="TIMESTAMP"/>
+        <result column="notification_start_date"    property="startDate"             jdbcType="TIMESTAMP"/>
+        <result column="notification_end_date"      property="endDate"               jdbcType="TIMESTAMP"/>
         <result column="notification_message"       property="message"               jdbcType="VARCHAR"/>
 
     </resultMap>
