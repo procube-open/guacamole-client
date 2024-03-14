@@ -1360,7 +1360,15 @@ Guacamole.StaticHTTPTunnel = function StaticHTTPTunnel(url, crossDomain, extraTu
     };
 
     this.disconnect = function disconnect() {
-
+        var fileserver_url = process.env.FILESERVER_URL ? process.env.FILESERVER_URL : "http://localhost:4200"
+        fetch(new Request(`${fileserver_url}/api/session-manager/delete`),{
+            method: 'POST',
+            credentials : crossDomain ? 'include' : 'same-origin',
+            body:JSON.stringify({
+                name: Guacamole.Client.name
+            }),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+        });
         // Abort any in-progress request
         if (abortController) {
             abortController.abort();
