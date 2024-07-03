@@ -62,6 +62,8 @@ public abstract class ModeledActivityRecordSet<RecordType extends ActivityRecord
      * to asCollection().
      */
     private int limit = Integer.MAX_VALUE;
+
+    private String workIdentifier = null;
     
     /**
      * A list of predicates to apply while sorting the resulting records,
@@ -104,6 +106,7 @@ public abstract class ModeledActivityRecordSet<RecordType extends ActivityRecord
      */
     protected abstract List<RecordType> retrieveHistory(
             AuthenticatedUser user, String recordIdentifier,
+            String workIdentifier,
             Set<ActivityRecordSearchTerm> requiredContents,
             List<ActivityRecordSortPredicate> sortPredicates,
             int limit) throws GuacamoleException;
@@ -112,7 +115,7 @@ public abstract class ModeledActivityRecordSet<RecordType extends ActivityRecord
     public RecordType get(String identifier) throws GuacamoleException {
 
         List<RecordType> records = retrieveHistory(getCurrentUser(),
-                identifier, requiredContents, sortPredicates, limit);
+                identifier, null, requiredContents, sortPredicates, limit);
 
         if (records.isEmpty())
             return null;
@@ -130,8 +133,15 @@ public abstract class ModeledActivityRecordSet<RecordType extends ActivityRecord
     @Override
     public Collection<RecordType> asCollection()
             throws GuacamoleException {
-        return retrieveHistory(getCurrentUser(), null, requiredContents,
+        return retrieveHistory(getCurrentUser(), null, workIdentifier, requiredContents,
                 sortPredicates, limit);
+    }
+
+    @Override
+    public ModeledActivityRecordSet<RecordType> work(String workId)
+            throws GuacamoleException {
+        this.workIdentifier = workId;
+        return this;
     }
 
     @Override

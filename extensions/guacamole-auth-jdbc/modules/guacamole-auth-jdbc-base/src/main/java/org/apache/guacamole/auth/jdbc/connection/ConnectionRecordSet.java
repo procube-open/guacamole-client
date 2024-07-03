@@ -80,13 +80,14 @@ public class ConnectionRecordSet extends ModeledActivityRecordSet<ConnectionReco
     @Override
     protected List<ConnectionRecord> retrieveHistory(
             AuthenticatedUser user, String recordIdentifier,
+            String workIdentifier,
             Set<ActivityRecordSearchTerm> requiredContents,
             List<ActivityRecordSortPredicate> sortPredicates,
             int limit) throws GuacamoleException {
 
         // Retrieve history from database
         return connectionService.retrieveHistory(identifier, getCurrentUser(),
-                recordIdentifier, requiredContents, sortPredicates, limit);
+                recordIdentifier, workIdentifier, requiredContents, sortPredicates, limit);
 
     }
 

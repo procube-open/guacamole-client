@@ -27,6 +27,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleSecurityException;
@@ -153,7 +154,10 @@ public class ConnectionResource extends DirectoryObjectResource<Connection, APIC
      */
     @SuppressWarnings("deprecation")
     @Path("history")
-    public ConnectionHistoryResource getConnectionHistory()
+    public ConnectionHistoryResource getConnectionHistory(
+        @QueryParam("workId") String workId,
+        @QueryParam("size") String size
+    )
             throws GuacamoleException {
 
         Connection connection = getInternalObject();
@@ -161,7 +165,7 @@ public class ConnectionResource extends DirectoryObjectResource<Connection, APIC
         // Try the current getConnectionHistory() method, first, for connection history.
         try {
             return new ConnectionHistoryResource(connection.getConnectionHistory()
-                    .sort(ActivityRecordSet.SortableProperty.START_DATE, true));
+                    .sort(ActivityRecordSet.SortableProperty.START_DATE, true), workId, size);
         }
         catch (GuacamoleUnsupportedException e) {
             logger.debug("Call to getConnectionHistory() is unsupported, falling back to getHistory().", e);
@@ -169,14 +173,14 @@ public class ConnectionResource extends DirectoryObjectResource<Connection, APIC
         
         // Fall back to the deprecated getHistory() method.
         try {
-            return new ConnectionHistoryResource(new SimpleActivityRecordSet<>(connection.getHistory()));
+            return new ConnectionHistoryResource(new SimpleActivityRecordSet<>(connection.getHistory()), workId, size);
         }
         catch (GuacamoleUnsupportedException e) {
             logger.debug("Call to getHistory() is unsupported, no connection history records will be returned.", e);
         }
         
         // If all fails, return an empty connection history set.
-        return new ConnectionHistoryResource(new SimpleActivityRecordSet<>());
+        return new ConnectionHistoryResource(new SimpleActivityRecordSet<>(), workId, size);
 
     }
 

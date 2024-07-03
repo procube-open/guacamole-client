@@ -429,6 +429,7 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
      */
     public List<ConnectionRecord> retrieveHistory(String identifier,
             ModeledAuthenticatedUser user, String recordIdentifier,
+            String workIdetifier,
             Collection<ActivityRecordSearchTerm> requiredContents,
             List<ActivityRecordSortPredicate> sortPredicates, int limit)
             throws GuacamoleException {
@@ -438,12 +439,13 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
         // Bypass permission checks if the user is privileged
         if (user.isPrivileged())
             searchResults = connectionRecordMapper.search(identifier,
-                    recordIdentifier, requiredContents, sortPredicates, limit);
+                    recordIdentifier, workIdetifier, requiredContents, sortPredicates, limit);
 
         // Otherwise only return explicitly readable history records
         else
             searchResults = connectionRecordMapper.searchReadable(identifier,
                     user.getUser().getModel(), recordIdentifier,
+                    workIdetifier,
                     requiredContents, sortPredicates, limit,
                     user.getEffectiveUserGroups());
 

@@ -37,8 +37,8 @@ public class ConnectionHistoryResource extends ActivityRecordSetResource<Connect
      * @param history
      *     The ActivityRecordSet whose records should be exposed.
      */
-    public ConnectionHistoryResource(ActivityRecordSet<ConnectionRecord> history) {
-        super(history);
+    public ConnectionHistoryResource(ActivityRecordSet<ConnectionRecord> history, String workId, String size) {
+        super(history, workId, size);
     }
 
     @Override

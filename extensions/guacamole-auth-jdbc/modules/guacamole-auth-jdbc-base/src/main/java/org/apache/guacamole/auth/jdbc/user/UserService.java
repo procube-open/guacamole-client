@@ -614,12 +614,12 @@ public class UserService extends ModeledDirectoryObjectService<ModeledUser, User
         // Bypass permission checks if the user is privileged
         if (user.isPrivileged())
             searchResults = userRecordMapper.search(username, recordIdentifier,
-                    requiredContents, sortPredicates, limit);
+                    null, requiredContents, sortPredicates, limit);
 
         // Otherwise only return explicitly readable history records
         else
             searchResults = userRecordMapper.searchReadable(username, 
-                    user.getUser().getModel(), recordIdentifier,
+                    user.getUser().getModel(), recordIdentifier, null,
                     requiredContents, sortPredicates, limit,
                     user.getEffectiveUserGroups());
 

@@ -64,6 +64,23 @@ public abstract class ActivityRecordSetResource<InternalRecordType extends Activ
      */
     private ActivityRecordSet<InternalRecordType> history;
 
+    private final String workId;
+
+    private final String size;
+
+    /**
+     * Creates a new ActivityRecordSetResource which exposes the records within
+     * the given ActivityRecordSet.
+     *
+     * @param history
+     *     The ActivityRecordSet whose records should be exposed.
+     */
+    public ActivityRecordSetResource(ActivityRecordSet<InternalRecordType> history, String workId, String size) {
+        this.history = history;
+        this.workId = workId;
+        this.size = size;
+    }
+
     /**
      * Creates a new ActivityRecordSetResource which exposes the records within
      * the given ActivityRecordSet.
@@ -72,7 +89,7 @@ public abstract class ActivityRecordSetResource<InternalRecordType extends Activ
      *     The ActivityRecordSet whose records should be exposed.
      */
     public ActivityRecordSetResource(ActivityRecordSet<InternalRecordType> history) {
-        this.history = history;
+        this(history, null, null);
     }
 
     /**
@@ -123,8 +140,18 @@ public abstract class ActivityRecordSetResource<InternalRecordType extends Activ
         for (APISortPredicate predicate : sortPredicates)
             history = history.sort(predicate.getProperty(), predicate.isDescending());
 
-        // Limit to maximum result size
-        history = history.limit(MAXIMUM_HISTORY_SIZE);
+            if (this.workId != null) {
+                history = history.work(workId);
+            }
+    
+            if (this.size != null) {
+                // Limit to maximum result size
+                history = history.limit(Integer.parseInt(size));
+            }
+            else {
+                // Limit to maximum result size
+                history = history.limit(MAXIMUM_HISTORY_SIZE);
+            }
 
     }
 

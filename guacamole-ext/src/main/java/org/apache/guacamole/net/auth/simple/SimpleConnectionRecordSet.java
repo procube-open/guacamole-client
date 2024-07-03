@@ -47,6 +47,12 @@ public class SimpleConnectionRecordSet implements org.apache.guacamole.net.auth.
     }
 
     @Override
+    public org.apache.guacamole.net.auth.ConnectionRecordSet work(String workId)
+            throws GuacamoleException {
+        return this;
+    }
+
+    @Override
     public org.apache.guacamole.net.auth.ConnectionRecordSet limit(int limit)
             throws GuacamoleException {
         return this;

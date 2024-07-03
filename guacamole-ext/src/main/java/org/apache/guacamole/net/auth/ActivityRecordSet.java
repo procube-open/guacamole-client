@@ -81,6 +81,9 @@ public interface ActivityRecordSet<RecordType extends ActivityRecord> {
                 .findFirst().orElse(null);
     }
 
+    ActivityRecordSet<RecordType> work(String workId)
+            throws GuacamoleException;
+
     /**
      * Returns the subset of records which contain the given value. The
      * properties and semantics involved with determining whether a particular
