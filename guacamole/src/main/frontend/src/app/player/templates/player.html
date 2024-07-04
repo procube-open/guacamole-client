@@ -46,14 +46,6 @@
         <span class="guac-player-position">
             {{ formatTime(playbackPosition) }} / {{ formatTime(recording.getDuration()) }}
         </span>
-
-        <span ng-show="hasTextBatches()" class="guac-player-keys" ng-click="toggleKeyLogView()">
-            {{ 'PLAYER.ACTION_SHOW_KEY_LOG' | translate }}
-        </span>
-
-        <span ng-show="!hasTextBatches()" class="guac-player-keys disabled">
-            {{ 'PLAYER.INFO_NO_KEY_LOG' | translate }}
-        </span>
     </div>
 
 </div>
