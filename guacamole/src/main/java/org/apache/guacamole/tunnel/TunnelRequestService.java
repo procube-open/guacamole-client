@@ -31,7 +31,9 @@ import org.apache.guacamole.net.GuacamoleTunnel;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Connectable;
 import org.apache.guacamole.net.auth.Credentials;
+import org.apache.guacamole.net.auth.Period;
 import org.apache.guacamole.net.auth.UserContext;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.net.event.TunnelCloseEvent;
 import org.apache.guacamole.net.event.TunnelConnectEvent;
 import org.apache.guacamole.rest.auth.AuthenticationService;
@@ -202,7 +204,7 @@ public class TunnelRequestService {
      *     If an error occurs while creating the tunnel.
      */
     protected GuacamoleTunnel createConnectedTunnel(UserContext context,
-            final TunnelRequestType type, String id,
+            final TunnelRequestType type, String id, String workIdentifier,
             GuacamoleClientInformation info, Map<String, String> tokens)
             throws GuacamoleException {
 
@@ -213,7 +215,7 @@ public class TunnelRequestService {
                     + "destination does not exist.");
 
         // Connect tunnel to destination
-        GuacamoleTunnel tunnel = connectable.connect(info, tokens);
+        GuacamoleTunnel tunnel = connectable.connect(info, workIdentifier, tokens);
         logger.info("User \"{}\" connected to {} \"{}\".",
                 context.self().getIdentifier(), type.NAME, id);
         return tunnel;
@@ -333,6 +335,7 @@ public class TunnelRequestService {
         // Parse request parameters
         String authToken                = request.getAuthenticationToken();
         String id                       = request.getIdentifier();
+        String workIdentifier           = request.getWorkIdentifier();
         TunnelRequestType type          = request.getType();
         String authProviderIdentifier   = request.getAuthenticationProviderIdentifier();
         GuacamoleClientInformation info = getClientInformation(request);
@@ -346,11 +349,21 @@ public class TunnelRequestService {
         if (name != null)
             info.setName(name);
 
+        Work work = userContext.getWorkDirectory().get(workIdentifier);
+        boolean withinPeriod = false;
+        for (Period period : work.getPeriods()) {
+            withinPeriod = period.isWithinPeriod() || withinPeriod;
+        }
+
+        if (!withinPeriod) {
+            throw new GuacamoleException("Work is not within a valid period.");
+        }
+
         try {
 
             // Create connected tunnel using provided connection ID and client information
             GuacamoleTunnel tunnel = createConnectedTunnel(userContext, type,
-                    id, info, new StandardTokenMap(authenticatedUser));
+                    id, workIdentifier, info, new StandardTokenMap(authenticatedUser));
 
             // Notify listeners to allow connection to be vetoed
             fireTunnelConnectEvent(authenticatedUser, authenticatedUser.getCredentials(), tunnel);

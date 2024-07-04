@@ -22,6 +22,7 @@ package org.apache.guacamole.rest.history;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleUnsupportedException;
@@ -65,12 +66,15 @@ public class HistoryResource {
      *     If an error occurs while retrieving the connection history.
      */
     @Path("connections")
-    public ConnectionHistoryResource getConnectionHistory() throws GuacamoleException {
+    public ConnectionHistoryResource getConnectionHistory(
+        @QueryParam("workId") String workId,
+        @QueryParam("size") String size
+    ) throws GuacamoleException {
         try {
-            return new ConnectionHistoryResource(userContext.getConnectionHistory());
+            return new ConnectionHistoryResource(userContext.getConnectionHistory(), workId, size);
         }
         catch (GuacamoleUnsupportedException e) {
-            return new ConnectionHistoryResource(new SimpleActivityRecordSet<>());
+            return new ConnectionHistoryResource(new SimpleActivityRecordSet<>(), null, null);
         }
     }
 

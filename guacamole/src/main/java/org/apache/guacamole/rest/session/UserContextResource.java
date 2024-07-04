@@ -33,20 +33,24 @@ import org.apache.guacamole.net.auth.ActiveConnection;
 import org.apache.guacamole.net.auth.AuthenticatedUser;
 import org.apache.guacamole.net.auth.Connection;
 import org.apache.guacamole.net.auth.ConnectionGroup;
+import org.apache.guacamole.net.auth.Notification;
 import org.apache.guacamole.net.auth.SharingProfile;
 import org.apache.guacamole.net.auth.User;
 import org.apache.guacamole.net.auth.UserContext;
 import org.apache.guacamole.net.auth.UserGroup;
+import org.apache.guacamole.net.auth.Work;
 import org.apache.guacamole.rest.activeconnection.APIActiveConnection;
 import org.apache.guacamole.rest.connection.APIConnection;
 import org.apache.guacamole.rest.connectiongroup.APIConnectionGroup;
 import org.apache.guacamole.rest.directory.DirectoryObjectResource;
 import org.apache.guacamole.rest.directory.DirectoryObjectResourceFactory;
 import org.apache.guacamole.rest.history.HistoryResource;
+import org.apache.guacamole.rest.notification.APINotification;
 import org.apache.guacamole.rest.schema.SchemaResource;
 import org.apache.guacamole.rest.sharingprofile.APISharingProfile;
 import org.apache.guacamole.rest.user.APIUser;
 import org.apache.guacamole.rest.usergroup.APIUserGroup;
+import org.apache.guacamole.rest.work.APIWork;
 
 /**
  * A REST resource which exposes the contents of a particular UserContext.
@@ -86,6 +90,22 @@ public class UserContextResource {
     @Inject
     private DirectoryResourceFactory<Connection, APIConnection>
             connectionDirectoryResourceFactory;
+
+    /**
+     * Factory for creating DirectoryResources which expose a given
+     * Connection Directory.
+     */
+    @Inject
+    private DirectoryResourceFactory<Work, APIWork>
+            workDirectoryResourceFactory;
+
+    /**
+     * Factory for creating DirectoryResources which expose a given
+     * Notification Directory.
+     */
+    @Inject
+    private DirectoryResourceFactory<Notification, APINotification>
+            notificationDirectoryResourceFactory;
 
     /**
      * Factory for creating DirectoryResources which expose a given
@@ -189,6 +209,29 @@ public class UserContextResource {
             throws GuacamoleException {
         return connectionDirectoryResourceFactory.create(authenticatedUser,
                 userContext, userContext.getConnectionDirectory());
+    }
+
+    /**
+     * Returns a new resource which represents the Work Directory
+     * contained within the UserContext exposed by this UserContextResource.
+     *
+     * @return
+     *     A new resource which represents the Work Directory
+     *     contained within the UserContext exposed by this UserContextResource.
+     *
+     * @throws GuacamoleException
+     *     If an error occurs while retrieving the Work Directory.
+     */
+    @Path("works")
+    public DirectoryResource<Work, APIWork> getWorkDirectoryResource() throws GuacamoleException {
+        return workDirectoryResourceFactory.create(authenticatedUser,
+                userContext, userContext.getWorkDirectory());
+    }
+
+    @Path("notifications")
+    public DirectoryResource<Notification, APINotification> getNotificationDirectoryResource() throws GuacamoleException {
+        return notificationDirectoryResourceFactory.create(authenticatedUser,
+                userContext, userContext.getNotificationDirectory());
     }
 
     /**

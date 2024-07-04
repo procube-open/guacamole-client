@@ -75,6 +75,12 @@ public class DelegatingActivityRecordSet<RecordType extends ActivityRecord>
     }
 
     @Override
+    public ActivityRecordSet<RecordType> work(String workId)
+            throws GuacamoleException {
+        return recordSet.work(workId);
+    }
+
+    @Override
     public ActivityRecordSet<RecordType> limit(int limit) throws GuacamoleException {
         return recordSet.limit(limit);
     }

@@ -31,6 +31,10 @@ public class APIConnectionRecord extends APIActivityRecord {
      */
     private final String connectionIdentifier;
 
+    private final String hostname;
+
+    private final String protocol;
+
     /**
      * The identifier of the connection associated with this record.
      */
@@ -40,6 +44,12 @@ public class APIConnectionRecord extends APIActivityRecord {
      * The identifier of the sharing profile associated with this record.
      */
     private final String sharingProfileIdentifier;
+
+    /**
+     * The identifier of the work associated with this
+     * record.
+     */
+    private final String workId;
 
     /**
      * The identifier of the sharing profile associated with this record.
@@ -56,7 +66,10 @@ public class APIConnectionRecord extends APIActivityRecord {
     public APIConnectionRecord(ConnectionRecord record) {
         super(record);
         this.connectionIdentifier     = record.getConnectionIdentifier();
+        this.hostname                 = record.getHostname();
+        this.protocol                 = record.getProtocol();
         this.connectionName           = record.getConnectionName();
+        this.workId                   = record.getWorkIdentifier();
         this.sharingProfileIdentifier = record.getSharingProfileIdentifier();
         this.sharingProfileName       = record.getSharingProfileName();
     }
@@ -73,6 +86,28 @@ public class APIConnectionRecord extends APIActivityRecord {
     }
 
     /**
+     * Returns the hostname of the connection associated with this
+     * record.
+     *
+     * @return
+     *     The hostname of the connection associated with this record.
+     */
+    public String getHostname() {
+        return hostname;
+    }
+
+    /**
+     * Returns the protocol of the connection associated with this
+     * record.
+     *
+     * @return
+     *     The protocol of the connection associated with this record.
+     */
+    public String getProtocol() {
+        return protocol;
+    }
+
+    /**
      * Returns the name of the connection associated with this record.
      *
      * @return
@@ -80,6 +115,17 @@ public class APIConnectionRecord extends APIActivityRecord {
      */
     public String getConnectionName() {
         return connectionName;
+    }
+
+    /**
+     * Returns the identifier of the work associated with this
+     * record.
+     *
+     * @return
+     *     The identifier of the work associated with this record.
+     */
+    public String getWorkId() {
+        return workId;
     }
 
     /**

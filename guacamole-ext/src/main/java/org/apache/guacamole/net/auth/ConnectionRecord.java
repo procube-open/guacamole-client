@@ -37,6 +37,25 @@ public interface ConnectionRecord extends ActivityRecord {
      *     record.
      */
     public String getConnectionIdentifier();
+
+    /**
+     * Returns the name of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The name of the connection associated with this connection record.
+     */
+    public String getHostname();
+
+    /**
+     * Returns the protocol of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The protocol of the connection associated with this connection
+     *     record.
+     */
+    public String getProtocol();
     
     /**
      * Returns the name of the connection associated with this connection
@@ -46,6 +65,16 @@ public interface ConnectionRecord extends ActivityRecord {
      *     The name of the connection associated with this connection record.
      */
     public String getConnectionName();
+
+    /**
+     * Returns the identifier of the user that used the connection associated
+     * with this connection record.
+     *
+     * @return
+     *     The identifier of the user that used the connection associated with
+     *     this connection record.
+     */
+    public String getWorkIdentifier();
 
     /**
      * Returns the identifier of the sharing profile that was used to access the

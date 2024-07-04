@@ -32,6 +32,10 @@ public class ObjectPermission implements Permission<ObjectPermission.Type> {
      */
     public enum Type {
 
+        WORKER,
+
+        MANAGER,
+
         /**
          * Read data within an object.
          */

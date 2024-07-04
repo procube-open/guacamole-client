@@ -90,6 +90,16 @@ public class DelegatingConnection implements Connection {
     }
 
     @Override
+    public String getIdmIdentifier() {
+        return connection.getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        connection.setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public String getName() {
         return connection.getName();
     }
@@ -155,20 +165,21 @@ public class DelegatingConnection implements Connection {
 
     @Override
     @Deprecated
-    public GuacamoleTunnel connect(GuacamoleClientInformation info)
+    public GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
-        return connection.connect(info, currentTokens.get());
+        return connection.connect(info, workIdentifier, currentTokens.get());
     }
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Make received tokens available within the legacy connect() strictly
         // in context of the current connect() call
         try {
             currentTokens.set(tokens);
-            return connect(info);
+            return connect(info, workIdentifier);
         }
         finally {
             currentTokens.remove();

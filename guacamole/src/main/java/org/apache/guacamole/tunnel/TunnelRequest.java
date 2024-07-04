@@ -56,6 +56,12 @@ public abstract class TunnelRequest {
     public static final String IDENTIFIER_PARAMETER = "GUAC_ID";
 
     /**
+     * The name of the parameter containing the unique identifier of the
+     * connection to which a tunnel is being requested.
+     */
+    public static final String WORK_IDENTIIER_PARAMETER = "GUAC_WORK_ID";
+
+    /**
      * The name of the parameter containing the desired display width, in
      * pixels.
      */
@@ -245,6 +251,21 @@ public abstract class TunnelRequest {
      */
     public String getIdentifier() throws GuacamoleException {
         return getRequiredParameter(IDENTIFIER_PARAMETER);
+    }
+
+    /**
+     * Returns the identifier of the connection to which the tunnel being
+     * requested should be connected.
+     *
+     * @return
+     *     The identifier of the connection to which the tunnel being requested
+     *     should be connected.
+     *
+     * @throws GuacamoleException
+     *     If the identifier was not present in the request.
+     */
+    public String getWorkIdentifier() throws GuacamoleException {
+        return getRequiredParameter(WORK_IDENTIIER_PARAMETER);
     }
 
     /**

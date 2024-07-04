@@ -46,16 +46,19 @@ public interface Connectable {
      *
      * @deprecated
      *     This function has been deprecated in favor of
-     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, java.util.Map)},
+     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, String, java.util.Map)},
      *     which allows for connection parameter tokens to be injected and
      *     applied by cooperating extensions, replacing the functionality
      *     previously provided through the {@link org.apache.guacamole.token.StandardTokens}
      *     class. It continues to be defined on this interface for
      *     compatibility. <strong>New implementations should instead implement
-     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, java.util.Map)}.</strong>
+     *     {@link #connect(org.apache.guacamole.protocol.GuacamoleClientInformation, String, java.util.Map)}.</strong>
      *
      * @param info
      *     Information associated with the connecting client.
+     * 
+     * @param workIdentifier
+     *   The name of the connection being actively used.
      *
      * @return
      *     A fully-established GuacamoleTunnel.
@@ -65,9 +68,9 @@ public interface Connectable {
      *     connect is denied.
      */
     @Deprecated
-    default GuacamoleTunnel connect(GuacamoleClientInformation info)
+    default GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
-        return this.connect(info, Collections.emptyMap());
+        return this.connect(info, workIdentifier, Collections.emptyMap());
     }
 
     /**
@@ -81,6 +84,9 @@ public interface Connectable {
      *
      * @param info
      *     Information associated with the connecting client.
+     * 
+     * @param workIdentifier
+     *    The name of the connection being actively used.
      *
      * @param tokens
      *     A Map containing the token names and corresponding values to be
@@ -96,6 +102,7 @@ public interface Connectable {
      *     connect is denied.
      */
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException;
 
     /**

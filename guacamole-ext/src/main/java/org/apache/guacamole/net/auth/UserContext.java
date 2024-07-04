@@ -137,6 +137,34 @@ public interface UserContext {
 
     /**
      * Retrieves a Directory which can be used to view and manipulate
+     * connections and their configurations, but only as allowed by the
+     * permissions given to the user.
+     *
+     * @return A Directory whose operations are bound by the permissions of 
+     *         the user.
+     *
+     * @throws GuacamoleException If an error occurs while creating the
+     *                            Directory.
+     */
+    Directory<Work> getWorkDirectory()
+            throws GuacamoleException;
+
+    /**
+     * Retrieves a Directory which can be used to view and manipulate
+     * notifications, but only as allowed by the permissions given to the
+     * user.
+     * 
+     * @return A Directory whose operations are bound by the permissions of
+     *         the user.
+     * 
+     * @throws GuacamoleException If an error occurs while creating the
+     *                            Directory.
+     */
+    Directory<Notification> getNotificationDirectory()
+            throws GuacamoleException;
+
+    /**
+     * Retrieves a Directory which can be used to view and manipulate
      * connection groups and their members, but only as allowed by the
      * permissions given to the user.
      *
@@ -259,6 +287,17 @@ public interface UserContext {
      *     A collection of all attributes applicable to user groups.
      */
     Collection<Form> getUserGroupAttributes();
+
+    /**
+     * Retrieves a collection of all attributes applicable to user groups. This
+     * collection will contain only those attributes which the current user has
+     * general permission to view or modify. If there are no such attributes,
+     * this collection will be empty.
+     *
+     * @return
+     *     A collection of all attributes applicable to work.
+     */
+    Collection<Form> getWorkAttributes();
 
     /**
      * Retrieves a collection of all attributes applicable to connections. This

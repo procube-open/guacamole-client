@@ -84,6 +84,7 @@ public class HistoryTrackingConnection extends DelegatingConnection {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Create a connection record model, starting at the current date/time
@@ -96,6 +97,8 @@ public class HistoryTrackingConnection extends DelegatingConnection {
 
         // Set the connection information
         connectionRecordModel.setConnectionName(this.getDelegateConnection().getName());
+        connectionRecordModel.setHostname(this.getDelegateConnection().getName());
+        connectionRecordModel.setProtocol(this.getDelegateConnection().getConfiguration().getProtocol());
 
         // Insert the connection history record to mark the start of this connection
         connectionRecordMapper.insert(connectionRecordModel);
@@ -106,7 +109,7 @@ public class HistoryTrackingConnection extends DelegatingConnection {
         updatedTokens.put("HISTORY_UUID", modeledRecord.getUUID().toString());
 
         // Connect, and wrap the tunnel for return
-        GuacamoleTunnel tunnel = super.connect(info, updatedTokens);
+        GuacamoleTunnel tunnel = super.connect(info, workIdentifier, updatedTokens);
         return new HistoryTrackingTunnel(
             tunnel, this.connectionRecordMapper, connectionRecordModel);
     }

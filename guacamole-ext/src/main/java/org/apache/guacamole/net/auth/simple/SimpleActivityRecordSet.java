@@ -66,6 +66,12 @@ public class SimpleActivityRecordSet<RecordType extends ActivityRecord>
     }
 
     @Override
+    public ActivityRecordSet<RecordType> work(String workId)
+            throws GuacamoleException {
+        return this;
+    }
+
+    @Override
     public ActivityRecordSet<RecordType> contains(String value)
             throws GuacamoleException {
         return this;

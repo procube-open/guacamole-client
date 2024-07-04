@@ -106,13 +106,14 @@ public class TokenInjectingConnection extends DelegatingConnection {
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Apply provided tokens over those given to connect()
         tokens = new HashMap<>(tokens);
         addTokens(tokens);
 
-        return super.connect(info, tokens);
+        return super.connect(info, workIdentifier, tokens);
 
     }
 

@@ -30,6 +30,7 @@ import org.apache.guacamole.auth.jdbc.permission.ConnectionPermissionService;
 import org.apache.guacamole.auth.jdbc.permission.SharingProfilePermissionService;
 import org.apache.guacamole.auth.jdbc.permission.UserGroupPermissionService;
 import org.apache.guacamole.auth.jdbc.permission.UserPermissionService;
+import org.apache.guacamole.auth.jdbc.permission.WorkPermissionService;
 import org.apache.guacamole.auth.jdbc.user.ModeledAuthenticatedUser;
 import org.apache.guacamole.net.auth.Permissions;
 import org.apache.guacamole.net.auth.permission.ObjectPermissionSet;
@@ -93,6 +94,12 @@ public abstract class ModeledPermissions<ModelType extends EntityModel>
      */
     @Inject
     private UserGroupPermissionService userGroupPermissionService;
+
+    /**
+     * Service for retrieving user group permissions.
+     */
+    @Inject
+    private WorkPermissionService workPermissionService;
 
     /**
      * Returns whether the underlying entity is a user. Entities may be either
@@ -198,6 +205,16 @@ public abstract class ModeledPermissions<ModelType extends EntityModel>
                 this, Collections.<String>emptySet());
     }
 
+    @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        return workPermissionService.getPermissionSet(getCurrentUser(), this, Collections.<String>emptySet()); 
+    }
+
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return null;
+    }
+
     /**
      * Returns the identifiers of all user groups defined within the database
      * which apply to this user, including any groups inherited through
@@ -280,6 +297,18 @@ public abstract class ModeledPermissions<ModelType extends EntityModel>
             public ObjectPermissionSet getUserGroupPermissions()
                     throws GuacamoleException {
                 return userGroupPermissionService.getPermissionSet(getCurrentUser(), ModeledPermissions.this, effectiveGroups);
+            }
+
+            @Override
+            public ObjectPermissionSet getWorkPermissions()
+                    throws GuacamoleException {
+                return workPermissionService.getPermissionSet(authenticatedUser, ModeledPermissions.this, effectiveGroups);
+            }
+
+            @Override
+            public ObjectPermissionSet getNotificationPermissions()
+                    throws GuacamoleException {
+                return null;
             }
 
         };

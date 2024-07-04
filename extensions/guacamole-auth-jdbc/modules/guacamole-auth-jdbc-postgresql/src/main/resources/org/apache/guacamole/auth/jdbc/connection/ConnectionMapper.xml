@@ -28,11 +28,13 @@
 
         <!-- Connection properties -->
         <id     column="connection_id"            property="objectID"              jdbcType="INTEGER"/>
+        <result column="connection_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
         <result column="connection_name"          property="name"                  jdbcType="VARCHAR"/>
         <result column="parent_id"                property="parentIdentifier"      jdbcType="INTEGER"/>
         <result column="protocol"                 property="protocol"              jdbcType="VARCHAR"/>
         <result column="max_connections"          property="maxConnections"        jdbcType="INTEGER"/>
         <result column="max_connections_per_user" property="maxConnectionsPerUser" jdbcType="INTEGER"/>
+        <result column="remark"                   property="remark"                jdbcType="VARCHAR"/>
         <result column="proxy_hostname"           property="proxyHostname"         jdbcType="VARCHAR"/>
         <result column="proxy_port"               property="proxyPort"             jdbcType="INTEGER"/>
         <result column="proxy_encryption_method"  property="proxyEncryptionMethod" jdbcType="VARCHAR"
@@ -127,11 +129,13 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
-            protocol,
+            guacamole_connection.protocol,
             max_connections,
             max_connections_per_user,
+            remark,
             proxy_hostname,
             proxy_port,
             proxy_encryption_method,
@@ -174,11 +178,13 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
-            protocol,
+            guacamole_connection.protocol,
             max_connections,
             max_connections_per_user,
+            remark,
             proxy_hostname,
             proxy_port,
             proxy_encryption_method,
@@ -238,11 +244,13 @@
 
         SELECT
             guacamole_connection.connection_id,
+            guacamole_connection.connection_idm_id,
             guacamole_connection.connection_name,
             parent_id,
-            protocol,
+            guacamole_connection.protocol,
             max_connections,
             max_connections_per_user,
+            remark,
             proxy_hostname,
             proxy_port,
             proxy_encryption_method,
@@ -270,11 +278,13 @@
             parameterType="org.apache.guacamole.auth.jdbc.connection.ConnectionModel">
 
         INSERT INTO guacamole_connection (
+            connection_idm_id,
             connection_name,
             parent_id,
             protocol,
             max_connections,
             max_connections_per_user,
+            remark,
             proxy_hostname,
             proxy_port,
             proxy_encryption_method,
@@ -282,11 +292,13 @@
             failover_only
         )
         VALUES (
+            #{object.idmIdentifier,jdbcType=VARCHAR},
             #{object.name,jdbcType=VARCHAR},
             #{object.parentIdentifier,jdbcType=INTEGER}::integer,
             #{object.protocol,jdbcType=VARCHAR},
             #{object.maxConnections,jdbcType=INTEGER},
             #{object.maxConnectionsPerUser,jdbcType=INTEGER},
+            #{object.remark,jdbcType=VARCHAR},
             #{object.proxyHostname,jdbcType=VARCHAR},
             #{object.proxyPort,jdbcType=INTEGER},
             #{object.proxyEncryptionMethod,jdbcType=VARCHAR}::guacamole_proxy_encryption_method,
@@ -299,11 +311,13 @@
     <!-- Update single connection -->
     <update id="update" parameterType="org.apache.guacamole.auth.jdbc.connection.ConnectionModel">
         UPDATE guacamole_connection
-        SET connection_name          = #{object.name,jdbcType=VARCHAR},
+        SET connection_idm_id        = #{object.idmIdentifier,jdbcType=VARCHAR},
+            connection_name          = #{object.name,jdbcType=VARCHAR},
             parent_id                = #{object.parentIdentifier,jdbcType=INTEGER}::integer,
             protocol                 = #{object.protocol,jdbcType=VARCHAR},
             max_connections          = #{object.maxConnections,jdbcType=INTEGER},
             max_connections_per_user = #{object.maxConnectionsPerUser,jdbcType=INTEGER},
+            remark                   = #{object.remark,jdbcType=VARCHAR},
             proxy_hostname           = #{object.proxyHostname,jdbcType=VARCHAR},
             proxy_port               = #{object.proxyPort,jdbcType=INTEGER},
             proxy_encryption_method  = #{object.proxyEncryptionMethod,jdbcType=VARCHAR}::guacamole_proxy_encryption_method,

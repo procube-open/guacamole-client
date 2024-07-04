@@ -150,6 +150,13 @@ angular.module('client').directive('guacClientNotification', [function guacClien
             remaining: 15
         };
 
+        const CLOSE_WINDOW = {
+          name      : "CLIENT.ACTION_CLOSE_WINDOW",
+          className : "close button",
+          callback  : function reconnectCallback() {
+              window.close();
+          }
+      };
         /**
          * Displays a notification at the end of a Guacamole connection, whether
          * that connection is ending normally or due to an error. As the end of
@@ -192,11 +199,11 @@ angular.module('client').directive('guacClientNotification', [function guacClien
                 return;
 
             // Build array of available actions
-            let actions;
-            if (NAVIGATE_HOME_ACTION)
-                actions = [ NAVIGATE_HOME_ACTION, RECONNECT_ACTION, LOGOUT_ACTION ];
-            else
-                actions = [ RECONNECT_ACTION, LOGOUT_ACTION ];
+            let actions= [ CLOSE_WINDOW ];
+            // if (NAVIGATE_HOME_ACTION)
+            //     actions = [ NAVIGATE_HOME_ACTION, RECONNECT_ACTION, LOGOUT_ACTION, CLOSE_WINDOW ];
+            // else
+            //     actions = [ RECONNECT_ACTION, LOGOUT_ACTION ];
 
             // Get any associated status code
             const status = $scope.client.clientState.statusCode;

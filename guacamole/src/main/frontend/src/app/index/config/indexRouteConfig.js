@@ -117,85 +117,85 @@ angular.module('index').config(['$routeProvider', '$locationProvider',
     // Configure each possible route
     $routeProvider
 
-        // Home screen
-        .when('/', {
-            title         : 'APP.NAME',
-            bodyClassName : 'home',
-            templateUrl   : 'app/home/templates/home.html',
-            controller    : 'homeController',
-            resolve       : { routeToUserHomePage: routeToUserHomePage }
-        })
+        // // Home screen
+        // .when('/', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'home',
+        //     templateUrl   : 'app/home/templates/home.html',
+        //     controller    : 'homeController',
+        //     resolve       : { routeToUserHomePage: routeToUserHomePage }
+        // })
 
-        // Connection import page
-        .when('/import/:dataSource/connection', {
-            title         : 'APP.NAME',
-            bodyClassName : 'settings',
-            templateUrl   : 'app/import/templates/connectionImport.html',
-            controller    : 'importConnectionsController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Connection import page
+        // .when('/import/:dataSource/connection', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'settings',
+        //     templateUrl   : 'app/import/templates/connectionImport.html',
+        //     controller    : 'importConnectionsController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // Connection import file format help page
-        .when('/import/connection/file-format-help', {
-            title         : 'APP.NAME',
-            bodyClassName : 'settings',
-            templateUrl   : 'app/import/templates/connectionImportFileHelp.html',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Connection import file format help page
+        // .when('/import/connection/file-format-help', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'settings',
+        //     templateUrl   : 'app/import/templates/connectionImportFileHelp.html',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // Management screen
-        .when('/settings/:dataSource?/:tab', {
-            title         : 'APP.NAME',
-            bodyClassName : 'settings',
-            templateUrl   : 'app/settings/templates/settings.html',
-            controller    : 'settingsController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Management screen
+        // .when('/settings/:dataSource?/:tab', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'settings',
+        //     templateUrl   : 'app/settings/templates/settings.html',
+        //     controller    : 'settingsController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // Connection editor
-        .when('/manage/:dataSource/connections/:id*?', {
-            title         : 'APP.NAME',
-            bodyClassName : 'manage',
-            templateUrl   : 'app/manage/templates/manageConnection.html',
-            controller    : 'manageConnectionController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Connection editor
+        // .when('/manage/:dataSource/connections/:id*?', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'manage',
+        //     templateUrl   : 'app/manage/templates/manageConnection.html',
+        //     controller    : 'manageConnectionController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // Sharing profile editor
-        .when('/manage/:dataSource/sharingProfiles/:id*?', {
-            title         : 'APP.NAME',
-            bodyClassName : 'manage',
-            templateUrl   : 'app/manage/templates/manageSharingProfile.html',
-            controller    : 'manageSharingProfileController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Sharing profile editor
+        // .when('/manage/:dataSource/sharingProfiles/:id*?', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'manage',
+        //     templateUrl   : 'app/manage/templates/manageSharingProfile.html',
+        //     controller    : 'manageSharingProfileController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // Connection group editor
-        .when('/manage/:dataSource/connectionGroups/:id*?', {
-            title         : 'APP.NAME',
-            bodyClassName : 'manage',
-            templateUrl   : 'app/manage/templates/manageConnectionGroup.html',
-            controller    : 'manageConnectionGroupController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // Connection group editor
+        // .when('/manage/:dataSource/connectionGroups/:id*?', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'manage',
+        //     templateUrl   : 'app/manage/templates/manageConnectionGroup.html',
+        //     controller    : 'manageConnectionGroupController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // User editor
-        .when('/manage/:dataSource/users/:id*?', {
-            title         : 'APP.NAME',
-            bodyClassName : 'manage',
-            templateUrl   : 'app/manage/templates/manageUser.html',
-            controller    : 'manageUserController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // User editor
+        // .when('/manage/:dataSource/users/:id*?', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'manage',
+        //     templateUrl   : 'app/manage/templates/manageUser.html',
+        //     controller    : 'manageUserController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
-        // User group editor
-        .when('/manage/:dataSource/userGroups/:id*?', {
-            title         : 'APP.NAME',
-            bodyClassName : 'manage',
-            templateUrl   : 'app/manage/templates/manageUserGroup.html',
-            controller    : 'manageUserGroupController',
-            resolve       : { updateCurrentToken: updateCurrentToken }
-        })
+        // // User group editor
+        // .when('/manage/:dataSource/userGroups/:id*?', {
+        //     title         : 'APP.NAME',
+        //     bodyClassName : 'manage',
+        //     templateUrl   : 'app/manage/templates/manageUserGroup.html',
+        //     controller    : 'manageUserGroupController',
+        //     resolve       : { updateCurrentToken: updateCurrentToken }
+        // })
 
         // Recording player
         .when('/settings/:dataSource/recording/:identifier/:name', {
@@ -215,9 +215,9 @@ angular.module('index').config(['$routeProvider', '$locationProvider',
             resolve       : { updateCurrentToken: updateCurrentToken }
         })
 
-        // Redirect to home screen if page not found
-        .otherwise({
-            resolve : { routeToUserHomePage: routeToUserHomePage }
-        });
+        // // Redirect to home screen if page not found
+        // .otherwise({
+        //     resolve : { routeToUserHomePage: routeToUserHomePage }
+        // });
 
 }]);

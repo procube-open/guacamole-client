@@ -91,6 +91,7 @@ public interface ActivityRecordMapper<ModelType> {
      */
     List<ModelType> search(@Param("identifier") String identifier,
             @Param("recordIdentifier") String recordIdentifier,
+            @Param("workIdentifier") String workIdentifier,
             @Param("terms") Collection<ActivityRecordSearchTerm> terms,
             @Param("sortPredicates") List<ActivityRecordSortPredicate> sortPredicates,
             @Param("limit") int limit);
@@ -139,6 +140,7 @@ public interface ActivityRecordMapper<ModelType> {
     List<ModelType> searchReadable(@Param("identifier") String identifier,
             @Param("user") UserModel user,
             @Param("recordIdentifier") String recordIdentifier,
+            @Param("workIdentifier") String workIdentifier,
             @Param("terms") Collection<ActivityRecordSearchTerm> terms,
             @Param("sortPredicates") List<ActivityRecordSortPredicate> sortPredicates,
             @Param("limit") int limit,

@@ -78,6 +78,12 @@ public class APIPermissionSet {
             new HashMap<String, Set<ObjectPermission.Type>>();
 
     /**
+     * Map of work ID to the set of granted permissions.
+     */
+    private Map<String, Set<ObjectPermission.Type>> workPermissions =
+            new HashMap<String, Set<ObjectPermission.Type>>();
+
+    /**
      * Set of all granted system-level permissions.
      */
     private Set<SystemPermission.Type> systemPermissions =
@@ -170,6 +176,7 @@ public class APIPermissionSet {
         addObjectPermissions(activeConnectionPermissions, permissions.getActiveConnectionPermissions());
         addObjectPermissions(userPermissions,             permissions.getUserPermissions());
         addObjectPermissions(userGroupPermissions,        permissions.getUserGroupPermissions());
+        addObjectPermissions(workPermissions,             permissions.getWorkPermissions());
         
     }
 
@@ -261,6 +268,20 @@ public class APIPermissionSet {
     }
 
     /**
+     * Returns a map of work IDs to the set of permissions granted for
+     * that work. If no permissions are granted for a particular work,
+     * its ID will not be present as a key in the map. This map is
+     * mutable, and changes to to this map will affect the permission set
+     * directly.
+     *
+     * @return
+     *     A map of work IDs to the set of permissions granted for that user.
+     */
+    public Map<String, Set<ObjectPermission.Type>> getWorkPermissions() {
+        return workPermissions;
+    }
+
+    /**
      * Returns the set of granted system-level permissions. If no permissions
      * are granted at the system level, this will be an empty set. This set is
      * mutable, and changes to this set will affect the permission set
@@ -348,6 +369,19 @@ public class APIPermissionSet {
      */
     public void setUserGroupPermissions(Map<String, Set<ObjectPermission.Type>> userGroupPermissions) {
         this.userGroupPermissions = userGroupPermissions;
+    }
+
+    /**
+     * Replaces the current map of work permissions with the given map,
+     * which must map work ID to its corresponding set of granted
+     * permissions. If a work has no permissions, its ID must not be
+     * present as a key in the map.
+     *
+     * @param workPermissions
+     *     The map which must replace the currently-stored map of permissions.
+     */
+    public void setWorkPermissions(Map<String, Set<ObjectPermission.Type>> workPermissions) {
+        this.workPermissions = workPermissions;
     }
 
     /**

@@ -65,6 +65,8 @@ import org.apache.guacamole.rest.jsonpatch.APIPatchError;
 import org.apache.guacamole.rest.jsonpatch.APIPatchFailureException;
 import org.apache.guacamole.rest.jsonpatch.APIPatchOutcome;
 import org.apache.guacamole.rest.jsonpatch.APIPatchResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A REST resource which abstracts the operations available on all Guacamole
@@ -88,6 +90,10 @@ import org.apache.guacamole.rest.jsonpatch.APIPatchResponse;
 @Consumes(MediaType.APPLICATION_JSON)
 public abstract class DirectoryResource<InternalType extends Identifiable, ExternalType> {
 
+    /**
+     * Logger for this class.
+     */
+    private final Logger logger = LoggerFactory.getLogger(DirectoryResource.class);
     /**
      * The user that is accessing this resource.
      */
@@ -414,8 +420,11 @@ public abstract class DirectoryResource<InternalType extends Identifiable, Exter
 
         // Translate each retrieved object into the corresponding external object
         Map<String, ExternalType> apiObjects = new HashMap<String, ExternalType>();
-        for (InternalType object : directory.getAll(identifiers))
+        for (InternalType object : directory.getAll(identifiers)) {
+            logger.debug("getObjects Retrieved object id: {}", object.getIdentifier());
+            logger.debug("getObjects Retrieved object contents: {}", translator.toExternalObject(object));
             apiObjects.put(object.getIdentifier(), translator.toExternalObject(object));
+        }
 
         return apiObjects;
 

@@ -48,6 +48,16 @@ public abstract class AbstractConnection extends AbstractIdentifiable
     private GuacamoleConfiguration configuration;
 
     @Override
+    public String getIdmIdentifier() {
+        return getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        setIdmIdentifier(idmIdentifier);
+    }
+
+    @Override
     public String getName() {
         return name;
     }

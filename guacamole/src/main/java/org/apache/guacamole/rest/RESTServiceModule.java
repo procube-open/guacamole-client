@@ -40,6 +40,8 @@ import org.apache.guacamole.rest.tunnel.TunnelCollectionResourceFactory;
 import org.apache.guacamole.rest.tunnel.TunnelResourceFactory;
 import org.apache.guacamole.rest.user.UserModule;
 import org.apache.guacamole.rest.usergroup.UserGroupModule;
+import org.apache.guacamole.rest.work.WorkModule;
+import org.apache.guacamole.rest.notification.NotificationModule;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.servlet.ServletProperties;
 
@@ -78,6 +80,9 @@ public class RESTServiceModule extends ServletModule {
         bind(AuthTokenGenerator.class).to(SecureRandomAuthTokenGenerator.class);
         bind(DecorationService.class);
 
+        // Bind fliters on sigleton
+        // bind(RESTServiceFilter.class).in(Scopes.SINGLETON);
+
         // Root-level resources
         install(new FactoryModuleBuilder().build(SessionResourceFactory.class));
         install(new FactoryModuleBuilder().build(TunnelCollectionResourceFactory.class));
@@ -91,6 +96,8 @@ public class RESTServiceModule extends ServletModule {
         install(new SharingProfileModule());
         install(new UserModule());
         install(new UserGroupModule());
+        install(new WorkModule());
+        install(new NotificationModule());
 
         // Serve REST services using Jersey 2.x
         bind(ServletContainer.class).in(Scopes.SINGLETON);
@@ -98,6 +105,7 @@ public class RESTServiceModule extends ServletModule {
             ServletProperties.JAXRS_APPLICATION_CLASS,
             GuacamoleApplication.class.getName()
         ));
+        // filter("/api/*").through(RESTServiceFilter.class);
 
     }
 

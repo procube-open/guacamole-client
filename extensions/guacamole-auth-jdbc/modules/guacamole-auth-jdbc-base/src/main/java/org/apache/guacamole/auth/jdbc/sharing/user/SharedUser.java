@@ -146,6 +146,16 @@ public class SharedUser implements User {
     }
 
     @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        return ObjectPermissionSet.EMPTY_SET;
+    }
+
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        return ObjectPermissionSet.EMPTY_SET;
+    }
+
+    @Override
     public RelatedObjectSet getUserGroups() throws GuacamoleException {
         return RelatedObjectSet.EMPTY_SET;
     }

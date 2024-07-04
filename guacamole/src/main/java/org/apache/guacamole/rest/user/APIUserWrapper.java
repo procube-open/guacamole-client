@@ -122,6 +122,16 @@ public class APIUserWrapper implements User {
     }
 
     @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        throw new GuacamoleUnsupportedException("APIUserWrapper does not provide permission access.");
+    }
+
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        throw new GuacamoleUnsupportedException("APIUserWrapper does not provide permission access.");
+    }
+
+    @Override
     public Permissions getEffectivePermissions() throws GuacamoleException {
         throw new GuacamoleUnsupportedException("APIUserWrapper does not provide permission access.");
     }

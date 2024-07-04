@@ -73,7 +73,17 @@ public interface Directory<ObjectType extends Identifiable> {
          * The type of a Directory that contains {@link UserGroup}
          * objects.
          */
-        USER_GROUP(UserGroup.class);
+        USER_GROUP(UserGroup.class),
+
+        /**
+         * The type of a Directory that contains {@link Work} objects.
+         */
+        WORK(Work.class),
+
+        /**
+         * The type of a Directory that contains {@link Notification} objects.
+         */
+        NOTIFICATION(Notification.class);
 
         /**
          * The base class of the type of object stored within the type of

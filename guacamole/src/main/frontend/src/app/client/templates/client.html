@@ -49,38 +49,6 @@
     <div class="menu" ng-class="{open: menu.shown}" id="guac-menu">
         <div class="menu-content" ng-if="menu.shown" guac-touch-drag="menuDrag">
 
-            <!-- Stationary header -->
-            <div class="header">
-                <h2 ng-hide="rootConnectionGroups">{{ getName(clientGroup) }}</h2>
-                <h2 class="connection-select-menu" ng-show="rootConnectionGroups">
-                    <guac-menu menu-title="getName(clientGroup)" interactive="true">
-                        <div class="all-connections">
-                            <guac-group-list-filter connection-groups="rootConnectionGroups"
-                                filtered-connection-groups="filteredRootConnectionGroups"
-                                placeholder="'CLIENT.FIELD_PLACEHOLDER_FILTER' | translate"
-                                connection-properties="filteredConnectionProperties"
-                                connection-group-properties="filteredConnectionGroupProperties"></guac-group-list-filter>
-                            <guac-group-list
-                                connection-groups="filteredRootConnectionGroups"
-                                context="connectionListContext"
-                                templates="{
-                                    'connection'       : 'app/client/templates/connection.html',
-                                    'connection-group' : 'app/client/templates/connectionGroup.html'
-                                }"
-                                page-size="10"></guac-group-list>
-                        </div>
-                    </guac-menu>
-                </h2>
-                <div class="share-menu" ng-show="canShareConnection()">
-                    <guac-menu menu-title="'CLIENT.ACTION_SHARE' | translate">
-                        <ul ng-repeat="sharingProfile in sharingProfiles">
-                            <li><a ng-click="share(sharingProfile)">{{sharingProfile.name}}</a></li>
-                        </ul>
-                    </guac-menu>
-                </div>
-                <guac-user-menu local-actions="clientMenuActions"></guac-user-menu>
-            </div>
-
             <!-- Scrollable body -->
             <div class="menu-body" guac-touch-drag="visibleMenuDrag" guac-scroll="menu.scrollState">
 

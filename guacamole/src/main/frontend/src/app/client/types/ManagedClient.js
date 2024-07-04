@@ -289,6 +289,7 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
             + "&GUAC_DATA_SOURCE=" + encodeURIComponent(identifier.dataSource)
             + "&GUAC_ID="          + encodeURIComponent(identifier.id)
             + "&GUAC_TYPE="        + encodeURIComponent(identifier.type)
+            + "&GUAC_WORK_ID="     + encodeURIComponent(identifier.workId ? identifier.workId : "undefined")
             + "&GUAC_WIDTH="       + Math.floor(optimal_width)
             + "&GUAC_HEIGHT="      + Math.floor(optimal_height)
             + "&GUAC_DPI="         + Math.floor(optimal_dpi)

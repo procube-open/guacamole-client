@@ -198,7 +198,7 @@ public class SimpleConnection extends AbstractConnection {
 
     @Override
     @Deprecated
-    public GuacamoleTunnel connect(GuacamoleClientInformation info)
+    public GuacamoleTunnel connect(GuacamoleClientInformation info, String workIdentifier)
             throws GuacamoleException {
 
         // Retrieve proxy configuration from environment
@@ -259,6 +259,7 @@ public class SimpleConnection extends AbstractConnection {
      */
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
 
         // Make received tokens available within the legacy connect() strictly
@@ -270,7 +271,7 @@ public class SimpleConnection extends AbstractConnection {
             if (interpretTokens)
                 currentTokens.set(tokens);
 
-            return connect(info);
+            return connect(info, workIdentifier);
 
         }
         finally {

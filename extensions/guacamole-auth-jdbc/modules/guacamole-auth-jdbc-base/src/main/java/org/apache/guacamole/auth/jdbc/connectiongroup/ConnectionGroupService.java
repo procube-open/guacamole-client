@@ -240,6 +240,8 @@ public class ConnectionGroupService extends ModeledChildDirectoryObjectService<M
      *
      * @param connectionGroup
      *     The connectionGroup being connected to.
+     * 
+     * @param
      *
      * @param info
      *     Information associated with the connecting client.
@@ -256,12 +258,12 @@ public class ConnectionGroupService extends ModeledChildDirectoryObjectService<M
      *     If permission to connect to this connection is denied.
      */
     public GuacamoleTunnel connect(ModeledAuthenticatedUser user,
-            ModeledConnectionGroup connectionGroup, GuacamoleClientInformation info,
-            Map<String, String> tokens) throws GuacamoleException {
+            ModeledConnectionGroup connectionGroup, String workIdenifier,
+            GuacamoleClientInformation info, Map<String, String> tokens) throws GuacamoleException {
 
         // Connect only if READ permission is granted
         if (hasObjectPermission(user, connectionGroup.getIdentifier(), ObjectPermission.Type.READ))
-            return tunnelService.getGuacamoleTunnel(user, connectionGroup, info, tokens);
+            return tunnelService.getGuacamoleTunnel(user, connectionGroup, workIdenifier, info, tokens);
 
         // The user does not have permission to connect
         throw new GuacamoleSecurityException("Permission denied.");

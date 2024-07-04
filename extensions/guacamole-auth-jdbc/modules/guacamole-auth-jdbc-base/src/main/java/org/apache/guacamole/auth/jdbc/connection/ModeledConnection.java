@@ -26,7 +26,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.guacamole.auth.jdbc.tunnel.GuacamoleTunnelService;
@@ -61,6 +60,12 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * Logger for this class.
      */
     private static final Logger logger = LoggerFactory.getLogger(ModeledConnection.class);
+
+    /**
+     * The name of the attribute which contains the name of the remote desktop
+     * connection.
+     */
+    public static final String REMARK_NAME = "remark";
 
     /**
      * The name of the attribute which overrides the hostname used to connect
@@ -98,6 +103,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * connection.
      */
     public static final Form GUACD_PARAMETERS = new Form("guacd", Arrays.<Field>asList(
+        new TextField(REMARK_NAME),
         new TextField(GUACD_HOSTNAME_NAME),
         new NumericField(GUACD_PORT_NAME),
         new EnumField(GUACD_ENCRYPTION_NAME, Arrays.asList(
@@ -164,6 +170,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      */
     public static final Set<String> ATTRIBUTE_NAMES =
             Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
+                REMARK_NAME,
                 GUACD_HOSTNAME_NAME,
                 GUACD_PORT_NAME,
                 GUACD_ENCRYPTION_NAME,
@@ -212,6 +219,16 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * Creates a new, empty ModeledConnection.
      */
     public ModeledConnection() {
+    }
+
+    @Override
+    public String getIdmIdentifier() {
+        return getModel().getIdmIdentifier();
+    }
+
+    @Override
+    public void setIdmIdentifier(String idmIdentifier) {
+        getModel().setIdmIdentifier(idmIdentifier);
     }
 
     @Override
@@ -270,8 +287,9 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
 
     @Override
     public GuacamoleTunnel connect(GuacamoleClientInformation info,
+            String workIdentifier,
             Map<String, String> tokens) throws GuacamoleException {
-        return connectionService.connect(getCurrentUser(), this, info, tokens);
+        return connectionService.connect(getCurrentUser(), this, workIdentifier, info, tokens);
     }
 
     @Override
@@ -299,6 +317,8 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
         // Set guacd (proxy) hostname and port
         attributes.put(GUACD_HOSTNAME_NAME, getModel().getProxyHostname());
         attributes.put(GUACD_PORT_NAME, NumericField.format(getModel().getProxyPort()));
+
+        attributes.put(REMARK_NAME, getModel().getRemark());
 
         // Set guacd (proxy) encryption method
         EncryptionMethod encryptionMethod = getModel().getProxyEncryptionMethod();
@@ -353,6 +373,9 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
             logger.warn("Not setting maximum connections per user: {}", e.getMessage());
             logger.debug("Unable to parse numeric attribute.", e);
         }
+
+        // Translate remark attribute
+        getModel().setRemark(attributes.get(REMARK_NAME));
 
         // Translate guacd hostname
         getModel().setProxyHostname(TextField.parse(attributes.get(GUACD_HOSTNAME_NAME)));

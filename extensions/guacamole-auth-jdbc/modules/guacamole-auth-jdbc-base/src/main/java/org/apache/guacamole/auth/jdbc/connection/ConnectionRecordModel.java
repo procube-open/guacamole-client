@@ -32,11 +32,20 @@ public class ConnectionRecordModel extends ActivityRecordModel {
      * The identifier of the connection associated with this connection record.
      */
     private String connectionIdentifier;
+    
+    private String hostname;
+
+    private String protocol;
 
     /**
      * The name of the connection associated with this connection record.
      */
     private String connectionName;
+
+    /**
+     * The identifier of the work associated with this connection record.
+     */
+    private String workIdentifier;
 
     /**
      * The identifier of the sharing profile associated with this connection
@@ -75,6 +84,78 @@ public class ConnectionRecordModel extends ActivityRecordModel {
      */
     public void setConnectionIdentifier(String connectionIdentifier) {
         this.connectionIdentifier = connectionIdentifier;
+    }
+
+    /**
+     * Returns the hostname of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The hostname of the connection associated with this connection
+     *     record.
+     */
+    public String getHostname() {
+        return hostname;
+    }
+
+    /**
+     * Sets the hostname of the connection associated with this connection
+     * record.
+     *
+     * @param hostname
+     *     The hostname of the connection to associate with this connection
+     *     record.
+     */
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
+    /**
+     * Returns the protocol of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The protocol of the connection associated with this connection
+     *     record.
+     */
+    public String getProtocol() {
+        return protocol;
+    }
+
+    /**
+     * Sets the protocol of the connection associated with this connection
+     * record.
+     *
+     * @param protocol
+     *     The protocol of the connection to associate with this connection
+     *     record.
+     */
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    /**
+     * Returns the name of the connection associated with this connection
+     * record.
+     *
+     * @return
+     *     The name of the connection associated with this connection
+     *     record.
+     */
+    public String getWorkIdentifier() {
+        return workIdentifier;
+    }
+
+    /**
+     * Sets the name of the connection associated with this connection
+     * record.
+     *
+     * @param workIdentifier
+     *     The name of the connection to associate with this connection
+     *     record.
+     */
+    public void setWorkIdentifier(String workIdentifier) {
+        this.workIdentifier = workIdentifier;
     }
 
 

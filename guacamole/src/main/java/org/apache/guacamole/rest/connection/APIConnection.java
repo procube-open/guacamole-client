@@ -38,6 +38,11 @@ import org.apache.guacamole.rest.sharingprofile.APISharingProfile;
 public class APIConnection {
 
     /**
+     * The identifier of IDM of this connection.
+     */
+    private String idmIdentifier;
+
+    /**
      * The name of this connection.
      */
     private String name;
@@ -101,6 +106,7 @@ public class APIConnection {
             throws GuacamoleException {
 
         // Set connection information
+        this.idmIdentifier = connection.getIdmIdentifier();
         this.name = connection.getName();
         this.identifier = connection.getIdentifier();
         this.parentIdentifier = connection.getParentIdentifier();
@@ -114,6 +120,24 @@ public class APIConnection {
         // Associate any attributes
         this.attributes = connection.getAttributes();
 
+    }
+
+    /**
+     * Returns the unique identifier of IDM of this connection.
+     *
+     * @return The unique identifier of IDM of this connection.
+     */
+    public String getIdmIdentifier() {
+        return idmIdentifier;
+    }
+
+    /**
+     * Sets the unique identifier of IDM of this connection.
+     *
+     * @param idmIdentifier The unique identifier of IDM of this connection.
+     */
+    public void setIdmIdentifier(String idmIdentifier) {
+        this.idmIdentifier = idmIdentifier;
     }
 
     /**

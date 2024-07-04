@@ -114,6 +114,16 @@ public class APIUserGroupWrapper implements UserGroup {
     }
 
     @Override
+    public ObjectPermissionSet getWorkPermissions() throws GuacamoleException {
+        throw new GuacamoleUnsupportedException("APIUserWrapper does not provide permission access.");
+    }
+
+    @Override
+    public ObjectPermissionSet getNotificationPermissions() throws GuacamoleException {
+        throw new GuacamoleUnsupportedException("APIUserWrapper does not provide permission access.");
+    }
+
+    @Override
     public RelatedObjectSet getUserGroups() throws GuacamoleException {
         throw new GuacamoleUnsupportedException("APIUserGroupWrapper does not provide group access.");
     }
