@@ -483,6 +483,9 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
             GuacamoleClientInformation info,
             Map<String, String> tokens) throws GuacamoleException {
 
+        if (hasObjectPermission(user, connection.getIdentifier(), ObjectPermission.Type.DISABLED))
+            throw new GuacamoleClientException("disabled connetion for the user");
+
         // Connect only if READ permission is granted
         if (hasObjectPermission(user, connection.getIdentifier(), ObjectPermission.Type.READ))
             return tunnelService.getGuacamoleTunnel(user, connection, workIdetifier, info, tokens);

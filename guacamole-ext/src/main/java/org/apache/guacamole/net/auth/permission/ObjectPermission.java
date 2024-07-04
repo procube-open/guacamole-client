@@ -32,6 +32,8 @@ public class ObjectPermission implements Permission<ObjectPermission.Type> {
      */
     public enum Type {
 
+        DISABLED,
+
         WORKER,
 
         MANAGER,

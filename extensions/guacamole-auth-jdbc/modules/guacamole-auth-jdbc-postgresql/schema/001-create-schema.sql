@@ -43,7 +43,10 @@ CREATE TYPE guacamole_object_permission_type AS ENUM(
     'READ',
     'UPDATE',
     'DELETE',
-    'ADMINISTER'
+    'ADMINISTER',
+    'WORKER',
+    'MANAGER',
+    'DISABLED'
 );
 
 --
