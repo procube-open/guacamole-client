@@ -117,7 +117,7 @@
             </if>
 
             <if test="workIdentifier != null">
-                AND guacamole_connection_history.connection_id = #{identifier,jdbcType=VARCHAR}
+                AND guacamole_connection_history.work_id = #{workIdentifier,jdbcType=VARCHAR}
             </if>
 
             <foreach collection="terms" item="term" open=" AND " separator=" AND ">
@@ -219,7 +219,7 @@
             </if>
 
             <if test="workIdentifier != null">
-                AND guacamole_connection_history.connection_id = #{identifier,jdbcType=VARCHAR}
+                AND guacamole_connection_history.work_id = #{workIdentifier,jdbcType=VARCHAR}
             </if>
 
             <foreach collection="terms" item="term" open=" AND " separator=" AND ">
