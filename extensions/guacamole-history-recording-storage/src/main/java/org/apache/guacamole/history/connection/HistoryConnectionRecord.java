@@ -91,8 +91,10 @@ public class HistoryConnectionRecord extends DelegatingConnectionRecord {
 
         UUID uuid = record.getUUID();
         if (uuid != null) {
+            logger.info("uuid is not null");
             File recordingFile = new File(HistoryAuthenticationProvider.getRecordingSearchPath(), uuid.toString());
             if (recordingFile.canRead())
+                logger.info("Recording file can read");
                 return recordingFile;
         }
 
@@ -312,12 +314,15 @@ public class HistoryConnectionRecord extends DelegatingConnectionRecord {
     public Map<String, ActivityLog> getLogs() {
 
         // Do nothing if there are no associated logs
-        if (recording == null)
+        if (recording == null) {
+            logger.warn("Recording is null");
             return super.getLogs();
+        }
 
         // Add associated log (or logs, if this is a directory)
         Map<String, ActivityLog> logs = new HashMap<>(super.getLogs());
         if (recording.isDirectory()) {
+            logger.info("Recording is directory");
             Arrays.asList(recording.listFiles()).stream()
                     .forEach((file) -> addActivityLog(logs, file));
         }
