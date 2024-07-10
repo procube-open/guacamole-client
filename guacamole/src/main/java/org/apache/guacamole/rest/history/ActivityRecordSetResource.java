@@ -140,18 +140,18 @@ public abstract class ActivityRecordSetResource<InternalRecordType extends Activ
         for (APISortPredicate predicate : sortPredicates)
             history = history.sort(predicate.getProperty(), predicate.isDescending());
 
-            if (this.workId != null) {
-                history = history.work(workId);
-            }
+        if (this.workId != null) {
+            history = history.work(workId);
+        }
     
-            if (this.size != null) {
-                // Limit to maximum result size
-                history = history.limit(Integer.parseInt(size));
-            }
-            else {
-                // Limit to maximum result size
-                history = history.limit(MAXIMUM_HISTORY_SIZE);
-            }
+        if (this.size != null) {
+            // Limit to maximum result size
+            history = history.limit(Integer.parseInt(size));
+        }
+        else {
+            // Limit to maximum result size
+            history = history.limit(MAXIMUM_HISTORY_SIZE);
+        }
 
     }
 

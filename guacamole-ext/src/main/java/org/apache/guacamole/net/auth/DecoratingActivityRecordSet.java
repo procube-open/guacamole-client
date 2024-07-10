@@ -134,6 +134,11 @@ public abstract class DecoratingActivityRecordSet<RecordType extends ActivityRec
     }
 
     @Override
+    public ActivityRecordSet<RecordType> work(String workId) throws GuacamoleException {
+        return decorate(super.work(workId));
+    }
+
+    @Override
     public ActivityRecordSet<RecordType> sort(SortableProperty property,
             boolean desc) throws GuacamoleException {
         return decorate(super.sort(property, desc));
