@@ -53,7 +53,7 @@ import org.apache.guacamole.net.auth.ActivityRecordSet;
 @Consumes(MediaType.APPLICATION_JSON)
 public abstract class ActivityRecordSetResource<InternalRecordType extends ActivityRecord,
         ExternalRecordType extends APIActivityRecord> {
-    
+
     /**
      * The maximum number of history records to return in any one response.
      */

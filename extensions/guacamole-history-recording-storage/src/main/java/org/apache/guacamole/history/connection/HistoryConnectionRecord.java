@@ -312,9 +312,8 @@ public class HistoryConnectionRecord extends DelegatingConnectionRecord {
     public Map<String, ActivityLog> getLogs() {
 
         // Do nothing if there are no associated logs
-        if (recording == null) {
+        if (recording == null)
             return super.getLogs();
-        }
 
         // Add associated log (or logs, if this is a directory)
         Map<String, ActivityLog> logs = new HashMap<>(super.getLogs());
