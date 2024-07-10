@@ -32,8 +32,6 @@ import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleResourceNotFoundException;
 import org.apache.guacamole.net.auth.ActivityRecord;
 import org.apache.guacamole.net.auth.ActivityRecordSet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * A REST resource which abstracts the operations available on an
@@ -56,11 +54,6 @@ import org.slf4j.LoggerFactory;
 public abstract class ActivityRecordSetResource<InternalRecordType extends ActivityRecord,
         ExternalRecordType extends APIActivityRecord> {
     
-    /**
-     * Logger for this class.
-     */
-    private static final Logger logger = LoggerFactory.getLogger(ActivityRecordSetResource.class);
-
     /**
      * The maximum number of history records to return in any one response.
      */
@@ -137,42 +130,28 @@ public abstract class ActivityRecordSetResource<InternalRecordType extends Activ
     private void applyCriteria(List<String> requiredContents,
             List<APISortPredicate> sortPredicates) throws GuacamoleException {
 
-        logger.info("Apply criteria");
-        logger.info(history.getClass().getName());
-
         // Restrict to records which contain the specified strings
         for (String required : requiredContents) {
-            logger.info(required);
             if (!required.isEmpty())
                 history = history.contains(required);
         }
-
-        logger.info("Checked reauired");
 
         // Sort according to specified ordering
         for (APISortPredicate predicate : sortPredicates)
             history = history.sort(predicate.getProperty(), predicate.isDescending());
 
-        logger.info("Checked reauired");
-
         if (this.workId != null) {
-            logger.info("Work id is not null");
-            logger.info(workId);
             history = history.work(workId);
         }
     
         if (this.size != null) {
-            logger.info("Size is not null");
             // Limit to maximum result size
             history = history.limit(Integer.parseInt(size));
         }
         else {
-            logger.info("Size is null");
             // Limit to maximum result size
             history = history.limit(MAXIMUM_HISTORY_SIZE);
         }
-
-        logger.info(history.getClass().getName());
 
     }
 
