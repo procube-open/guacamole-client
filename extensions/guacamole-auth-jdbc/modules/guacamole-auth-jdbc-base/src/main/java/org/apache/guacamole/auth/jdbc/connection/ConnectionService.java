@@ -487,7 +487,7 @@ public class ConnectionService extends ModeledChildDirectoryObjectService<Modele
         ObjectPermissionSet permissionSet = getEffectivePermissionSet(user);
 
         if (permissionSet.hasPermission(ObjectPermission.Type.DISABLED, connection.getIdentifier()))
-            throw new GuacamoleClientException("disabled connetion for the user");
+            throw new GuacamoleSecurityException("Disabled connetion for the user.");
 
         // Connect only if READ permission is granted
         if (hasObjectPermission(user, connection.getIdentifier(), ObjectPermission.Type.READ))
