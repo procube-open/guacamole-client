@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleResourceNotFoundException;
+import org.apache.guacamole.GuacamoleSecurityException;
 import org.apache.guacamole.GuacamoleSession;
 import org.apache.guacamole.GuacamoleUnauthorizedException;
 import org.apache.guacamole.net.GuacamoleTunnel;
@@ -355,8 +356,11 @@ public class TunnelRequestService {
             withinPeriod = period.isWithinPeriod() || withinPeriod;
         }
 
+        if (work.isDisabled()) {
+            throw new GuacamoleSecurityException("Work is disabled.");
+        }
         if (!withinPeriod) {
-            throw new GuacamoleException("Work is not within a valid period.");
+            throw new GuacamoleSecurityException("Work is not within a valid period.");
         }
 
         try {

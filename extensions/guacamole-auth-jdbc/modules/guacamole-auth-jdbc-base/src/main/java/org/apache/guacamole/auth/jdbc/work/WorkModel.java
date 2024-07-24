@@ -35,6 +35,8 @@ public class WorkModel extends ObjectModel {
      */
     private String name;
 
+    private boolean disabled;
+
     /**
      * The work periods associated with this work.
      */
@@ -69,6 +71,26 @@ public class WorkModel extends ObjectModel {
      */
     public void setIdmIdentifier(String idmIdentifier) {
         this.idmIdentifier = idmIdentifier;
+    }
+
+    /**
+     * Returns whether this work is disabled.
+     * 
+     * @return
+     *     true if this work is disabled, false otherwise.
+     */
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    /**
+     * Sets whether this work is disabled.
+     * 
+     * @param disabled
+     *     true if this work is disabled, false otherwise.
+     */
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 
     /**
