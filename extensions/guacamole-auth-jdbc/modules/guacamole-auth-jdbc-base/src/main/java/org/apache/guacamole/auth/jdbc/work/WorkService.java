@@ -142,6 +142,7 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
 
         modeledWork.setPeriods(object.getPeriods());
         modeledWork.setConnections(object.getConnections());
+        modeledWork.setDisabled(object.isDisabled());
 
         List<WorkUser> workUsers = object.getUsers();
         String workIdentifier = modeledWork.getIdentifier();
