@@ -44,12 +44,19 @@ import org.mybatis.guice.transactional.Transactional;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Service which provides convenience methods for creating, retrieving, and
  * manipulating works.
  */
 public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work, WorkModel> {
+
+    /**
+     * Logger for this class.
+     */
+    private static final Logger logger = LoggerFactory.getLogger(WorkService.class);
 
     /**
      * Mapper for accessing work.
@@ -111,7 +118,10 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         // Set model contents through ModeledWork, copying the provided work
         work.setName(object.getName());
         work.setIdmIdentifier(object.getIdmIdentifier());
+        work.setDisabled(object.isDisabled());
         work.setAttributes(object.getAttributes());
+
+        logger.info("get work model instance");
 
         return model;
         
@@ -143,6 +153,8 @@ public class WorkService extends ModeledDirectoryObjectService<ModeledWork, Work
         modeledWork.setPeriods(object.getPeriods());
         modeledWork.setConnections(object.getConnections());
         modeledWork.setDisabled(object.isDisabled());
+
+        logger.info("create work object");
 
         List<WorkUser> workUsers = object.getUsers();
         String workIdentifier = modeledWork.getIdentifier();
