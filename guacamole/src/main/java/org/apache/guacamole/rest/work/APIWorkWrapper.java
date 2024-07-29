@@ -120,4 +120,14 @@ public class APIWorkWrapper implements Work {
         return apiWork.getIsAdmin();
     }
 
+    @Override
+    public Boolean isDisabled() {
+        return apiWork.isDisabled();
+    }
+
+    @Override
+    public void setDisabled(Boolean disabled) {
+        apiWork.setDisabled(disabled);
+    }
+
 }

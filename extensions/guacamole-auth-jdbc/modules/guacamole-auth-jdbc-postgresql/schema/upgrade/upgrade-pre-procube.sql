@@ -22,6 +22,7 @@ CREATE TABLE guacamole_work (
   work_id      serial       NOT NULL,
   work_idm_id  varchar(10)  NOT NULL,
   work_name    varchar(128) NOT NULL,
+  work_disabled     boolean      DEFAULT false NOT NULL,
 
   PRIMARY KEY (work_id)
 );

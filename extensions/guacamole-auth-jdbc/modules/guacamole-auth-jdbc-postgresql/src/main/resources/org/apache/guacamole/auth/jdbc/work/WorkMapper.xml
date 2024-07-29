@@ -30,6 +30,7 @@
         <id     column="work_id"            property="objectID"              jdbcType="INTEGER"/>
         <result column="work_idm_id"        property="idmIdentifier"         jdbcType="VARCHAR"/>
         <result column="work_name"          property="name"                  jdbcType="VARCHAR"/>
+        <result column="work_disabled"      property="disabled"              jdbcType="BOOLEAN"/>
 
         <!-- Arbitrary attributes -->
         <collection property="arbitraryAttributes" resultSet="arbitraryAttributes"
@@ -116,7 +117,8 @@
         SELECT
             work_id,
             work_idm_id,
-            work_name
+            work_name,
+            work_disabled
         FROM guacamole_work
         WHERE guacamole_work.work_id IN
             <foreach collection="identifiers" item="identifier"
@@ -168,7 +170,8 @@
         SELECT
             work_id,
             work_idm_id,
-            work_name
+            work_name,
+            work_disabled
         FROM guacamole_work
         WHERE guacamole_work.work_id IN
             <foreach collection="identifiers" item="identifier"
@@ -249,11 +252,13 @@
 
         INSERT INTO guacamole_work (
             work_idm_id,
-            work_name
+            work_name,
+            work_disabled
         )
         VALUES (
             #{object.idmIdentifier,jdbcType=VARCHAR},
-            #{object.name,jdbcType=VARCHAR}
+            #{object.name,jdbcType=VARCHAR},
+            false
         )
 
     </insert>
@@ -262,7 +267,8 @@
     <update id="update" parameterType="org.apache.guacamole.auth.jdbc.work.WorkModel">
         UPDATE guacamole_work
         SET work_idm_id          = #{object.idmIdentifier,jdbcType=VARCHAR},
-            work_name            = #{object.name,jdbcType=VARCHAR}
+            work_name            = #{object.name,jdbcType=VARCHAR},
+            work_disabled        = #{object.disabled,jdbcType=BOOLEAN}
         WHERE work_id = #{object.objectID,jdbcType=INTEGER}
     </update>
 

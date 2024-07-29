@@ -38,6 +38,10 @@ public interface Work extends Identifiable, Attributes, Nameable {
      */
     public void setIdmIdentifier(String idmIdentifier);
 
+    public Boolean isDisabled();
+
+    public void setDisabled(Boolean disabled);
+
     public List<Period> getPeriods();
 
     public void setPeriods(List<Period> periods);

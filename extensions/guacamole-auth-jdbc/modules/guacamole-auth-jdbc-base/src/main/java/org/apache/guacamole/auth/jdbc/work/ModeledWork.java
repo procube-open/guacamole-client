@@ -91,6 +91,28 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
         getModel().setIdmIdentifier(idmIdentifier);
     }
 
+    /**
+     * Returns whether this work is disabled.
+     *
+     * @return
+     *     true if this work is disabled, false otherwise.
+     */
+    @Override
+    public Boolean isDisabled() {
+        return getModel().isDisabled();
+    }
+
+    /**
+     * Sets whether this work is disabled.
+     *
+     * @param disabled
+     *     true if this work is disabled, false otherwise.
+     */
+    @Override
+    public void setDisabled(Boolean disabled) {
+        getModel().setDisabled(disabled);
+    }
+
     @Override
     public Map<String, String> getAttributes() {
         

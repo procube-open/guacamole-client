@@ -43,6 +43,7 @@ public class APIWork {
     private List<WorkUser> users;
     private Boolean isWorker;
     private Boolean isManager;
+    private Boolean disabled;
 
     public APIWork() {}
     public APIWork(Work work) {
@@ -55,6 +56,7 @@ public class APIWork {
         this.users = work.getUsers();
         this.isWorker = work.isWorker();
         this.isManager = work.isManager();
+        this.disabled = work.isDisabled();
     }
 
     public String getIdentifier() {
@@ -127,6 +129,14 @@ public class APIWork {
 
     public void setIsAdmin(Boolean isManager) {
         this.isManager = isManager;
+    }
+
+    public Boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        this.disabled = disabled;
     }
 
 }
