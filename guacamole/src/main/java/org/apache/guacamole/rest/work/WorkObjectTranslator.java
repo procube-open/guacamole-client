@@ -42,6 +42,7 @@ public class WorkObjectTranslator extends DirectoryObjectTranslator<Work, APIWor
     public void applyExternalChanges(Work existingObject,
             APIWork object) throws GuacamoleException {
 
+        existingObject.setDisabled(object.isDisabled());
         // Update user attributes
         existingObject.setAttributes(object.getAttributes());
 
