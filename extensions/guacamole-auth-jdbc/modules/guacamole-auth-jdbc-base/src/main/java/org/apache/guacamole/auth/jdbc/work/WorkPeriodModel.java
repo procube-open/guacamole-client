@@ -25,6 +25,11 @@ import java.sql.Time;
 public class WorkPeriodModel {
 
     /**
+     * The unique identifier associated with this work period.
+     */
+    private String identifier;
+
+    /**
      * The unique identifier associated for work.
      */
     private String workIdentifier;
@@ -53,6 +58,26 @@ public class WorkPeriodModel {
      * Creates a new, empty WorkPeriodModel.
      */
     public WorkPeriodModel() {
+    }
+
+    /**
+     * Returns the unique identifier associated with this work period.
+     *
+     * @return
+     *     The unique identifier associated with this work period.
+     */
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    /**
+     * Sets the unique identifier associated with this work period.
+     *
+     * @param identifier
+     *     The unique identifier to associate with this work period.
+     */
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     /**

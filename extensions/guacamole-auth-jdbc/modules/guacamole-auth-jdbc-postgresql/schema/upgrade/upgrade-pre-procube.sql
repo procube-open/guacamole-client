@@ -87,13 +87,14 @@ CREATE INDEX guacamole_work_attribute_work_id
 
 CREATE TABLE guacamole_work_period (
 
+  id            uuid         NOT NULL,
   work_id       integer      NOT NULL,
   work_start_time  time         NOT NULL,
   work_end_time    time         NOT NULL,
   work_valid_from  date       NOT NULL,
   work_valid_until date      NOT NULL,
 
-  PRIMARY KEY (work_id, work_start_time, work_end_time, work_valid_from, work_valid_until),
+  PRIMARY KEY (id),
 
   CONSTRAINT guacamole_work_period_ibfk_1
     FOREIGN KEY (work_id)

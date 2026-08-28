@@ -126,6 +126,13 @@
             <version>1.0.7</version>
         </dependency>
 
+        <!-- Pin transitive bc-fips version to match documented license info -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bc-fips</artifactId>
+            <version>1.0.2.5</version>
+        </dependency>
+
     </dependencies>
 
 </project>

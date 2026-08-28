@@ -44,6 +44,7 @@
         <collection property="workPeriods" resultSet="workPeriods"
                     ofType="org.apache.guacamole.auth.jdbc.work.WorkPeriodModel"
                     column="work_id" foreignColumn="work_id">
+            <id     property="identifier" column="id" jdbcType="VARCHAR"/>
             <result property="startTime" column="work_start_time" jdbcType="TIME"/>
             <result property="endTime"   column="work_end_time"   jdbcType="TIME"/>
             <result property="validFrom" column="work_valid_from" jdbcType="DATE"/>
@@ -139,6 +140,7 @@
             </foreach>;
 
         SELECT
+            guacamole_work_period.id,
             guacamole_work_period.work_id,
             work_start_time,
             work_end_time,
@@ -204,6 +206,7 @@
             );
 
         SELECT
+            guacamole_work_period.id,
             guacamole_work_period.work_id,
             work_start_time,
             work_end_time,
@@ -302,6 +305,7 @@
     <!-- Insert periods for work -->
     <insert id="insertPeriods" parameterType="org.apache.guacamole.auth.jdbc.work.WorkPeriodModel">
         INSERT INTO guacamole_work_period (
+            id,
             work_id,
             work_start_time,
             work_end_time,
@@ -310,7 +314,8 @@
         )
         VALUES
             <foreach collection="object.workPeriods" item="period" separator=",">
-                (#{object.objectID,jdbcType=INTEGER}::integer,
+                (#{period.identifier,jdbcType=VARCHAR}::uuid,
+                 #{object.objectID,jdbcType=INTEGER}::integer,
                  #{period.startTime,jdbcType=TIME},
                  #{period.endTime,jdbcType=TIME},
                  #{period.validFrom,jdbcType=DATE},

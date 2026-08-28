@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.jdbc.base.ModeledDirectoryObject;
@@ -220,6 +221,7 @@ public class ModeledWork extends ModeledDirectoryObject<WorkModel> implements Wo
         for (Period period : periods) {
             WorkPeriodModel modeledPeriod = new WorkPeriodModel();
             try {
+                modeledPeriod.setIdentifier(UUID.randomUUID().toString());
                 modeledPeriod.setStartTime(parseTime(period.getStartTime()));
                 modeledPeriod.setEndTime(parseTime(period.getEndTime()));
                 modeledPeriod.setValidFrom(parseDate(period.getValidFrom()));
