@@ -1,10 +1,10 @@
 name: Publish Docker image
 
-# Push the "latest" tag to Docker Hub whenever main is updated
+# Push the "latest" tag to Docker Hub whenever master is updated
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   DOCKERHUB_REPOSITORY: procube/guacamole
